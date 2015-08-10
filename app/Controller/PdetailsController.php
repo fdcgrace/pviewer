@@ -141,6 +141,7 @@ class PdetailsController extends AppController {
 		$this->set('p_id', $projectID);
 
 		if ($this->request->is(array('post', 'put'))) {
+			//var_dump($this->request->data); die();
 			if ($this->Pdetail->save($this->request->data)) {
 				$this->Session->setFlash(__('The details has been updated.'));
 				return $this->redirect(array('action' => 'index', $projectID));

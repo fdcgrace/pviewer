@@ -36,7 +36,8 @@
 					<?php echo $this->Form->create('Pdetail'); ?>
 					<tr style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>">
 						<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
-						<td><?php echo $this->Form->input('date', array('label' => '', 'type' => 'text', 'value' => $Pdetail['Pdetail']['date']));?></td>
+						<td>
+						<?php echo $this->Form->input('date', array('label' => '', 'id' => 'datepicker', 'type' => 'text', 'value' => $Pdetail['Pdetail']['date']));?></td>
 						<td><?php echo $this->Form->input('issue_no', array('label' => '', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_no']));?></td>
 						<td><?php echo $this->Form->input('sub_task', array('label' => '', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['sub_task']));?></td>
 						<td><?php echo $this->Form->input('task_description', array('label' => '', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['task_description']));?></td>
@@ -100,3 +101,14 @@
 		?>
 	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      numberOfMonths: 3,
+      showButtonPanel: true
+    });
+  });
+});
+</script>

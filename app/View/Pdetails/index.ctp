@@ -21,7 +21,7 @@
 						<th><?php echo $this->Paginator->sort('Project ID'); ?></th>
 						<th><?php echo $this->Paginator->sort('Date assigned'); ?></th>
 						<th><?php echo $this->Paginator->sort('Issue Number'); ?></th>
-						<th><?php echo $this->Paginator->sort('Sub Task Description'); ?></th>
+						<!-- <th><?php //echo $this->Paginator->sort('Sub Task Description'); ?></th> -->
 						<th><?php echo $this->Paginator->sort('Task Description'); ?></th>
 						<th><?php echo $this->Paginator->sort('Assignee'); ?></th>
 						<th><?php echo $this->Paginator->sort('Issue Link'); ?></th>
@@ -38,7 +38,7 @@
 							<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['date']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['sub_task']); ?></td>
+							<!-- <td><?php //echo h($Pdetail['Pdetail']['sub_task']); ?></td> -->
 							<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
 							<td>
 								<?php echo $this->Form->input('member', array(
@@ -75,10 +75,13 @@
 							<td><?php echo h($Pdetail['Pdetail']['modified']); ?></td>
 							<td class="actions">
 								<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
-								<?php echo $this->Form->submit(__('Update Status'), array('action' => 'index')); ?>
+								<?php echo $this->Form->submit(__('Update Status'), array('class' => 'btn btn-primary btn-xs'),array('action' => 'index')); ?>
 								<?php //echo $this->Html->link(__('View'), array('action' => 'view', $Pdetail['Pdetail']['id'])); ?>
-								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id'])); ?>
-								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
+								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
+								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs'), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
+							</td>
+							<td>
+
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -125,9 +128,7 @@ $(document).ready(function(){
 			});
 	
 		}
-		
 	});
-
 	
 });
 </script>

@@ -30,9 +30,9 @@
 								<td><?php echo h($project['Project']['created']); ?></td>
 								<td><?php echo h($project['Project']['modified']); ?></td>
 								<td class="actions">
-									<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id'])); ?>
-									<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>
-									<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
+									<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
+									<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
+									<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), array('class' => 'btn btn-primary btn-xs'), array('confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
