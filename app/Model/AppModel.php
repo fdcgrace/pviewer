@@ -30,4 +30,26 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+	public $validate = array(
+		'team' => array(
+			'nonEmpty' => array(
+                'rule' => array('notEmpty'),
+                'allowEmpty' => false
+            )
+		)
+	);
+
+	function beforeSave($options = array()) {
+		$check = $this->find('all', array(
+			'conditions' => array('team' => $this->data[$this->alias]['team']))
+		);
+		if(count($check) == 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
+
+

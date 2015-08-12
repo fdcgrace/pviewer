@@ -45,7 +45,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->script(array(
 			'jquery',
 			'jquery.min.js',
-			'bootstrap', 
+			// 'bootstrap', 
 			'bootstrap.min',
 			/*'colorpicker',
 			'colorpicker-color',

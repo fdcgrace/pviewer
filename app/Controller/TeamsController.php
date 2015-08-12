@@ -70,7 +70,20 @@ class TeamsController extends AppController {
 		
 		$pagination = $this->paginate('Team');
 		$this->set('team', $pagination);
-		var_dump($pagination);
-		//$this->set('projects', $pagination);
+		// var_dump($pagination);
+		$this->set('projects', $pagination);
+	}
+
+	public function add() {
+		if($this->request->is('post')) {
+			if($this->Team->save($this->request->data)) {	
+				$this->Session->write('result', 'success');
+				$this->Session->write('message', 'Team name saved.');
+			} else {
+				$this->Session->write('result', 'warning');
+				$this->Session->write('message', 'Could not save. Team name already exists.');
+			}
+		}		
+		return $this->redirect(array('action' => 'index'));
 	}
 }

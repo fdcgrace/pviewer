@@ -30,4 +30,8 @@ class Project extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		die('here');
+	}
 }
