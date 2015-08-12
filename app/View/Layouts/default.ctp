@@ -34,14 +34,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'bootstrap',
 			'bootstrap-theme',
 			//'docs',
-			'colpick'
+			'colpick',
+			'mystyle'
 			)
 		);
 
 		echo $this->Html->script(array(
-			'jquery',
+			// 'jquery',
 			'jquery.min.js',
-			'bootstrap', 
+			/*'bootstrap', */
 			'bootstrap.min',
 			/*'colorpicker',
 			'colorpicker-color',
@@ -56,6 +57,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 	?>
 </head>
+
+</script>
 <body>
 	<div id="container">
 		<div id="header">

@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class TeamsController extends AppController {
 
-	public $uses = array('Team', 'Project');
+	public $uses = array('Team', 'Project', 'Pdetail');
 
 /**
  * Components
@@ -24,29 +24,42 @@ class TeamsController extends AppController {
  * @return void
  */
 	public function index() {
-		//$this->Teams->recursive = 0;
-		//var_dump($this->Team->find('all'));
-		//$this->set('team', $this->Paginator->paginate());
-
-		$team = $this->Team->find('all');
-		$project = $this->Project->find('all');
+		$team = $this->Team->find('all', array('conditions' => array('Team.del_flg' => 1)));
+		$project = $this->Project->find('all', array('conditions' => array('Project.del_flg' => 1)));
 		foreach ($team as $key => $leader) {
 			$arr[$leader['Team']['team']] = array($leader['Team']['team']);
-			
 		}
-
 
 		foreach ($project as $val) {
 			foreach($arr as $key => $value) {
-				//var_dump($value);
 				if ($value[0] == $val['Team']['team']) {
 					$arr[$key][] = $val;
 
 				}
 			}
 		}
-		//var_dump($arr);
 		$this->set('team', $arr);
-		//var_dump($this->Paginator->paginate());
+	}
+
+	public function edit() {
+
+	}
+	public function delete($id = null) {
+		die();
+		$this->Project->id = $id;
+		if (!$this->Project->exists()) {
+			throw new NotFoundException(__('Invalid Team'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Project->saveField('del_flg', 0)) {			
+			$this->Pdetail->updateAll(
+			    array('Pdetail.del_flg' => 0),
+			    array('Pdetail.project_id' => $id)
+			);
+			$this->Session->setFlash(__('The Project has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The Project could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
 	}
 }
