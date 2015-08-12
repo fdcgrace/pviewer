@@ -19,7 +19,7 @@
 			<thead>
 				<tr>
 					<th><?php echo $this->Paginator->sort('Project ID'); ?></th>
-					<th><?php echo $this->Paginator->sort('Date assigned'); ?></th>
+					<th><?php echo $this->Paginator->sort('Deadline'); ?></th>
 					<th><?php echo $this->Paginator->sort('Issue Number'); ?></th>
 					<th><?php echo $this->Paginator->sort('Sub Task Description'); ?></th>
 					<th><?php echo $this->Paginator->sort('Task Description'); ?></th>
@@ -33,11 +33,11 @@
 			</thead>
 			<tbody>
 				<?php foreach ($pdetails as $Pdetail): ?>
-					<?php echo $this->Form->create('Pdetail'); ?>
+					<?php echo $this->Form->create('Pdetail', array('class' => 'form-group')); ?>
 					<tr style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>">
 						<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
 						<td>
-						<?php echo $this->Form->input('date', array('label' => '', 'id' => 'datepicker', 'type' => 'text', 'value' => $Pdetail['Pdetail']['date']));?></td>
+						<?php echo $this->Form->input('deadline', array('label' => '', 'id' => 'datepicker', 'type' => 'text', 'value' => $Pdetail['Pdetail']['deadline']));?></td>
 						<td><?php echo $this->Form->input('issue_no', array('label' => '', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_no']));?></td>
 						<td><?php echo $this->Form->input('sub_task', array('label' => '', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['sub_task']));?></td>
 						<td><?php echo $this->Form->input('task_description', array('label' => '', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['task_description']));?></td>
@@ -76,10 +76,10 @@
 						<td><?php echo h($Pdetail['Pdetail']['modified']); ?></td>
 						<td class="actions">
 							<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
-							<?php echo $this->Form->submit(__('Update'), array('action' => 'index')); ?>
+							<?php echo $this->Form->submit(__('Update'), array('class' => 'btn btn-primary btn-xs'), array('action' => 'index')); ?>
 							<?php //echo $this->Html->link(__('View'), array('action' => 'view', $Pdetail['Pdetail']['id'])); ?>
 							<?php //echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id'])); ?>
-							<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
+							<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs'), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -107,8 +107,10 @@ $(document).ready(function(){
   $(function() {
     $( "#datepicker" ).datepicker({
       numberOfMonths: 3,
-      showButtonPanel: true
+      showButtonPanel: true,
+      dateFormat: "yy-mm-dd"
     });
   });
+
 });
 </script>

@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class ProjectsController extends AppController {
 
-	public $uses = array('Project', 'Pdetail');
+	public $uses = array('Project', 'Pdetail', 'Team');
 
 /**
  * Components
@@ -25,7 +25,30 @@ class ProjectsController extends AppController {
  */
 	public function index() {
 		$this->Project->recursive = 0;
-		$this->set('projects', $this->Paginator->paginate());
+		$this->paginate = array(
+	            'limit' => 5, 
+	            'order' => 'modified DESC', 
+	            'joins' => array(
+						array(
+							'table' => 'Pdetails',
+							'alias' => 'Pdetail',
+							'type'	=> 'LEFT',
+							'conditions' => array('Pdetail.project_id = Project.id AND Pdetail.status <> 6 AND Pdetail.status <> 5')
+						),
+						array(
+							'table' => 'Teams',
+							'alias' => 'Leader',
+							'type'	=> 'LEFT',
+							'conditions' => array('Project.team_id = Leader.id')
+						),
+
+					),
+	            'group' => array('Pdetail.project_id'),
+	            'fields' => array('count(Pdetail.project_id) as total_num_task', '*', 'Leader.team')
+        	);
+		
+		$pagination = $this->paginate('Project');
+		$this->set('projects', $pagination);
 	}
 
 /**

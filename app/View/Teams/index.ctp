@@ -10,13 +10,14 @@
 			    	<div class="panel-heading" role="tab" id="headingOne">
 			      		<h4 class="panel-title">
 			        		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $counter;?>" aria-expanded="true" aria-controls="collapseOne">
-				      		<?php echo $teams[0];?>
+				      		<?php echo $teams['Team']['team'];?>
 							</a>
 			      		</h4>
 			    	</div>
 		    		<div id="<?php echo $counter;?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 		      			<div class="panel-body">
 					      	<table class="table table-hover">
+					      	<?php if($teams['Project']['p_name']): ?>
 							<thead>
 								<tr>
 									<th><?php echo $this->Paginator->sort('Project Name'); ?></th>
@@ -28,26 +29,30 @@
 									<th class="actions"><?php echo __('Actions'); ?></th>
 								</tr>
 							</thead>
-					      	<?php foreach ($teams as $key2 => $val): ?>
-					      			<?php if ($key2 != 0 ):?>
+					      	<?php //foreach ($teams as $key2 => $val): ?>
+					      			<?php //if ($key2 != 0 ):?>
+					      			
 										<tbody>
 											<tr>
-												<td><?php echo h($val['Project']['p_name']); ?></td>
-												<td><a href="<?php echo h($teams[1]['Project']['link']); ?>" target="_blank"><?php echo h($val['Project']['link']); ?></a></td>
-												<td><?php echo h($val['Team']['team']); ?></td>
-												<td><?php echo h($val['Project']['no_of_task']); ?></td>
-												<td><?php echo h($val['Project']['created']); ?></td>
-												<td><?php echo h($val['Project']['modified']); ?></td>
+												<td><?php echo h($teams['Project']['p_name']); ?></td>
+												<td><a href="<?php echo h($teams['Project']['link']); ?>" target="_blank"><?php echo h($teams['Project']['link']); ?></a></td>
+												<td><?php echo h($teams['Team']['team']); ?></td>
+												<td><?php echo h($teams[0]['total_num_task']); ?></td>
+												<td><?php echo h($teams['Project']['created']); ?></td>
+												<td><?php echo h($teams['Project']['modified']); ?></td>
 												<td class="actions">
-													<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $val['Project']['id'])); ?>
-													<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $val['Project']['id'])); ?>
-													<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $val['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $val['Project']['id']))); ?>
+													<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $teams['Project']['id'])); ?>
+													<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $teams['Project']['id'])); ?>
+													<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $teams['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $teams['Project']['id']))); ?>
 												</td>
 											</tr>
 										</tbody>
+									<?php else:?>
+										<tbody>
+											<td>No Issue</td>
+										</tbody>
 									<?php endif;?>
-								
-							<?php endforeach; ?>
+							<?php// endforeach; ?>
 							</table>
 				      	</div>
 				    </div>

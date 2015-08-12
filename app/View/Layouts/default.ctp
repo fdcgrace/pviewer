@@ -75,7 +75,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		          </button>
 		          	<a class="navbar-brand" href="#">Project Viewer</a>
 		       		<ul class="nav navbar-nav">
-		          		<li><?php echo $this->Html->link(__('Team Project List'), array('controller' => 'teams', 'action' => 'index')); ?>
+		          		<li><?php echo $this->Html->link(__('Team Project List View'), array('controller' => 'teams', 'action' => 'index')); ?>
 		          		</li>
 		          	</ul>
 		        
@@ -105,6 +105,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="footer">
 		</div>
 	</div>
-	<?php //echo $this->element('sql_dump'); ?>
+	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

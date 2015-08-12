@@ -19,7 +19,7 @@
 				<thead>
 					<tr>
 						<th><?php echo $this->Paginator->sort('Project ID'); ?></th>
-						<th><?php echo $this->Paginator->sort('Date assigned'); ?></th>
+						<th><?php echo $this->Paginator->sort('Deadline'); ?></th>
 						<th><?php echo $this->Paginator->sort('Issue Number'); ?></th>
 						<!-- <th><?php //echo $this->Paginator->sort('Sub Task Description'); ?></th> -->
 						<th><?php echo $this->Paginator->sort('Task Description'); ?></th>
@@ -36,7 +36,7 @@
 						<?php echo $this->Form->create('Pdetail'); ?>
 						<tr style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>">
 							<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['date']); ?></td>
+							<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
 							<!-- <td><?php //echo h($Pdetail['Pdetail']['sub_task']); ?></td> -->
 							<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
@@ -78,7 +78,7 @@
 								<?php echo $this->Form->submit(__('Update Status'), array('class' => 'btn btn-primary btn-xs'),array('action' => 'index')); ?>
 								<?php //echo $this->Html->link(__('View'), array('action' => 'view', $Pdetail['Pdetail']['id'])); ?>
 								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
-								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs'), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
+								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']), 'class' => 'btn btn-primary btn-xs')); ?>
 							</td>
 							<td>
 

@@ -24,11 +24,8 @@ class TeamsController extends AppController {
  * @return void
  */
 	public function index() {
-		//$this->Teams->recursive = 0;
-		//var_dump($this->Team->find('all'));
-		//$this->set('team', $this->Paginator->paginate());
 
-		$team = $this->Team->find('all');
+		/*$team = $this->Team->find('all');
 		$project = $this->Project->find('all');
 		foreach ($team as $key => $leader) {
 			$arr[$leader['Team']['team']] = array($leader['Team']['team']);
@@ -44,9 +41,36 @@ class TeamsController extends AppController {
 
 				}
 			}
-		}
+		}*/
 		//var_dump($arr);
-		$this->set('team', $arr);
+		//$this->set('team', $arr);
 		//var_dump($this->Paginator->paginate());
+
+		$this->paginate = array(
+	            'limit' => 5, 
+	            'order' => 'team ASC', 
+	            'joins' => array(
+	            		array(
+							'table' => 'Projects',
+							'alias' => 'Project',
+							'type'	=> 'LEFT',
+							'conditions' => array('Team.id = Project.team_id')
+						),
+						array(
+							'table' => 'Pdetails',
+							'alias' => 'Pdetail',
+							'type'	=> 'LEFT',
+							'conditions' => array('Project.id = Pdetail.project_id AND Pdetail.status <> 6 AND Pdetail.status <> 5')
+						),
+					),
+	            'group' => array('Team.team'),
+	            'conditions' => array('Team.id >= 1'),
+	            'fields' => array('count(Pdetail.project_id) as total_num_task', 'Project.*', 'Team.*')
+        	);
+		
+		$pagination = $this->paginate('Team');
+		$this->set('team', $pagination);
+		var_dump($pagination);
+		//$this->set('projects', $pagination);
 	}
 }

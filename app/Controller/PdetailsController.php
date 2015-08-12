@@ -33,7 +33,6 @@ class PdetailsController extends AppController {
 
 		$this->paginate = array(
             'limit' => 5,
-            //'order' => $order,
             'conditions' => $condition
         );
 
@@ -129,7 +128,6 @@ class PdetailsController extends AppController {
 
 		$this->paginate = array(
             'limit' => 5,
-            //'order' => $order,
             'conditions' => $condition
         );
 
@@ -141,7 +139,6 @@ class PdetailsController extends AppController {
 		$this->set('p_id', $projectID);
 
 		if ($this->request->is(array('post', 'put'))) {
-			//var_dump($this->request->data); die();
 			if ($this->Pdetail->save($this->request->data)) {
 				$this->Session->setFlash(__('The details has been updated.'));
 				return $this->redirect(array('action' => 'index', $projectID));
@@ -227,35 +224,6 @@ class PdetailsController extends AppController {
 			$this->Session->setFlash(__('The project could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-		/*$this->Pdetail->id = $id;
-
-		$condition = array(
-				'pdetail.id' => $id
-			);
-
-		$this->paginate = array(
-            'limit' => 5,
-            //'order' => $order,
-            'conditions' => $condition
-        );
-
-		$pdetails = $this->paginate('Pdetail');
-		$this->set('pdetails', $pdetails);
-
-		$projectID = $pdetails[0]['Pdetail']['project_id'];
-
-		$this->set('p_id', $projectID);
-
-		if (!$this->Pdetail->exists()) {
-			throw new NotFoundException(__('Invalid issue'));
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Pdetail->delete()) {
-			$this->Session->setFlash(__('The issue has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The issue could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index', $projectID));*/
 	}
 }
 

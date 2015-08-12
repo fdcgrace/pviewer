@@ -25,8 +25,8 @@
 							<tr>
 								<td><?php echo h($project['Project']['p_name']); ?></td>
 								<td><a href="<?php echo h($project['Project']['link']); ?>" target="_blank"><?php echo h($project['Project']['link']); ?></a></td>
-								<td><?php echo h($project['Team']['team']); ?></td>
-								<td><?php echo h($project['Project']['no_of_task']); ?></td>
+								<td><?php echo h($project['Leader']['team']); ?></td>
+								<td><?php echo h($project[0]['total_num_task']); ?></td>
 								<td><?php echo h($project['Project']['created']); ?></td>
 								<td><?php echo h($project['Project']['modified']); ?></td>
 								<td class="actions">
