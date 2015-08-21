@@ -25,17 +25,19 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function index($id = null) {
-		
 		$this->Pdetail->recursive = 0;
 		$condition = array(
 				'project.id' => $id,
 				'Pdetail.del_flg' => 1
 			);
+		$order = array(
+				'Pdetail.priority' => 'desc'
+			);
 
 		$this->paginate = array(
             'limit' => 5,
-            //'order' => $order,
-            'conditions' => $condition
+            'conditions' => $condition,
+            'order' => $order
         );
 
 		$pdetails = $this->paginate('Pdetail');
@@ -47,7 +49,27 @@ class PdetailsController extends AppController {
 
 
 		if ($this->request->is(array('post', 'put'))) {
-			if(!empty($_POST['changeColor']) && !empty($_POST['color'])) {
+			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
+			//if($_POST['progress']!='' && !empty($_POST['id'])){
+				$arrData = array('progress' => $_POST['progress']);
+				$this->Pdetail->id = $_POST['id'];
+				$this->Pdetail->set($arrData);
+		        if($this->Pdetail->save()){
+		           $this->Session->setFlash(__('The details has been saved.'));
+		        }else{
+		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
+		        } 
+		    } else if((isset($_POST['priority']) &&!empty($_POST['priority'])) && (isset($_POST['id']) && !empty($_POST['id']))){
+		    //} else if(!empty($_POST['priority']) && !empty($_POST['id'])){
+				$arrData = array('priority' => $_POST['priority']);
+				$this->Pdetail->id = $_POST['id'];
+				$this->Pdetail->set($arrData);
+		        if($this->Pdetail->save()){
+		           $this->Session->setFlash(__('The details has been saved.'));
+		        }else{
+		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
+		        } 
+			}else if(!empty($_POST['changeColor']) && !empty($_POST['color'])) {
 				$getData = $this->Tblcolor->find('first', array(
 					'conditions' => array('status' => $_POST['changeColor']),
 					'fields' => array('id')
@@ -62,6 +84,7 @@ class PdetailsController extends AppController {
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
 			}else{
+				
 				if ($this->Pdetail->save($this->request->data)) {
 					$this->Session->setFlash(__('The details has been updated.'));
 					return $this->redirect(array('action' => 'index', $id));
