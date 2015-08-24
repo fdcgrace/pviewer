@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta name="robots" content="noindex,nofollow">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<title>オススメアプリ詳細</title>
+		<script src="./sm/js/jquery.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+
+		<style type="text/css">
+			<!--
+
+			/* 背景スタイル */
+			.ui-body-d{
+				background: %--bg_color--% !important;
+				text-shadow: none !important;
+			}
+
+			/* リストヘッダスタイル */
+			.ui-bar-c {
+				border: 1px solid %--hd_color2--% !important;
+				background: %--hd_color1--% !important;
+				background-image: -webkit-gradient(linear,left top,left bottom,from(%--hd_color1--%),to(%--hd_color2--%)) !important;
+				background-image: -webkit-linear-gradient(%--hd_color1--%,%--hd_color2--%) !important;
+				background-image: -moz-linear-gradient(%--hd_color1--%,%--hd_color2--%) !important;
+				background-image: -ms-linear-gradient(%--hd_color1--%,%--hd_color2--%) !important;
+				background-image: -o-linear-gradient(%--hd_color1--%,%--hd_color2--%) !important;
+				background-image: linear-gradient(%--hd_color1--%,%--hd_color2--%) !important;
+			}
+
+			/* リストコンテンツスタイル */
+			.ui-list-content {
+				border: 1px solid %--cnt_color2--%;
+				background: %--cnt_color1--% !important;
+				background-image: -webkit-gradient(linear,left top,left bottom,from(%--cnt_color1--%),to(%--cnt_color2--%)) !important;
+				background-image: -webkit-linear-gradient(%--cnt_color1--%,%--cnt_color2--%) !important;
+				background-image: -moz-linear-gradient(%--cnt_color1--%,%--cnt_color2--%) !important;
+				background-image: -ms-linear-gradient(%--cnt_color1--%,%--cnt_color2--%) !important;
+				background-image: -o-linear-gradient(%--cnt_color1--%,%--cnt_color2--%) !important;
+				background-image: linear-gradient(%--cnt_color1--%,%--cnt_color2--%) !important;
+			}
+
+			/* ボタンスタイル */
+			.ui-btn-up-d {
+				border: 1px solid %--btn_color2--%;
+				background: %--btn_color1--% !important;
+				background-image: -webkit-gradient(linear,left top,left bottom,from(%--btn_color1--%),to(%--btn_color2--%)) !important;
+				background-image: -webkit-linear-gradient(%--btn_color1--%,%--btn_color2--%) !important;
+				background-image: -moz-linear-gradient(%--btn_color1--%,%--btn_color2--%) !important;
+				background-image: -ms-linear-gradient(%--btn_color1--%,%--btn_color2--%) !important;
+				background-image: -o-linear-gradient(%--btn_color1--%,%--btn_color2--%) !important;
+				background-image: linear-gradient(%--btn_color1--%,%--btn_color2--%) !important;
+			}
+
+			/* 文字スタイル */
+			#ad-detail .title {
+				font-size: 24px !important;
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .type {
+				font-weight: bold;
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .price {
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .limit {
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .description {
+				color : %--txt_color--% !important;
+				text-shadow: %--txt_color--% !important;
+			}
+			#ad-detail .point {
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .list-header {
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .list-content {
+				color : %--txt_color--% !important;
+				text-shadow: #ffffff !important;
+			}
+			#ad-detail .button-label {
+				color : %--btn_txt_color--% !important;
+				text-shadow: 0 1px 0 %--btn_color2--% !important;
+			}
+
+			-->
+		</style>
+	</head>
+
+	<body>
+		<!-- tmpl:ifdef %--header_image--% -->
+		<img src="%--header_image_url--%" width="100%">
+		<!-- tmpl:endif -->
+		<div class="ad-detail ui-content ui-body-d" id="ad-detail">
+			<h1 class="title">%--ad_title--%</h1>
+			<table>
+				<tr>
+					<td rowspan="2" class="icon">
+						<img alt="" src="%--image_url--%" width="96" height="96"/>
+						<img border="0" width="1" height="1" src="%--impr_url--%" alt="" /></td>
+					<td class="type" style="padding-left: 30px;">%--ad_kind--%</td>
+					<td class="price">%--ad_price--%</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="limit" style="padding-left: 30px;">
+						<!-- tmpl:ifdef %--ad_limit--% -->
+						数量限定 %--ad_limit--% 件
+						<!-- tmpl:endif -->
+					</td>
+				</tr>
+			</table>
+			<p class="description">
+				%--ad_detail--%
+			</p>
+
+			<!-- tmpl:ifdef %--ad_point--% -->
+			<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+				<li class="ui-li ui-li-divider ui-bar-c ui-first-child list-header">
+					獲得%--point_label--%
+				</li>
+				<li class="center ui-li ui-li-static ui-list-content point">
+					%--ad_point--%
+				</li>
+				<li class="ui-li ui-li-divider ui-bar-c list-header">
+					獲得条件
+				</li>
+				<!-- tmpl:ifdef %--syonin_uri_joken_text--% -->
+				<li class="center ui-li ui-li-static ui-list-content list-content">
+					%--syonin_uri_joken_text--%
+				</li>
+				<!-- tmpl:endif -->
+				<li class="center ui-li ui-li-static ui-list-content ui-last-child list-content">
+					※ボタンクリックから成果獲得条件を満たすまで、同じブラウザを使用してください。異なるブラウザを使用した場合は成果発生対象外となります。<br>
+					※成果が発生するのは初回%--first_method--%時のみです。
+				</li>
+			</ul>
+			<!-- tmpl:endif -->
+
+			<a href="%--click_url--%" %--target_blank--% class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-d button-label">
+				<span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">%--button_label--%</span></span>
+			</a>
+
+		</div>
+
+	</body>
+</html>

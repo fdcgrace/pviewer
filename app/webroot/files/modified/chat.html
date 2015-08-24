@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html>
+<head>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script> 
+	<script type="text/javascript" src="http://cdn.peerjs.com/0/peer.min.js"></script>
+ 
+</head>
+<body>
+	<form id="connect">
+		<strong>connect to broker</strong><br>
+		<label>your id:</label><input type="text" name="myid">
+		<button type="submit">connect to broker</button>
+	</form>
+	<form id="call">
+		<strong>call to peer</strong><br>
+		<label>remote peer id:</label><input type="text" name="remoteid">
+		<button type="submit">call</button>
+	</form>
+	<form id="chat">
+		<strong>chat</strong><br>
+		<input type="text">
+		<button type="submit">send</button>
+	</form>
+	<div>
+		<dl>
+		</dl>
+	</div>
+ 
+	<script>
+		var peer_, conn_;
+ 
+	var enableForm_ = function(id) {
+		$("form").each(function(e){
+			$(this).find("button").attr("disabled", $(this).attr("id") === id ? false : "disabled");
+		})
+	}
+	var setupForRemote_ = function(conn) {
+		if(!!conn) conn_ = conn;
+ 
+		enableForm_("chat");
+ 
+		conn_.on("data", function(data){
+			showChat_(conn_.peer, data)
+		});
+	}
+ 
+	var showChat_ = function(id, mesg) {
+		$("<dt>"+id+"</dt><dd>"+mesg+"</dd>").appendTo("dl")
+	}
+ 
+	$("form#connect").submit(function(e){
+		e.preventDefault();
+		$(this).find("button").attr("disabeld", "disabled")
+ 
+		var id = $(this).find("input[name=myid]").val();
+		peer_ = Peer(id, { 
+			"host": "localhost", 
+			"port": 9000
+		});
+ 
+		peer_.on('connection', setupForRemote_);
+		enableForm_("call")
+	})
+ 
+	$("form#call").submit(function(e){
+		e.preventDefault();
+		var id = $(this).find("input[name=remoteid]").val();
+		conn_ = peer_.connect(id, {"serialization": "binary-utf8"});
+ 
+		conn_.on('open', setupForRemote_);
+	})
+ 
+	$("form#chat").submit(function(e){
+		e.preventDefault();
+ 
+		var mesg = $(this).find("input").val();
+		showChat_("me", mesg)
+		conn_.send(mesg)
+	})
+ 
+	function init(){
+		enableForm_("connect")
+	}
+	init();
+	</script>
+ 
+ 
+ 
+</body>
+</html>

@@ -70,7 +70,7 @@ class TeamsController extends AppController {
 		
 		$pagination = $this->paginate('Team');
 		$this->set('team', $pagination);
-		var_dump($pagination);
+		//var_dump($pagination);
 		//$this->set('projects', $pagination);
 	}
 }

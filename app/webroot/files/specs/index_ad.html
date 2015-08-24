@@ -1,0 +1,75 @@
+<style type="text/css">
+	.container dd span.title {
+		margin-right: 40px!important;
+		font-size: 14px!important;
+	}
+	
+	.container dd span.content {
+		margin-right: 15px!important;
+		font-size: 10px!important;
+		overflow:hidden;
+	}
+	
+	.container{
+		margin: none!important;
+		max-width: none!important;
+	}
+	
+	.container dl {
+		padding: 10px 2px!important;
+		width: 99%!important;
+	}
+	
+	.container dt {
+	width: 80px!important;
+	}
+	
+	.container dt img {
+		max-width: 80px!important;
+	}
+	nav {
+		border-bottom: none!important;
+	}
+	.box-right ul li {
+		padding: 0!important;
+	}
+	.box-main h1 {
+		width: 49%;
+		float: left;
+	}
+	.main-header .box-main h1 a img {
+		width: 130%;
+	}
+</style>
+
+<!-- tmpl:ifdef %--ad_exists--% -->
+
+
+	<!-- tmpl:loop %--app_loop--% -->
+	<a href="%--detail_url--%" class="ui-link-inherit">
+			<dl>
+				<dt><img src="%--image_url--%"></dt>
+				<dd>
+					<span class='genkin'>%--ad_price--%</span>
+		     	<span class='title'>%--ad_title--%</span>
+		      <span class='content'>%--ad_detail--%</span>
+		      <span class='point'><sub>%--ad_point--%</sub>pt獲得</span>
+		    </dd>
+	    </dl>
+	</a>
+	
+	<!-- tmpl:endloop -->
+
+
+<!-- tmpl:else -->
+<body style="height: 100%;">
+	<div style="height: 100%; background-color: %--bg_color1--%;">
+	<!-- tmpl:ifdef %--header_image--% -->
+	<!-- <img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;">-->
+	<!-- tmpl:endif -->
+	<p style="margin: auto; padding-top: 10px; text-align: center; color: %--txt_color--%;">
+	もうしわけございません。<br>
+	現在、広告がありません。</p>
+	</div>
+</body>
+<!-- tmpl:endif -->
