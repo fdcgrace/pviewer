@@ -33,9 +33,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			//'cake.generic',
 			'bootstrap',
 			'bootstrap-theme',
+			'bootstrap-editable',
 			//'docs',
 			'colpick',
-			'mystyle'
+			'mystyle',
+			'jquery-ui'
 			)
 		);
 
@@ -44,11 +46,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'jquery.min.js',
 			/*'bootstrap', */
 			'bootstrap.min',
+			'bootstrap-editable.min',
 			/*'colorpicker',
 			'colorpicker-color',
 			'docs',*/
-			'colpick'
-			//'npm'
+			'colpick',
+			// 'bootstrap-slider',
+			'jquery-ui',
+			//'npm',
+			'custom'
 			)
 		);
 
