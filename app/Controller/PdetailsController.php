@@ -348,6 +348,23 @@ class PdetailsController extends AppController {
 */
 		}
 	}
+	public function getModifiedFiles()
+	{
+		$this->autoRender = false;
+		$issueId = $_POST['issueId'];
+
+		$findModified = $this->Issue_spec->find('all', array(
+			'fields' => array(
+				'specs_id','file','type','id','date_modified'			
+				),
+			'conditions' => array('issue_id' => $issueId,'specs_id' => 2),
+			'order' => 'date_modified desc'
+			)
+		);
+		$extractModified = Set::extract('/Issue_spec/.', $findModified);
+		echo json_encode($extractModified);
+
+	}
 	public function insertText()
 	{
 		$this->autoRender = false;
@@ -407,9 +424,16 @@ class PdetailsController extends AppController {
 		$this->autoRender = false;
 		 if ($this->request->is('post')) {
 		 	$count = count($this->data['pdetails']['file']);
-		 
-		 	echo $count.'fg';
-		 	debug($this->data['pdetails']);
+		 	$arrayDates = array();
+		 	//echo $count.'fg';
+		 	//debug($this->data['pdetails']);
+
+
+			
+
+
+
+			//var_dump($arrayDates);
 
 		 	for($i=0;$i<$count;$i++)
 	        {
@@ -417,13 +441,15 @@ class PdetailsController extends AppController {
 				$tmpName  = $this->data['pdetails']['file'][$i]['tmp_name'];
 				$fileSize = $this->data['pdetails']['file'][$i]['size'];
 				$fileType = $this->data['pdetails']['file'][$i]['type'];
+
+				
 			
 				$fp      = fopen($tmpName, 'r');
 				$content = fread($fp, filesize($tmpName));
 				$content = addslashes($content);
 				fclose($fp);
 
-	    		echo $this->data['pdetails']['file'][$i]['name'].'sharona';
+	    		//echo $this->data['pdetails']['file'][$i]['name'].'sharona';
 	        		
 	        	$this->Issue_spec->create();
 	        	
@@ -437,10 +463,14 @@ class PdetailsController extends AppController {
 						            'type2' => $fileType,
 						            'size' => $fileSize,
 						            'content' => $content
+						            
 						        )
 						    
 						);
-
+						if(isset($this->data['pdetails']['dateModified']))
+					 	$data['Issue_spec']['date_modified'] = $this->data['pdetails']['dateModified'];
+						else
+						$data['Issue_spec']['date_released'] = $this->data['pdetails']['dateReleased'];    
 
 				 $this->Issue_spec->save($data);
 				 $filename = "C:/xampp/htdocs/pviewer/app/webroot/files/".$this->data['pdetails']['category'].'/'.$this->data['pdetails']['file'][$i]['name'];	
@@ -452,15 +482,15 @@ class PdetailsController extends AppController {
 		        }	    
 	       
 						
-						
+						 
 
-
+		       //	
 		       
 
 		        
 
 	        }
-		 	
+		// 	$this->redirect($this->referer());
            
     //       echo $filename;
 	   //      $this->redirect($this->referer());
@@ -489,8 +519,32 @@ class PdetailsController extends AppController {
 		}
 
 		echo $r;
+		//$result = Set::combine($legendStatusId, '{n}.Issue_spec.id', '{n}.Issue_spec.file', '{n}.Issue_spec.type', '{n}.Issue_spec.specs_id');
 		
-		//echo json_encode($legendStatusId);
+		//echo json_encode($result);
+	}
+	public function testJson()
+	{
+		$this->autoRender = false;
+		
+
+		$legendStatusId = $this->Issue_spec->find('all', array(
+			'fields' => array(
+				'specs_id','file','type','id'			
+				),
+			'conditions' => array('issue_id' => 4)
+			)
+		);
+		echo $today;
+
+		$things = Set::extract('/Issue_spec/.', $legendStatusId);
+		//debug($things);
+//$userNames = Set::extract($legendStatusId, '{n}.Issue_spec.file','Issue_spec.type');
+
+
+
+//debug($userNames);
+	echo json_encode($things);
 	}
 	public function downloadFile()
 	{
@@ -512,7 +566,7 @@ class PdetailsController extends AppController {
 		header("Content-length: $size");
 		header("Content-type: $type2");
 		header("Content-Disposition: attachment; filename=$file");
-		echo $content;
+		echo stripslashes($content);
 	}
 
 }

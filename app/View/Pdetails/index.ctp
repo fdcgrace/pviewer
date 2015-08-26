@@ -5,6 +5,8 @@
 	<div class="row">
 		<div class="col-md-8">
 			<?php 
+			date_default_timezone_set("Asia/Manila"); 
+			$todayDate = date("Y-m-d"); 
 			$baseUrl= Router::url('/', true);
 			echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
 			<?php echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success')); ?>
@@ -307,6 +309,7 @@
 			            <label for="tab2" id="label2" onclick="changeBgcolor('label2','1-3-4');">Files Modified</label>
 			            <label for="tab3" id="label3" onclick="changeBgcolor('label3','1-2-4');">Files Released</label>
 			            <label for="tab4" id="label4" onclick="changeBgcolor('label4','1-2-3');">Files Added</label>
+			            <input type='hidden' id='general-issueid'  >
 			        </li>
 			        <li>
 			            <input type="radio" checked name="tabs" id="tab1">
@@ -398,6 +401,7 @@
 									echo $this->Form->input('type',array( 'type' => 'hidden','value' => 'file'));
 									echo $this->Form->input('category',array( 'type' => 'hidden','id' => 'issueid','value' => 'modified'));
 									echo $this->Form->input('specsid',array( 'type' => 'hidden','id' => 'specsid','value' => 2));
+									echo $this->Form->input('dateModified',array( 'type' => 'hidden','id' => 'dateModified','value' => $todayDate));
 
 									?>
 								</div>
@@ -424,6 +428,7 @@
 									echo $this->Form->input('type',array( 'type' => 'hidden','value' => 'link'));
 									echo $this->Form->input('categoy',array( 'type' => 'hidden','id' => 'issueid','value' => 'modified'));
 									echo $this->Form->input('specsid',array( 'type' => 'hidden','id' => 'specsid','value' => 2));
+									echo $this->Form->input('dateModified',array( 'type' => 'hidden','id' => 'dateModified','value' => $todayDate));
 
 									?>
 								</div>
@@ -437,6 +442,8 @@
 							</div>
 
 							<div id="right-column2">
+								<table id="table-results">
+								</table>
 							<h4><b>Uploaded Files</b></h4>
 
 							<div id= 'right-column21'>
@@ -469,6 +476,7 @@
 									echo $this->Form->input('type',array( 'type' => 'hidden','value' => 'file'));
 									echo $this->Form->input('category',array( 'type' => 'hidden','id' => 'issueid','value' => 'released'));
 									echo $this->Form->input('specsid',array( 'type' => 'hidden','id' => 'specsid','value' => 3));
+									echo $this->Form->input('dateReleased',array( 'type' => 'hidden','id' => 'dateReleased','value' => $todayDate));
 
 									?>
 								</div>
@@ -576,7 +584,12 @@ function changeBgcolor(label,removeBg)
 	var removeLabel = label.replace('label', '' );
 
 	$('#specsid').val(removeLabel);
+	var genIssue = $('#general-issueid').val();
 	$('#'+label).css("background-color","#3498db");
+
+	if(removeLabel == 2)
+		viewModified(genIssue);
+
 
 	var count = removeBg.split('-');
 	for (var i = 0; i < count.length; i++) {
@@ -609,6 +622,8 @@ function viewIssueDetails(id)
 	            
 	            success: function(data){
 
+
+
 	            	var implodeRow = data.split('@');
 
 	            	for(var j=0;j<implodeRow.length;j++)
@@ -619,41 +634,46 @@ function viewIssueDetails(id)
 	            		var type = implodeSpecs[2];
 	            		var id = implodeSpecs[3];
 	            		var extension = file.substr( (file.lastIndexOf('.') +1) );
+
+	            		if(type == 'file')
+	            			var appendVal = "<a href='/pviewer/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />"
+	            		else
+	            			var appendVal = file+'<br />';
 	            	//	alert(extension);
 
 	            		if(specsId == 1)
 	            		{	
 	            			if((extension == 'php') && (type == 'file' || type == 'link'))
-	            			$('#php1').append("<a href='/pviewer/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />");
+	            			$('#php1').append(appendVal);
 	            			else if((extension == 'html') && (type == 'file' || type == 'link'))
-	            			$('#html1').append("<a href='/pviewer/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />");
+	            			$('#html1').append(appendVal);
 	            			else
-	            			$('#links1').append(file+'<br />');	
+	            			$('#links1').append(appendVal);	
 	            		}
 	            		else if(specsId == 2)
 	            		{
 	            			if((extension == 'php')  && (type == 'file' || type == 'link'))
-	            			$('#php2').append(file+'<br />');
+	            			$('#php2').append(appendVal);
 	            			else if(( extension == 'html') && (type == 'file' || type == 'link'))
-	            			$('#html2').append(file+'<br />');
+	            			$('#html2').append(appendVal);
 	            			else
-	            			$('#links2').append(file+'<br />');	
+	            			$('#links2').append(appendVal);	
 	            		}
 	            		else if(specsId == 3)
 	            		{
 	            			if(extension == 'php')
 
-	            			$('#php3').append(file+'<br />');
+	            			$('#php3').append(appendVal);
 	            			else
-	            			$('#html3').append(file+'<br />');
+	            			$('#html3').append(appendVal);
 	            		}	
 	            		else
 	            		{
 	            			if(extension == 'php')
 
-	            			$('#php4').append(file+'<br />');
+	            			$('#php4').append(appendVal);
 	            			else
-	            			$('#html4').append(file+'<br />');
+	            			$('#html4').append(appendVal);
 	            		}
 
 	            	}
@@ -675,6 +695,7 @@ function viewIssueDetails(id)
 	        }
 	       });
 	$('#issue-details').html('.');
+	$('#general-issueid').val(id);
 	$('#issueid').val(id);
 	$('#issueid2').val(id);
 	$('#issueid3').val(id);
@@ -683,6 +704,65 @@ function viewIssueDetails(id)
 	$('#issueid1v1').val(id);
 	$("#myModal3").modal('show');
 	
+}
+function toggleDate(counter)
+{
+	alert(counter);
+}
+function viewModified(genIssue)
+{
+		   $.ajax({
+	            type: "POST",
+	            url: 'http://localhost/pviewer/pdetails/getModifiedFiles',
+	            data: { issueId : genIssue }, 
+	            dataType: 'json',
+	            success: function(rows){
+	            	console.log(rows);
+	            	var data = {};
+				    var dates = [];
+				    $.each(rows, function () {
+				        if (typeof data[this.date_modified] == "undefined")
+				        {
+				            data[this.date_modified] = [];
+				        }
+				        data[this.date_modified].push(this);
+				        if (dates.indexOf(this.date_modified) == -1)
+				        {
+				            dates.push(this.date_modified);
+				        }
+				    });
+				    dates = dates.sort();
+				    var counter = 0;
+				    var table = $('#table-results');
+				    $.each(dates, function () {
+				    	counter++;
+				        table.append(
+				            $("<tr>").append('<td><button onclick = "toggleDate('+"'dateCounter"+counter+"'"+')">'+this+'</button></td>')
+				        );
+				        
+				        data[this] = data[this].sort(function (a, b) {
+				            return a.file > b.file;
+				        });
+				        
+				        $.each(data[this], function () {
+				        	console.log(this.file);
+				            table.append(
+				                $("<tr>").append(
+				                    $("<td>").html(this.file)
+				                ).append(
+				                    $("<th>").html(this.id)
+				                )
+				            );
+				        });
+				    });
+
+	        
+	               
+	            },
+	            error: function(data){
+	            //cannot connect to server
+	        }
+	       });
 }
 function backFunction()
 {
