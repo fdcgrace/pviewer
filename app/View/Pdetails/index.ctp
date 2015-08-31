@@ -1,12 +1,25 @@
+<?php 	
+	$res = $this->Session->read('result');
+	if (isset($res)) {
+		if ($res == 'success') { ?>
+			<div class="alert alert-success">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong><?php echo $this->Session->read('message');?>
+			</div>
+<?php 	} else if ($res == 'warning') { ?>
+			<div class="alert alert-warning">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Error!</strong><?php echo $this->Session->read('message');?>
+			</div>
+<?php 	}   } if(isset($_SESSION['result'])) { unset($_SESSION['result']); }?>
+
 <div class="container-fluid">
 	<h3>Project Detail</h3>
 	<div class="row">
 		<div class="col-md-8">
-
-			<?php 
-				echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary'));
-				echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#addForm'));
-			?>
+			<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
+			<?php echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#addForm')); ?>
+			<?php echo $this->Html->link(__('Add Member'), array('controller' => 'Members', 'action' => 'add', $t_id), array('class' => 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#addMember')); ?>
 		</div>
 		<div class="col-md-4">
 			Legend: 
@@ -35,11 +48,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($pdetails as $Pdetail): ?>
+					<?php foreach ($pdetails as $Pdetail):?>
+						<?php $count = 0;?>
+						<?php $count++;?>
 						<?php echo $this->Form->create('Pdetail'); ?>
-						<tr style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>">
+						<tr class="pdetail" style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>" state="hover" value="<?php echo $Pdetail['Pdetail']['id'];?>" data-title="Comment"data-html=true data-placement="bottom" data-toggle="popover" data-content="<a class='comment'><?php echo $Pdetail['Pdetail']['comment'];?></a>">
 							<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['date']); ?></td>
+							<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['sub_task']); ?></td>
 							<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
@@ -125,6 +140,13 @@
 </div>
 <!--end editForm button -->
 
+<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
 <script>
 $(document).ready(function(){
 
@@ -148,8 +170,75 @@ $(document).ready(function(){
 			});
 	
 		}
-		
-	});	
+	});
+
+	$('[data-toggle="popover"]').popover({
+		trigger: 'manual'
+	}).on('mouseenter', function() {
+		if($(this).attr('state') !== 'pinned') {
+			$(this).popover('show');
+		}
+	}).on('mouseleave', function() {
+		if($(this).attr('state') === 'hover') {
+			$(this).popover('hide');
+		}
+	}).on('dblclick', function() {
+		if($(this).attr('state') === 'hover') {
+			$(this).popover('show');
+			$(this).attr('state', 'pinned');
+		} else {
+			$(this).attr('state', 'hover');
+			$(this).popover('hide');
+		}
+		$('[data-toggle="popover"]').not(this).popover('hide');
+		$('[data-toggle="popover"]').not(this).attr('state', 'hover');
+		editComment();
+	});
+
+	function editComment(callback) {
+		$("a.comment").on('dblclick', function() {
+			console.log("called");
+			var form = "<input id='comment' class='comment form-control' type='text' name='comment' value='"+$(this).text()+
+					   "'></input><button class='glyphicon glyphicon-ok'/></button>";
+			$(".popover-content").append(form);
+			$(this).remove();
+			update();
+		});
+	}
+
+	function update(callback) {
+		$(".glyphicon-ok").on('click', function() {
+			var text = $("input.comment").val();
+			$('[data-toggle="popover"]').each(function() {
+				if($(this).attr('state') === 'pinned') {
+					// alert(text);
+					var id = $(this).attr('value');
+					$.ajax({
+						url: "/pviewer/pdetails/update/",
+						type: 'POST',
+						data: {'comment': text, 'id': id},
+						success: function(data) {
+						},
+						error: function(data) {
+							alert('fail');
+						}
+					});
+				}
+				$(this).attr('data-content', '<a class="comment">'+text+'</a>');
+				$(this).attr('state', 'hover');
+				$(this).popover('hide');
+			});
+		});
+	}
+	
+	$('body').on('click', function() {
+		$('[data-toggle="popover"]').each(function () {
+			if($(this).attr('state') === 'pinned') {
+				$(this).popover('hide');
+				$(this).attr('state', 'hover');
+			}
+	    });
+	});
 });
 </script>
 

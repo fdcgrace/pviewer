@@ -21,15 +21,6 @@
 			$proj_session = $this->Session->read('project');
 		} 
 ?>
-<style>
-	table > tr > td {
-		padding: 0;
-		border: 0;
-		border-top: 0px;
-		border-bottom: 0px;
-		border-spacing: 0px;
-	}
-</style>
 
 <script>
 	$(function() {

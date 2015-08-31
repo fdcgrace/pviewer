@@ -4,7 +4,7 @@
 foreach ($pdetails as $Pdetail):
 	echo $this->Form->create('Pdetail');
 	echo "<div class='form-group'>";
-	echo $this->Form->input('date', array('label' => 'Date Assigned', 'type' => 'text', 'value' => $Pdetail['Pdetail']['date'], 'class' => 'form-control'));
+	echo $this->Form->input('date', array('label' => 'Date Assigned', 'type' => 'text', 'value' => $Pdetail['Pdetail']['deadline'], 'class' => 'form-control'));
 	echo "</div>
 		 <div class='form-group'>";
 	echo $this->Form->input('issue_no', array('label' => 'Issue No.', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_no'], 'class' => 'form-control'));
