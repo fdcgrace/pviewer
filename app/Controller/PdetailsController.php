@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class PdetailsController extends AppController {
 
-	public $uses = array('Project', 'Pdetail', 'Member', 'Tblcolor','Issue_spec');
+	public $uses = array('Project', 'Pdetail', 'Member', 'Tblcolor','Issue_spec','Bug_info');
 
 /**
  * Components
@@ -258,7 +258,15 @@ class PdetailsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+	public function deleteBugInfo()
+	{
+		
 
+		 $this->autoRender = false;
+		 $bugId = $_POST['bugId'];
+		 $this->Bug_info->delete($bugId);
+		 echo json_encode($bugId);
+	}
 	public function deleteLegend()
 	{
 		 $this->autoRender = false;
@@ -419,21 +427,145 @@ class PdetailsController extends AppController {
 
        	 }	
 	}
+
+	public function updateBugInfo()
+	{
+		$this->autoRender = false;
+		 if ($this->request->is('post')) {	
+
+		 	$issueidbug = $this->data['pdetails']['issueid-bug'];
+			$bugDescription  = $this->data['pdetails']['bugdescription'];
+			$bugSteps = $this->data['pdetails']['bugsteps'];
+			$bugStatus = $this->data['pdetails']['bugstatus'];
+			$statusAfter = $this->data['pdetails']['statusAfter'];
+			$whoFound = $this->data['pdetails']['whofound'];
+			$bugReason = $this->data['pdetails']['bugreason'];
+
+
+			$data = 
+						    array(
+						            'bug_description'=>$bugDescription,
+						            'bug_steps'=>$bugSteps,
+						            'bug_status'=>$bugStatus,
+						            'status_after'=>$statusAfter,
+						            'who_found'=>$whoFound,
+						            'bug_reason'=>$bugReason
+						        
+						    
+						);
+
+				 $this->Bug_info->id = $issueidbug;
+				 $this->Bug_info->set($data);
+				 $this->Bug_info->save();
+
+
+
+		 }
+	}
+	public function insertBugInfo()
+	{
+		 $this->autoRender = false;
+		 if ($this->request->is('post')) {	
+
+		 	$issueidbug = $this->data['pdetails']['issueid-bug'];
+			$bugDescription  = $this->data['pdetails']['bugdescription'];
+			$bugSteps = $this->data['pdetails']['bugsteps'];
+			$bugStatus = $this->data['pdetails']['bugstatus'];
+			$statusAfter = $this->data['pdetails']['statusAfter'];
+			$whoFound = $this->data['pdetails']['whofound'];
+			$bugReason = $this->data['pdetails']['bugreason'];
+
+
+			$id  = $this->Bug_info->find('all', array(
+			'conditions' => array('issue_id' => $issueidbug)
+			)
+			);
+
+		/*	if(count($id) > 0)
+			{
+				echo "a";
+				$bugIssueId = $id[0]['Bug_info']['id'];
+				$data = 
+						    array(
+						            'bug_description'=>$bugDescription,
+						            'bug_steps'=>$bugSteps,
+						            'bug_status'=>$bugStatus,
+						            'status_after'=>$statusAfter,
+						            'who_found'=>$whoFound,
+						            'bug_reason'=>$bugReason
+						        
+						    
+						);
+
+				 $this->Bug_info->id = $bugIssueId;
+				 $this->Bug_info->set($data);
+				 $this->Bug_info->save();
+
+			}
+			else
+			{*/
+
+				echo 'b';
+				$this->Bug_info->create();
+
+				$data = 
+							  array(
+							        'Bug_info' => array(
+							            'issue_id'=>$issueidbug,
+							            'bug_description'=>$bugDescription,
+							            'bug_steps'=>$bugSteps,
+							            'bug_status'=>$bugStatus,
+							            'status_after'=>$statusAfter,
+							            'who_found'=>$whoFound,
+							            'bug_reason'=>$bugReason
+							        )
+							    
+							);
+		    
+				 $this->Bug_info->save($data);
+			//}
+
+	
+
+
+
+		 }
+	}
+	public function viewBugInfo()
+	{
+		$this->autoRender = false;
+		$issueId = $_POST['issueId'];
+
+		$infoRecord = $this->Bug_info->find('all', array(
+			'conditions' => array('issue_id' => $issueId)
+			)
+		);
+
+		$returnInfo = Set::extract('/Bug_info/.', $infoRecord);
+
+		echo json_encode($returnInfo);
+
+	}
+	public function editBugInfo()
+	{
+		$this->autoRender = false;
+		$bugId = $_POST['bugId'];
+
+		$infoRecord = $this->Bug_info->find('all', array(
+			'conditions' => array('id' => $bugId)
+			)
+		);
+
+		$returnInfo = Set::extract('/Bug_info/.', $infoRecord);
+
+		echo json_encode($returnInfo);
+	}
 	public function insertFiles()
 	{
 		$this->autoRender = false;
 		 if ($this->request->is('post')) {
 		 	$count = count($this->data['pdetails']['file']);
 		 	$arrayDates = array();
-		 	//echo $count.'fg';
-		 	//debug($this->data['pdetails']);
-
-
-			
-
-
-
-			//var_dump($arrayDates);
 
 		 	for($i=0;$i<$count;$i++)
 	        {

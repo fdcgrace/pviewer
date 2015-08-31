@@ -135,7 +135,17 @@
 								'selected' => $Pdetail['Pdetail']['status'],
 								'options' => $legendStatusId
 									)
-								); ?>
+								); 
+							//	echo $Pdetail['Pdetail']['status'].'sharonfaith';
+
+
+								if($Pdetail['Pdetail']['status'] == '4')
+								{ ?>
+									<input type='button' value='Bug Info' class='btn btn-info' id='bug-info' onclick="checkBugInfo('<?php echo $detId; ?>')">
+								<?php 
+								}
+
+								?>
 							</div>
 							</td>
 							<td><?php echo h($Pdetail['Pdetail']['created']); ?></td>
@@ -442,18 +452,19 @@
 							</div>
 
 							<div id="right-column2">
+								<h4><b>Uploaded Files</b></h4>
 								<table id="table-results">
 								</table>
-							<h4><b>Uploaded Files</b></h4>
+							
 
 							<div id= 'right-column21'>
-								<b>PHP FILES</b>
+								<!-- <b>PHP FILES</b>
 										<div id='php2'></div>
 										<br>
 										<b>HTML FILES</b>
 										<div id='html2'></div><br>
 										<b>OTHERS/LINKS</b>
-										<div id='links2'></div>
+										<div id='links2'></div> -->
 							</div>
 							</div>
 			                <!-- Your Content Here -->
@@ -561,23 +572,220 @@
 
 
 
+        <div id="myModal4" class="modal modal-wide fade">
+        <div class="modal-dialog" style='width:900px;'>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Bug Info</h4>
+                </div>
+                <div class="modal-body">
+                	<center>
+                		<div id='addBugInfo'>
+                	<table>
+
+                					<tr><!-- <td><label><input type='checkbox' onclick='handleClick(this);'>Edit</label></td> -->
+                						<td><label><input type='checkbox' id='show-all' onclick='showBugList(this);'>Show all bugs</label></td>
+                					</tr>
+                	<?php
+
+									/* create form with proper enctype */
+									echo $this->Form->create('pdetails', array('action' => 'insertBugInfo'));
+									echo $this->Form->input('issueid', array('type' => 'hidden','id' => 'issueid-bug','name' => "data[pdetails][issueid-bug]"));
+									echo '<tr><td colspan=2>'.$this->Form->input('Bug Description',array( 'id' => 'bug-desc','class' => 'form-control','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Steps on how bug is produced',array( 'id' => 'bug-steps','class' => 'form-control','type' => 'text','name' => "data[pdetails][bugsteps]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Status',array( 'id' => 'bug-stat','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Status after fix',array('id' => 'bug-statafter','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
+
+									echo '<tr><td colspan=2>'.$this->Form->input('Who found the bug',array('id' => 'bug-whofound','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Reason of Bug',array('id' => 'bug-reason','class' => 'form-control',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
+
+									?>
+
+									<?php
+									/* create submit button and close form */
+
+									echo '<tr><td>'.$this->Form->end('Submit').'</td><td><td></tr>';
+									?>
+					</table></div></center>
+					<center>
+                		<div id='addBugInfo2' style='display:none'>
+                	<table>
+
+                					
+                	<?php
+
+									/* create form with proper enctype */
+									echo $this->Form->create('pdetails', array('action' => 'updateBugInfo'));
+									echo $this->Form->input('issueid',array( 'type' => 'hidden','id' => 'bug-id2','name' => "data[pdetails][issueid-bug]"));
+									echo '<tr><td>Bug Description</td><td>'.$this->Form->input('',array( 'id' => 'bug-desc2','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
+									echo '<tr><td>Steps on how bug is produced</td><td>'.$this->Form->input('',array( 'id' => 'bug-steps2','type' => 'text','name' => "data[pdetails][bugsteps]")).'</td></tr>';
+									echo '<tr><td>Status</td><td>'.$this->Form->input('',array( 'id' => 'bug-stat2', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
+									echo '<tr><td>Status after fix</td><td>'.$this->Form->input('',array('id' => 'bug-statafter2', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
+
+									echo '<tr><td>Who found the bug</td><td>'.$this->Form->input('',array('id' => 'bug-whofound2', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
+									echo '<tr><td>Reason of Bug</td><td>'.$this->Form->input('',array('id' => 'bug-reason2',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
+
+									?>
+
+									<?php
+									/* create submit button and close form */
+									
+									echo '<tr><td>'.$this->Form->end('Submit').'</td><td><td></tr>';
+									?>
+					</table></div></center>
+
+
+                </div>
+                <div id='div-bugs'  style='display:none' >
+                	<table class='table table-hovered'>
+                		<tbody id='lala'>
+                			<tr>
+                				<th>Bug Description	</th>
+                				<th>Steps on how bug is produced</th>
+                				<th>Status	</th>
+                				<th>Status after fix	</th>
+                				<th>Who found the bug</th>
+                				<th>Reason of Bug</th>
+                			
+
+	
+
+
+	
+
+                			</tr>
+                		</tbody>
+                	
+                	</table>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
 
 
   
 
-<body>
-     
-    <!-- Modal -->
-   
-
-
-</body>
 
 
 <!-- Button to trigger modal -->
 
 
 <script>
+
+function handleClick(cb) {
+	if(cb.checked == true)
+		var read = false
+	else
+		var read = true
+	$("#bug-desc").prop("readonly", read);
+	$("#bug-steps").prop("readonly", read);
+	$("#bug-statafter").prop("readonly", read);
+	$("#bug-whofound").prop("readonly", read);
+	$("#bug-stat").prop("readonly", read);
+	$("#bug-reason").prop("readonly", read);
+}
+
+function showBugList(ischecked)
+{
+	var issue = $('#issueid-bug').val();
+
+
+	$('#lala').append("<tr><th>Bug Description</th><th>Steps on how bug is produced</th><th>Status	</th><th>Status after fix	</th><th>Who found the bug</th><th>Reason of Bug</th></tr>");
+
+	$.ajax({
+	            type: "POST",
+	            url: 'http://localhost/pviewer/pdetails/viewBugInfo',
+	            data: { issueId : issue },
+	            dataType: 'json', 
+	            
+	            success: function(rows){
+
+	            	var data = {};
+				    var dates = [];
+				    $.each(rows, function () {
+				        console.log(this.issue_id);
+				        $('#lala').append("<tr><td>"+this.bug_description+"</td><td>"+this.bug_steps+"</td><td>"+this.bug_status+"</td><td>"+this.status_after+"</td><td>"+this.who_found+"</td><td>"+this.bug_reason+'</td><td><input type="button" class="btn btn-primary" value="EDIT" onclick="editBug('+"'"+this.id+"'"+')"></td><td><input type="button" class="btn btn-primary" value="DELETE" onclick="deleteBug('+"'"+this.id+"'"+')"></td></tr>')
+
+				     /*   $("#bug-desc").val(this.bug_description);
+						$("#bug-steps").val(this.bug_steps);
+						$("#bug-statafter").val(this.status_after);
+						$("#bug-whofound").val(this.who_found);
+						$("#bug-stat").val(this.bug_status);
+						$("#bug-reason").val(this.bug_reason);*/
+				    });
+	            	
+
+				    $('#div-bugs').show();
+				    $('#addBugInfo').hide();
+	         //    window.location.href='http://localhost/pviewer/pdetails/index/1';
+	               
+	            },
+	            error: function(data){
+	            //cannot connect to server
+	        }
+	       });
+
+
+}
+function editBug(bugId)
+{
+	$('#div-bugs').hide();
+	$('#addBugInfo').hide();
+	$('#addBugInfo2').show();
+	$.ajax({
+	            type: "POST",
+	            url: 'http://localhost/pviewer/pdetails/editBugInfo',
+	            data: { bugId : bugId },
+	            dataType: 'json', 
+	            
+	            success: function(rows){
+
+
+
+	            	var data = {};
+				    var dates = [];
+				    $.each(rows, function () {
+
+				        console.log(this.issue_id);
+				        $("#bug-id2").val(this.id);
+				        $("#bug-desc2").val(this.bug_description);
+						$("#bug-steps2").val(this.bug_steps);
+						$("#bug-statafter2").val(this.status_after);
+						$("#bug-whofound2").val(this.who_found);
+						$("#bug-stat2").val(this.bug_status);
+						$("#bug-reason2").val(this.bug_reason);
+				    });
+	            	
+
+	         //    window.location.href='http://localhost/pviewer/pdetails/index/1';
+	               
+	            },
+	            error: function(data){
+	            //cannot connect to server
+	        }
+	       });
+
+
+}
+function checkBugInfo(issueId)
+{
+	
+	$('#issueid-bug').val(issueId);
+
+	$('#addBugInfo').show();
+	$('#addBugInfo2').hide();
+	$('#div-bugs').hide();
+
+	$( "#show-all" ).prop( "checked", false );
+
+	$('#lala').empty();	
+
+
+	$("#myModal4").modal('show');
+}
 function changeBgcolor(label,removeBg)
 {
 
@@ -596,8 +804,34 @@ function changeBgcolor(label,removeBg)
 		$('#label'+count[i]).css("background-color","#2c3e50");	
 	};
 }
+
+
+
+function deleteBug(bugId)
+{
+	 if(confirm("Are you sure?"))
+   	 {
+   	 	$.ajax({
+	            type: "POST",
+	            url: 'http://localhost/pviewer/pdetails/deleteBugInfo',
+	            data: { bugId : bugId },
+	            dataType: 'json', 
+	            
+	            success: function(rows){
+	            	alert('Bug Deleted');
+	            },
+	            error: function(data){
+	        }
+	       });
+   	 }	
+   
+	
+}
 function viewIssueDetails(id)
 {
+
+
+
 	$('#php1').empty();
 	$('#html1').empty();
 	$('#links1').empty();
@@ -707,17 +941,18 @@ function viewIssueDetails(id)
 }
 function toggleDate(counter)
 {
-	alert(counter);
+	$('#'+counter).toggle();;
 }
 function viewModified(genIssue)
 {
+	$('#table-results').empty();
 		   $.ajax({
 	            type: "POST",
 	            url: 'http://localhost/pviewer/pdetails/getModifiedFiles',
 	            data: { issueId : genIssue }, 
 	            dataType: 'json',
 	            success: function(rows){
-	            	console.log(rows);
+	            	//console.log(rows);
 	            	var data = {};
 				    var dates = [];
 				    $.each(rows, function () {
@@ -735,18 +970,25 @@ function viewModified(genIssue)
 				    var counter = 0;
 				    var table = $('#table-results');
 				    $.each(dates, function () {
+				   // 	alert('dd');
 				    	counter++;
 				        table.append(
-				            $("<tr>").append('<td><button onclick = "toggleDate('+"'dateCounter"+counter+"'"+')">'+this+'</button></td>')
+				            $("<tr id='tableRow"+counter+"'>").append('<td><div style="text-decoration: underline;font-weight:bold" onclick = "toggleDate('+"'divCounter"+counter+"'"+')">'+"<<"+this+'</div></td>')
+				        );
+				        table.append(
+				        $("<tr>").append("<div style='display:none' id='divCounter"+counter+"'> </div>")
 				        );
 				        
 				        data[this] = data[this].sort(function (a, b) {
 				            return a.file > b.file;
 				        });
+
+
 				        
 				        $.each(data[this], function () {
-				        	console.log(this.file);
-				            table.append(
+				        	 console.log(this);
+				        //	console.log(this.file);
+				            $("#divCounter"+counter).append(
 				                $("<tr>").append(
 				                    $("<td>").html(this.file)
 				                ).append(
@@ -898,6 +1140,8 @@ function insertLegend(func)
 
 
 $(document).ready(function(){
+
+
 
 	 $('#tab-click tr').on('click', function(e) {
         
