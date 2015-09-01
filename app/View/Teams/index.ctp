@@ -57,8 +57,9 @@
 	<div class="row">
 		<div class="col-md-8">
 			<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
+			<?php echo $this->Html->link(__('Member List'), array('controller' => 'Members', 'action' => 'index'), array('class' => 'btn btn-info')); ?>
+			<?php echo $this->Html->link(__('Team Leader List'), array('controller' => 'Teams', 'action' => 'view'), array('class' => 'btn btn-warning')); ?>
 			<?php echo $this->Html->link(__('Add Team Leader'), '#', array('class' => 'btn btn-success', 'data-target' => '#add', 'data-toggle' => 'modal')); ?>
-			<!-- <a class="btn btn-success" data-toggle="modal" data-target="#add">Add Team Leader</a> -->
 			<?php echo $this->Html->link(__('Save'), array('controller' => 'Teams', 'action' => 'save'), array('class' => 'btn btn-default')); ?>
 		</div>
 	</div>

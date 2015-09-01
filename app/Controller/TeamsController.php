@@ -213,4 +213,9 @@ class TeamsController extends AppController {
 		}
 
 	}
+
+	public function view() {
+		$this->paginate = array('limit' => 5);
+		$this->set('teams', $this->Paginator->paginate());
+	}
 }
