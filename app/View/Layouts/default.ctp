@@ -25,6 +25,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -38,8 +39,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'bootstrap-slider',
 			'jquery-ui',
 			'jquery-ui.structure',
-			'jquery-ui.theme'
-			//'mystyle'
+			'jquery-ui.theme',
+			'mystyle', 
+			'font-awesome.min',
+			'bars-pill',
+			'bars-1to10'
 			)
 		);
 
@@ -54,7 +58,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'colpick',
 			'bootstrap-slider',
 			'jquery-ui',
-			'custom'
+			'custom',
+			'jquery.barrating',
+			'bars'
 			//'npm'
 			)
 		);
@@ -66,7 +72,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 
 </script>
-<body>
+<body>			
 	<div id="container">
 		<div id="header">
 			<nav class="navbar navbar-default navbar-static-top">
@@ -89,6 +95,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="content">
 		<div class="container-fluid">
 			<div class="row">
+
 					<!-- <div class="col-sm-3 col-md-2 sidebar">
 			      <ul class="nav nav-sidebar">
 			        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
@@ -109,6 +116,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="footer">
 		</div>
 	</div>
+
 	<?php // echo $this->element('sql_dump'); ?>
+
 </body>
 </html>
