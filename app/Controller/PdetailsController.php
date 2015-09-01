@@ -53,8 +53,11 @@ class PdetailsController extends AppController {
 		$this->set('t_id', $teamID);
 		$this->set('p_id', $projectID);
 
-
+		
 		if ($this->request->is(array('post', 'put'))) {
+		
+
+			
 
 			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
 			//if($_POST['progress']!='' && !empty($_POST['id'])){
@@ -180,6 +183,9 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+
+		debug($this->request->data);die();
+
 		$this->Pdetail->recursive = 0;
 		$condition = array(
 				'pdetail.id' => $id
@@ -392,17 +398,34 @@ class PdetailsController extends AppController {
 	{
 		$this->autoRender = false;
 		$issueId = $_POST['issueId'];
+		$type = $_POST['type'];
 
-		$findModified = $this->Issue_spec->find('all', array(
-			'fields' => array(
-				'specs_id','file','type','id','date_modified'			
-				),
-			'conditions' => array('issue_id' => $issueId,'specs_id' => 2),
-			'order' => 'date_modified desc'
-			)
-		);
-		$extractModified = Set::extract('/Issue_spec/.', $findModified);
-		echo json_encode($extractModified);
+		if($type == 'modified')
+		{
+			$findModified = $this->Issue_spec->find('all', array(
+				'fields' => array(
+					'specs_id','file','type','id',"`date_modified` AS `date`"			
+					),
+				'conditions' => array('issue_id' => $issueId,'specs_id' => 2),
+				'order' => 'date_modified desc'
+				)
+			);
+			$extractModified = Set::extract('/Issue_spec/.', $findModified);
+			echo json_encode($extractModified);
+		}
+		else if($type == 'released')
+		{
+			$findReleased = $this->Issue_spec->find('all', array(
+				'fields' => array(
+					'specs_id','file','type','id',"`date_released` AS `date`"			
+					),
+				'conditions' => array('issue_id' => $issueId,'specs_id' => 3),
+				'order' => 'date_released desc'
+				)
+			);
+			$extractReleased = Set::extract('/Issue_spec/.', $findReleased);
+			echo json_encode($extractReleased);
+		}
 
 	}
 	public function insertText()
@@ -494,6 +517,7 @@ class PdetailsController extends AppController {
 
 
 		 }
+		 	$this->redirect($this->referer());
 	}
 	public function insertBugInfo()
 	{
@@ -538,7 +562,6 @@ class PdetailsController extends AppController {
 			else
 			{*/
 
-				echo 'b';
 				$this->Bug_info->create();
 
 				$data = 
@@ -563,6 +586,7 @@ class PdetailsController extends AppController {
 
 
 		 }
+		  	$this->redirect($this->referer());
 	}
 	public function viewBugInfo()
 	{
@@ -655,7 +679,7 @@ class PdetailsController extends AppController {
 		        
 
 	        }
-		// 	$this->redirect($this->referer());
+		 	$this->redirect($this->referer());
            
     //       echo $filename;
 	   //      $this->redirect($this->referer());
@@ -737,6 +761,8 @@ class PdetailsController extends AppController {
 
 	public function update() {
 		$this->autoRender = false;
+
+		debug($this->request->data);die();
 		if($this->request->is('ajax')) {
 			$this->Pdetail->id = $this->request->data['id'];
 			$this->Pdetail->save($this->request->data);

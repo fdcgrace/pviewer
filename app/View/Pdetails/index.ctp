@@ -70,7 +70,8 @@
 									<th>Assignee</th>
 									<th>Issue Link</th>
 									<th>Status</th>
-									<th>Created Date</th>
+									<th>Priority</th>	
+									<th>Progress</th>
 									<th>Modified Date</th>
 									<th class="actions">Actions</th>
 					</tr>
@@ -191,7 +192,7 @@
 							<!-- end progress -->
 							<script type="text/javascript">
 								$(document).ready(function(){
-									var id = '<?php echo $Pdetail['Pdetail']['id']; ?>';
+									var id = "<?php echo $Pdetail['Pdetail']['id']; ?>";
 									var projID = <?php echo $Pdetail['Pdetail']['id']; ?>;
 									var selected =  <?php echo $Pdetail['Pdetail']['priority']; ?>;
 									//priority
@@ -204,7 +205,7 @@
 									    }
 									}
 									//progressBar
-									var progID = '<?php echo $Pdetail['Pdetail']['id']; ?>p';
+									var progID = "<?php echo $Pdetail['Pdetail']['id']; ?>p";
 									var progressBar =  <?php echo $Pdetail['Pdetail']['progress']; ?>;
 									for (p = 0; p <= progressBar; p++) { 
 										$("#"+progID).find('[href="#"]').attr("gval", id);
@@ -228,7 +229,7 @@
 
 
 								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm')); ?>
-								<?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id']), array('confirm' => __('Are you sure you want to delete this Project?'))); ?>
+								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id']), array('confirm' => __('Are you sure you want to delete this Project?'))); ?>
 							</td>
 						</tr>
 
@@ -255,7 +256,8 @@
 									<th>Assignee</th>
 									<th>Issue Link</th>
 									<th>Status</th>
-									<th>Created Date</th>
+									<th>Priority</th>	
+									<th>Progress</th>
 									<th>Modified Date</th>
 									<th class="actions">Actions</th><td></td></tr>
 
@@ -541,7 +543,7 @@
 
 							<div id="right-column2">
 								<h4><b>Uploaded Files</b></h4>
-								<table id="table-results">
+								<table id="table-resultsmodified">
 								</table>
 							
 
@@ -588,12 +590,15 @@
 
 							<div id="right-column3">
 							<h4><b>Uploaded Files</b></h4>
+								<table id="table-resultsreleased">
+								</table>
+
 
 							<div id= 'right-column31'>
-										<b>PHP FILES</b>
+								<!-- 		<b>PHP FILES</b>
 										<div id='php3'></div>
 										<b>HTML FILES</b>
-										<div id='html3'></div>
+										<div id='html3'></div> -->
 							</div>
 							
 							
@@ -661,72 +666,17 @@
 
 
         <div id="myModal4" class="modal modal-wide fade">
-        <div class="modal-dialog" style='width:900px;'>
-            <div class="modal-content">
+        <div class="modal-dialog" >
+            <div class="modal-content" style='max-width:900px'>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Bug Info</h4>
                 </div>
                 <div class="modal-body">
                 	<center>
-                		<div id='addBugInfo'>
-                	<table>
+                		  <div id='div-bugs'  style='display:none' >	
 
-                					<tr><!-- <td><label><input type='checkbox' onclick='handleClick(this);'>Edit</label></td> -->
-                						<td><label><input type='checkbox' id='show-all' onclick='showBugList(this);'>Show all bugs</label></td>
-                					</tr>
-                	<?php
-
-									/* create form with proper enctype */
-									echo $this->Form->create('pdetails', array('action' => 'insertBugInfo'));
-									echo $this->Form->input('issueid', array('type' => 'hidden','id' => 'issueid-bug','name' => "data[pdetails][issueid-bug]"));
-									echo '<tr><td colspan=2>'.$this->Form->input('Bug Description',array( 'id' => 'bug-desc','class' => 'form-control','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
-									echo '<tr><td colspan=2>'.$this->Form->input('Steps on how bug is produced',array( 'id' => 'bug-steps','class' => 'form-control','type' => 'text','name' => "data[pdetails][bugsteps]")).'</td></tr>';
-									echo '<tr><td colspan=2>'.$this->Form->input('Status',array( 'id' => 'bug-stat','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
-									echo '<tr><td colspan=2>'.$this->Form->input('Status after fix',array('id' => 'bug-statafter','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
-
-									echo '<tr><td colspan=2>'.$this->Form->input('Who found the bug',array('id' => 'bug-whofound','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
-									echo '<tr><td colspan=2>'.$this->Form->input('Reason of Bug',array('id' => 'bug-reason','class' => 'form-control',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
-
-									?>
-
-									<?php
-									/* create submit button and close form */
-
-									echo '<tr><td>'.$this->Form->end('Submit').'</td><td><td></tr>';
-									?>
-					</table></div></center>
-					<center>
-                		<div id='addBugInfo2' style='display:none'>
-                	<table>
-
-                					
-                	<?php
-
-									/* create form with proper enctype */
-									echo $this->Form->create('pdetails', array('action' => 'updateBugInfo'));
-									echo $this->Form->input('issueid',array( 'type' => 'hidden','id' => 'bug-id2','name' => "data[pdetails][issueid-bug]"));
-									echo '<tr><td>Bug Description</td><td>'.$this->Form->input('',array( 'id' => 'bug-desc2','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
-									echo '<tr><td>Steps on how bug is produced</td><td>'.$this->Form->input('',array( 'id' => 'bug-steps2','type' => 'text','name' => "data[pdetails][bugsteps]")).'</td></tr>';
-									echo '<tr><td>Status</td><td>'.$this->Form->input('',array( 'id' => 'bug-stat2', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
-									echo '<tr><td>Status after fix</td><td>'.$this->Form->input('',array('id' => 'bug-statafter2', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
-
-									echo '<tr><td>Who found the bug</td><td>'.$this->Form->input('',array('id' => 'bug-whofound2', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
-									echo '<tr><td>Reason of Bug</td><td>'.$this->Form->input('',array('id' => 'bug-reason2',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
-
-									?>
-
-									<?php
-									/* create submit button and close form */
-									
-									echo '<tr><td>'.$this->Form->end('Submit').'</td><td><td></tr>';
-									?>
-					</table></div></center>
-
-
-                </div>
-                <div id='div-bugs'  style='display:none' >
-                	<table class='table table-hovered'>
+                	<table class='table table-responsive' style='max-width:900px'>
                 		<tbody id='lala'>
                 			<tr>
                 				<th>Bug Description	</th>
@@ -748,6 +698,65 @@
                 	
                 	</table>
                 </div>
+                		<div id='addBugInfo'>
+                	<table class='table table-hovered table-striped'>
+
+                					<tr><!-- <td><label><input type='checkbox' onclick='handleClick(this);'>Edit</label></td> -->
+                						<td><label><input type='checkbox' id='show-all' onclick='showBugList(this);'>Show all bugs</label></td>
+                					</tr>
+                	<?php
+
+									/* create form with proper enctype */
+									echo $this->Form->create('pdetails', array('action' => 'insertBugInfo'));
+									echo $this->Form->input('issueid', array('type' => 'hidden','id' => 'issueid-bug','name' => "data[pdetails][issueid-bug]"));
+									echo '<tr><td colspan=2>'.$this->Form->input('Bug Description',array( 'id' => 'bug-desc','class' => 'form-control','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Steps on how bug is produced',array( 'id' => 'bug-steps','class' => 'form-control','type' => 'textarea','name' => "data[pdetails][bugsteps]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Status',array( 'id' => 'bug-stat','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Status after fix',array('id' => 'bug-statafter','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
+
+									echo '<tr><td colspan=2>'.$this->Form->input('Who found the bug',array('id' => 'bug-whofound','class' => 'form-control', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
+									echo '<tr><td colspan=2>'.$this->Form->input('Reason of Bug',array('id' => 'bug-reason','class' => 'form-control',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
+
+									?>
+
+									<?php
+									/* create submit button and close form */
+
+									echo '<tr><td><button type="submit" class="btn btn-primary">Submit</button>'.$this->Form->end().'</td><td><td></tr>';
+									?>
+								
+							       
+					</table></div></center>
+					<center>
+                		<div id='addBugInfo2' style='display:none'>
+                	<table class='table table-hovered table-striped'>
+
+                					
+                	<?php
+
+									/* create form with proper enctype */
+									echo $this->Form->create('pdetails', array('action' => 'updateBugInfo'));
+									echo $this->Form->input('issueid',array( 'type' => 'hidden','id' => 'bug-id2','name' => "data[pdetails][issueid-bug]"));
+									echo '<tr><td>Bug Description</td><td>'.$this->Form->input('',array( 'id' => 'bug-desc2','type' => 'text','name' => "data[pdetails][bugdescription]")).'</td></tr>';
+									echo '<tr><td>Steps on how bug is produced</td><td>'.$this->Form->input('',array( 'id' => 'bug-steps2','type' => 'textarea','name' => "data[pdetails][bugsteps]")).'</td></tr>';
+									echo '<tr><td>Status</td><td>'.$this->Form->input('',array( 'id' => 'bug-stat2', 'type' => 'text','name' => "data[pdetails][bugstatus]")).'</td></tr>';
+									echo '<tr><td>Status after fix</td><td>'.$this->Form->input('',array('id' => 'bug-statafter2', 'type' => 'text','name' => "data[pdetails][statusAfter]")).'</td></tr>';
+
+									echo '<tr><td>Who found the bug</td><td>'.$this->Form->input('',array('id' => 'bug-whofound2', 'type' => 'text','name' => "data[pdetails][whofound]")).'</td></tr>';
+									echo '<tr><td>Reason of Bug</td><td>'.$this->Form->input('',array('id' => 'bug-reason2',  'type' => 'text','name' => "data[pdetails][bugreason]")).'</td></tr>';
+
+									?>
+
+									<?php
+									/* create submit button and close form */
+									
+									echo '<tr><td><button type="submit" class="btn btn-primary">Submit</button>'.$this->Form->end().'</td><td><td></tr>';
+									?>
+					</table></div></center>
+
+
+                </div>
+              
               
             </div>
         </div>
@@ -798,26 +807,17 @@ function showBugList(ischecked)
 				        console.log(this.issue_id);
 				        $('#lala').append("<tr><td>"+this.bug_description+"</td><td>"+this.bug_steps+"</td><td>"+this.bug_status+"</td><td>"+this.status_after+"</td><td>"+this.who_found+"</td><td>"+this.bug_reason+'</td><td><input type="button" class="btn btn-primary" value="EDIT" onclick="editBug('+"'"+this.id+"'"+')"></td><td><input type="button" class="btn btn-primary" value="DELETE" onclick="deleteBug('+"'"+this.id+"'"+')"></td></tr>')
 
-				     /*   $("#bug-desc").val(this.bug_description);
-						$("#bug-steps").val(this.bug_steps);
-						$("#bug-statafter").val(this.status_after);
-						$("#bug-whofound").val(this.who_found);
-						$("#bug-stat").val(this.bug_status);
-						$("#bug-reason").val(this.bug_reason);*/
 				    });
 	            	
 
 				    $('#div-bugs').show();
 				    $('#addBugInfo').hide();
-	         //    window.location.href='http://localhost/pviewer/pdetails/index/1';
 	               
 	            },
 	            error: function(data){
-	            //cannot connect to server
 	        }
 	       });
 
-//Have you sent me an email sir because I am looking at my inbox right now  and there is no email from you there
 }
 function editBug(bugId)
 {
@@ -884,8 +884,14 @@ function changeBgcolor(label,removeBg)
 	var genIssue = $('#general-issueid').val();
 	$('#'+label).css("background-color","#3498db");
 
+	$('#table-resultsmodified').empty();
+	$('#table-resultsreleased').empty();
 	if(removeLabel == 2)
-		viewModified(genIssue);
+		viewModifiedRelease(genIssue,'modified');
+	if(removeLabel == 3)
+		viewModifiedRelease(genIssue,'released')
+
+
 
 
 	var count = removeBg.split('-');
@@ -924,19 +930,8 @@ function viewIssueDetails(id)
 	$('#php1').empty();
 	$('#html1').empty();
 	$('#links1').empty();
-
-	$('#php2').empty();
-	$('#html2').empty();
-	$('#links2').empty();
-
-	$('#php3').empty();
-	$('#html3').empty();
-
 	$('#php4').empty();
 	$('#html4').empty();
-	/*$('#right-column21').empty();
-	$('#right-column31').empty();
-	$('#right-column41').empty();*/
 
 	$.ajax({
 	            type: "POST",
@@ -962,7 +957,6 @@ function viewIssueDetails(id)
 	            			var appendVal = "<a href='/pviewer/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />"
 	            		else
 	            			var appendVal = file+'<br />';
-	            	//	alert(extension);
 
 	            		if(specsId == 1)
 	            		{	
@@ -973,23 +967,6 @@ function viewIssueDetails(id)
 	            			else
 	            			$('#links1').append(appendVal);	
 	            		}
-	            		else if(specsId == 2)
-	            		{
-	            			if((extension == 'php')  && (type == 'file' || type == 'link'))
-	            			$('#php2').append(appendVal);
-	            			else if(( extension == 'html') && (type == 'file' || type == 'link'))
-	            			$('#html2').append(appendVal);
-	            			else
-	            			$('#links2').append(appendVal);	
-	            		}
-	            		else if(specsId == 3)
-	            		{
-	            			if(extension == 'php')
-
-	            			$('#php3').append(appendVal);
-	            			else
-	            			$('#html3').append(appendVal);
-	            		}	
 	            		else
 	            		{
 	            			if(extension == 'php')
@@ -1000,18 +977,7 @@ function viewIssueDetails(id)
 	            		}
 
 	            	}
-		           /*  var obj = jQuery.parseJSON(data);
-		             alert(obj['Issue_spec']);
-	                 console.log(obj);
-	           		 $.each(obj, function(key, val){ 
-
-	               
-
-	                 var name2 = "'"+val.file+"'";
-	                 alert(name2);*/
-               
-
-	               
+              
 	            },
 	            error: function(data){
 	            //cannot connect to server
@@ -1032,37 +998,37 @@ function toggleDate(counter)
 {
 	$('#'+counter).toggle();;
 }
-function viewModified(genIssue)
+function viewModifiedRelease(genIssue,type)
 {
-	$('#table-results').empty();
+
 		   $.ajax({
 	            type: "POST",
 	            url: 'http://localhost/pviewer/pdetails/getModifiedFiles',
-	            data: { issueId : genIssue }, 
+	            data: { issueId : genIssue, type: type }, 
 	            dataType: 'json',
 	            success: function(rows){
-	            	//console.log(rows);
+	            	console.log(rows);
 	            	var data = {};
 				    var dates = [];
 				    $.each(rows, function () {
-				        if (typeof data[this.date_modified] == "undefined")
+				        if (typeof data[this.date] == "undefined")
 				        {
-				            data[this.date_modified] = [];
+				            data[this.date] = [];
 				        }
-				        data[this.date_modified].push(this);
-				        if (dates.indexOf(this.date_modified) == -1)
+				        data[this.date].push(this);
+				        if (dates.indexOf(this.date) == -1)
 				        {
-				            dates.push(this.date_modified);
+				            dates.push(this.date);
 				        }
 				    });
 				    dates = dates.sort();
 				    var counter = 0;
-				    var table = $('#table-results');
+				    var table = $('#table-results'+type);
 				    $.each(dates, function () {
 				   // 	alert('dd');
 				    	counter++;
 				        table.append(
-				            $("<tr id='tableRow"+counter+"'>").append('<td><div style="text-decoration: underline;font-weight:bold" onclick = "toggleDate('+"'divCounter"+counter+"'"+')">'+"<<"+this+'</div></td>')
+				            $("<tr id='tableRow"+counter+"'>").append('<td><div style="text-decoration: underline;font-weight:bold" onclick = "toggleDate('+"'divCounter"+counter+"'"+')">'+"<< &nbsp;"+this+'<br /></div></td>')
 				        );
 				        table.append(
 				        $("<tr>").append("<div style='display:none' id='divCounter"+counter+"'> </div>")
@@ -1079,9 +1045,7 @@ function viewModified(genIssue)
 				        //	console.log(this.file);
 				            $("#divCounter"+counter).append(
 				                $("<tr>").append(
-				                    $("<td>").html(this.file)
-				                ).append(
-				                    $("<th>").html(this.id)
+				                    $("<td>").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+this.file)
 				                )
 				            );
 				        });
