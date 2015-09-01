@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja" %--no_ad--%>
+<head>
+
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>オススメアプリ一覧</title>
+
+<script src="./js/jquery.js"></script>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+
+<link rel="stylesheet" href="css/html5reset.css" media="screen">
+<link rel="stylesheet" href="css/reset.css" media="screen">
+<link rel="stylesheet" href="css/common.css" media="screen">
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/popup_like.css" type="text/css">
+<link rel="stylesheet" href="css/common_style.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+<script type="text/javascript" src="js/popup_like.js"></script>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="js/func_with_filtering.js"></script>
+
+<link href="css/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+if((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0){
+	
+}else if (navigator.userAgent.indexOf('Android') > 0){
+    document.write('<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />');
+}else{
+    document.write('<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />');
+}
+</script>
+
+
+<script type="text/javascript" src="js/respond.src.js"></script>
+<script type="text/javascript">
+var _rys = jQuery.noConflict();
+_rys("document").ready(function(){
+
+    _rys(window).scroll(function () {
+        if (_rys(this).scrollTop() > 136) {
+            _rys('.nav-container').addClass("f-nav");
+        } else {
+            _rys('.nav-container').removeClass("f-nav");
+        }
+    });
+
+});
+</script> 
+
+<script type="text/javascript">
+function moreApp(pos){
+
+	$.ajax({
+		type: "GET",
+		url: "index.php?sid=%--sid--%&ucd=%--ucd--%%--other_param--%%--prev--%&pos=" + pos,
+		success: function (html) {
+			$('#more-button').remove();
+			$('#ad-list').append(html);
+		}
+	});
+}
+</script>
+<style type="text/css">
+	nav {
+		border-bottom: none!important;
+	}
+	.box-right ul li {
+		padding-right: 10px!important; 
+		border: none!important;
+		line-height: inherit!important;
+	}
+	.last{
+		border-right:none!important;
+	}
+	.link-notice{
+		padding: 0px!important;
+		font: normal normal normal 13.3333330154419px/normal Arial!important;
+	  color: initial;
+	  font-size: 13px!important;
+	}
+</style>
+</head>
+
+<!-- tmpl:ifdef %--ad_exists--% -->
+<body>
+	<!-- tmpl:ifdef %--header_image--% -->
+	<!-- <img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;"> -->
+	<!-- tmpl:endif -->
+	
+	<!-- tmpl:ifdef %--header_html--% -->
+	<!-- <p style="font-size:12px; margin-top: 3px;">
+		%--header_html--%
+	</p> -->
+	<!-- tmpl:endif -->
+<div class="wrapper">	
+	<header class="main-header">
+		<div class="box-main">
+			<div class="box-left">
+	    <h1>
+	    	<!-- <a href="%getDomain%"> -->
+	    	<a href="%--site_d_url--%" style="target-new: tab;" target="_blank">
+	    		<!-- tmpl:ifdef %--header_image--% -->
+						<img src="%--header_image_url--%" alt="" style="padding: 0; margin: 0; max-width:253px;">
+					<!-- tmpl:endif -->
+	    	</a>
+	    </h1>
+	    </div>
+	    <div class="box-right">
+		    <ul>
+		    	<li class="clearfix">
+		        <form method="post" action="http://l-charge.net/notice.php" class="ui-link">
+							<input type="hidden" name="s" value="%--linkToChargeSID--%" />
+							<input type="hidden" name="u" value="%--linkToChargeUID--%" />
+							<input type="hidden" name="carrier" value="%--aCarrier--%" />
+							<input type="hidden" name="appliBack" value="1" />
+							<input type="submit" name="" value="注意事項" class="link-notice"/>
+						</form>
+					</li>
+					<li class="last clearfix">
+						<form method="post" action="http://l-charge.net/toiawase_smt_ex.php" class="ui-link">
+							<input type="hidden" name="s" value="%--linkToChargeSID--%" />
+							<input type="hidden" name="u" value="%--linkToChargeUID--%" />
+							<input type="hidden" name="carrier" value="%--aCarrier--%" />
+							<input type="hidden" name="appliBack" value="1" />
+							<input type="submit" name="" value="お問い合わせ" class="link-notice"/>
+						</form>
+					</li>
+		   	</ul>
+	   	</div>
+    </div>
+	</header>
+	
+	
+	<div class="nav-container">
+	  <nav>
+		 <ul id="tab" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header " role="tablist">
+			 <!-- menu to l_charge page -->
+			 	<li class="ui-state-default ui-corner-top" role="tab" tabindex="0" aria-controls="tabs_1" aria-labelledby="ui-id-1" aria-selected="false" data-type="l_charge" data-adtype="l_charge">
+					<a href="http://l-charge.net/index_smt_ca.php?s=%--linkToChargeSID--%&u=%--linkToChargeUID--%" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">月額</a>
+				</li>
+				<li class=" ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs_2" aria-labelledby="ui-id-2" aria-selected="false" data-type="paid" data-adtype="paid">
+					<a href="javascript:void(0)" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">有料</a>
+				</li>
+				<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs_3" aria-labelledby="ui-id-3" aria-selected="false" data-type="free" data-adtype="free">
+					<a href="javascript:void(0)" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">無料</a>
+				</li>
+	    </ul>
+	    <!-- select ui-state-select -->
+	  </nav>
+	</div> <!-- end nav-container -->
+	
+		<div class="container" id="ad_list">
+			<!-- tmpl:loop %--app_loop--% -->
+			<a href="%--detail_url--%" class="ui-link-inherit">
+					<dl>
+						<dt><img src="%--image_url--%"></dt>
+						<dd>
+							<span class='genkin'>%--ad_price--%</span>
+				     	<span class='title'>%--ad_title--%</span>
+				      <span class='content'>%--ad_detail--%</span>
+				      <span class='point'><sub>%--ad_point--%</sub>pt獲得</span>
+				    </dd>
+			    </dl>
+			</a>
+			<!-- tmpl:endloop -->
+		</div>   
+
+	<div class="scroll_top_wrapper">
+		<img src="images/page_top.png">
+	</div>
+  
+  <input type="hidden" class="sid" name="sid" value="%--sid--%">
+	<input type="hidden" class="ucd" name="ucd" value="%--ucd--%%--other_param--%%--prev--%">
+	<input type="hidden" class="carrier" name="carrier" value="%--carrier--%">
+	<input type="hidden" class="ad_type" name="ad_type" value="%--ad_type--%">
+	<input type="hidden" class="adtype" name="adtype" value="%--adtype--%">
+  <input type="hidden" class="pos" name="pos" value="%--pos--%">
+  <input type="hidden" class="newUrl" name="newUrl" value="%--newUrl--%">
+  <input type="hidden" class="linkToChargeSID" name="linkToChargeSID" value="%--linkToChargeSID--%">
+  <input type="hidden" class="linkToChargeUID" name="linkToChargeUID" value="%--linkToChargeUID--%">
+  <input type="hidden" class="ad_count" name="ad_count" value="%--ad_count--%">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="js/pagetop.js"></script>
+	<script src="js/jquery.bottom-1.0.js"></script>
+
+	
+</div>
+</body>
+<!-- tmpl:else -->
+<body style="height: 100%;">
+<div class="wrapper">	
+	<header class="main-header">
+		<div class="box-main">
+	    <h1>
+	    	<!-- <a href="%getDomain%"> -->
+	    	<a href="%--site_d_url--%" style="target-new: tab;" target="_blank">
+	    		<!-- tmpl:ifdef %--header_image--% -->
+						<img src="%--header_image_url--%" alt="" style="padding: 0; margin: 0;">
+					<!-- tmpl:endif -->
+	    	</a>
+	    </h1>
+	    <div class="box-right">
+		    <ul>
+		    	<li>
+		        <form method="post" action="http://l-charge.net/notice.php" class="ui-link">
+							<input type="hidden" name="s" value="%--linkToChargeSID--%" />
+							<input type="hidden" name="u" value="%--linkToChargeUID--%" />
+							<input type="hidden" name="carrier" value="%--aCarrier--%" />
+							<input type="hidden" name="appliBack" value="1" />
+							<input type="submit" name="" value="注意事項" class="link-notice"/>
+						</form>
+					</li>
+					<li class="last">
+		        <form method="post" action="http://l-charge.net/toiawase_smt_ex.php" class="ui-link">
+							<input type="hidden" name="s" value="%--linkToChargeSID--%" />
+							<input type="hidden" name="u" value="%--linkToChargeUID--%" />
+							<input type="hidden" name="carrier" value="%--aCarrier--%" />
+							<input type="hidden" name="appliBack" value="1" />
+							<input type="submit" name="" value="お問い合わせ" class="link-notice"/>
+						</form>
+						</li>
+		   	</ul>
+	   	</div>
+    </div>
+	</header>
+	
+	
+	<div class="nav-container">
+	  <nav>
+		 <ul id="tab" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+			 <!-- menu to l_charge page -->
+			 	<li class="ui-state-default ui-corner-top" role="tab" tabindex="0" aria-controls="tabs_1" aria-labelledby="ui-id-1" aria-selected="false" data-type="l_charge" data-adtype="l_charge">
+					<a href="%lChargeUrl%" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">月額</a>
+				</li>
+				<li class=" ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs_2" aria-labelledby="ui-id-2" aria-selected="false" data-type="paid" data-adtype="paid">
+					<a href="javascript:void(0)" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">有料</a>
+				</li>
+				<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs_3" aria-labelledby="ui-id-3" aria-selected="false" data-type="free" data-adtype="free">
+					<a href="javascript:void(0)" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">無料</a>
+				</li>
+	    </ul>
+	    <!-- select ui-state-select -->
+	  </nav>
+	</div> <!-- end nav-container -->
+	
+	<div class="container" id="ad_list">
+		<div style="height: 100%; background-color: %--bg_color1--%;">
+			<!-- tmpl:ifdef %--header_image--% -->
+			<!-- <img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;">-->
+			<!-- tmpl:endif -->
+			<p style="margin: auto; padding-top: 10px; text-align: center; color: %--txt_color--%;">
+			もうしわけございません。<br>
+			現在、広告がありません。</p>
+		</div>
+	</div>   
+
+	<div class="scroll_top_wrapper">
+		<img src="images/page_top.png">
+	</div>
+	
+   <input type="hidden" class="fdfdf" name="dfdfd" value="">
+  <input type="hidden" class="sid" name="sid" value="%--sid--%">
+	<input type="hidden" class="ucd" name="ucd" value="%--ucd--%%--other_param--%%--prev--%">
+	<input type="hidden" class="carrier" name="carrier" value="%--carrier--%">
+	<input type="hidden" class="ad_type" name="ad_type" value="%--ad_type--%">
+	<input type="hidden" class="adtype" name="adtype" value="%--adtype--%">
+  <input type="hidden" class="pos" name="pos" value="%--pos--%">
+  <input type="hidden" class="newUrl" name="newUrl" value="%--newUrl--%">
+  <input type="hidden" class="linkToChargeSID" name="linkToChargeSID" value="%--linkToChargeSID--%">
+  <input type="hidden" class="linkToChargeUID" name="linkToChargeUID" value="%--linkToChargeUID--%">
+  <input type="hidden" class="ad_count" name="ad_count" value="%--ad_count--%">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="js/pagetop.js"></script>
+	<script src="js/jquery.bottom-1.0.js"></script>
+
+	
+</div>
+</body>
+<!-- tmpl:endif -->
+</html>

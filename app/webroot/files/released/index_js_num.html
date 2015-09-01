@@ -1,0 +1,139 @@
+<html lang="ja" %--no_ad--%>
+<head>
+
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>オススメアプリ一覧</title>
+
+<script src="./js/jquery.js"></script>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+
+<link rel="stylesheet" href="css/html5reset.css" media="screen">
+<link rel="stylesheet" href="css/reset.css" media="screen">
+<link rel="stylesheet" href="css/common.css" media="screen">
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/popup_like.css" type="text/css">
+<link rel="stylesheet" href="css/common_style.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+<script type="text/javascript" src="js/popup_like.js"></script>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="js/func_with_filtering.js"></script>
+
+<link href="css/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript">
+if((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0){
+	
+}else if (navigator.userAgent.indexOf('Android') > 0){
+    document.write('<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />');
+}else{
+    document.write('<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />');
+}
+</script>
+
+
+<script type="text/javascript" src="js/respond.src.js"></script>
+<script type="text/javascript">
+var _rys = jQuery.noConflict();
+_rys("document").ready(function(){
+
+    _rys(window).scroll(function () {
+        if (_rys(this).scrollTop() > 136) {
+            _rys('.nav-container').addClass("f-nav");
+        } else {
+            _rys('.nav-container').removeClass("f-nav");
+        }
+    });
+
+});
+</script> 
+
+<script type="text/javascript">
+function moreApp(pos){
+
+	$.ajax({
+		type: "GET",
+		url: "index.php?sid=%--sid--%&ucd=%--ucd--%%--other_param--%%--prev--%&pos=" + pos,
+		success: function (html) {
+			$('#more-button').remove();
+			$('#ad-list').append(html);
+		}
+	});
+}
+</script>
+<style type="text/css">
+
+	.container dd span.title {
+		margin-right: 40px!important;
+		font-size: 15px!important;
+		height: 16px!important;
+	}
+	
+	.container dd span.content {	
+		height: 12px!important;
+		margin-right: 15px!important;
+		font-size: 13px!important;
+		overflow:hidden;
+	}
+	
+	.container dd span.point {
+		font-size: 14px!important;
+		height: 21px!important;
+	}
+	
+	.container{
+		margin: none!important;
+		max-width: none!important;
+	}
+	
+	.container dl {
+		padding: 10px 2px!important;
+		width: 99%!important;
+		height: 84px!important;
+	}
+	
+	.container dt {
+	width: 80px!important;
+	}
+	
+	.container dt img {
+		width: 80px!important;
+	}
+</style>
+</head>
+<!-- tmpl:ifdef %--ad_exists--% -->
+<body>
+	<div class="container" id="ad_list" style="width:100%;">
+	<!-- tmpl:loop %--app_loop--% -->
+	<a href="%--detail_url--%" class="ui-link-inherit" style="target-new: tab;" target="_blank" onclick="window.open(this.href,'_blank');return false;" >
+			<dl>
+				<dt><img src="%--image_url--%"></dt>
+				<dd>
+					<span class='genkin'>%--ad_price--%</span>
+		     	<span class='title'>%--ad_title--%</span>
+		      <span class='content'>%--ad_detail--%</span>
+		      <span class='point'><sub>%--ad_point--%</sub>pt獲得</span>
+		    </dd>
+	    </dl>
+	</a>
+	<!-- tmpl:endloop -->
+	</div>
+</body>
+<!-- tmpl:else -->
+<body style="height: 100%;">
+	<div style="height: 100%; background-color: %--bg_color1--%;">
+	<!-- tmpl:ifdef %--header_image--% -->
+	<img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;">
+	<!-- tmpl:endif -->
+	<p style="margin: auto; padding-top: 10px; text-align: center; color: %--txt_color--%;">
+	もうしわけございません。<br>
+	現在、広告がありません。</p>
+	</div>
+</body>
+<!-- tmpl:endif -->

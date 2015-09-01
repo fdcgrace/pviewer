@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja" %--no_ad--%>
+<head>
+
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>オススメアプリ一覧</title>
+
+<script src="./js/jquery.js"></script>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+
+<style type="text/css">
+<!--
+
+/* 背景色 */
+.ui-li {
+	background: %--bg_color1--% !important;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(%--bg_color1--%),to(%--bg_color2--%)) !important;
+	background-image: -webkit-linear-gradient(%--bg_color1--%, %--bg_color2--%) !important;
+	background-image: -moz-linear-gradient(%--bg_color1--%, %--bg_color2--%) !important;
+	background-image: -ms-linear-gradient(%--bg_color1--%, %--bg_color2--%) !important;
+	background-image: -o-linear-gradient(%--bg_color1--%, %--bg_color2--%) !important;
+	background-image: linear-gradient(%--bg_color1--%, %--bg_color2--%) !important;
+}
+
+/* アイコン画像 */
+.ui-li-thumb {
+	margin: 15px 10px;
+	width: 70px;
+}
+
+/* 文字スタイル */
+#ad-list .title {
+	color: %--txt_color--%;
+}
+#ad-list .description {
+	color: %--txt_color--%;
+}
+#ad-list .point {
+	font-size: 16px;
+	font-weight: bold;
+	color: %--txt_color--%;
+}
+#ad-list .type {
+	font-weight: bold;
+	color: %--txt_color--%;
+}
+#ad-list .price {
+	color: %--txt_color--%;
+}
+#ad-list .point-comment {
+	color: %--txt_color--%;
+}
+-->
+</style>
+
+<script type="text/javascript">
+function moreApp(pos){
+
+	$.ajax({
+		type: "GET",
+		url: "index.php?sid=%--sid--%&ucd=%--ucd--%%--other_param--%%--prev--%&pos=" + pos,
+		success: function (html) {
+			$('#more-button').remove();
+			$('#ad-list').append(html);
+		}
+	});
+}
+</script>
+
+</head>
+
+<!-- tmpl:ifdef %--ad_exists--% -->
+<body>
+	<!-- tmpl:ifdef %--header_image--% -->
+	<img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;">
+	<!-- tmpl:endif -->
+	
+	<!-- tmpl:ifdef %--header_html--% -->
+	<p style="font-size:12px; margin-top: 3px;">
+		%--header_html--%
+	</p>
+	<!-- tmpl:endif -->
+	
+	<ul id="ad-list" class="ui-listview ui-shadow ad-list">
+		<!-- tmpl:loop %--app_loop--% -->
+		<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li  ui-li-has-thumb" style="min-height: 95px;">
+			<div class="ui-btn-inner ui-li">
+				<div class="ui-btn-text">
+					<a href="%--detail_url--%" class="ui-link-inherit">
+					<p class="ui-li-aside ui-li-desc" style="width:20%">
+						<span class="type">%--ad_kind--%</span>
+						<br>
+						<span class="price">%--ad_price--%</span>
+					</p>
+					<img src="%--image_url--%" class="ui-li-thumb">
+					<h2 class="ui-li-heading">%--ad_title--%</h2>
+					<p class="ui-li-desc">
+						<span class="description">%--ad_detail--%</span>
+					</p>
+					<!-- tmpl:ifdef %--ad_point--% -->
+					<p class="ui-li-desc" style="margin-top:5px;">
+						<span class="point">%--ad_point--%</span>&nbsp;<span class="point-comment">ゲット</span>
+					</p>
+					<!-- tmpl:endif -->
+					</a>
+				</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
+			</div>
+		</li>
+		<!-- tmpl:endloop -->
+		<!-- tmpl:ifdef %--exists_more--% -->
+		<li id="more-button">
+			<a href="javascript:void(0)" onclick="moreApp(%--pos--%);" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
+			<span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">もっと見る</span></span>
+			</a>
+		</li>
+		<!-- tmpl:endif -->
+	</ul>
+</body>
+<!-- tmpl:else -->
+<body style="height: 100%;">
+	<div style="height: 100%; background-color: %--bg_color1--%;">
+	<!-- tmpl:ifdef %--header_image--% -->
+	<img src="%--header_image_url--%" width="100%" style="padding: 0; margin: 0;">
+	<!-- tmpl:endif -->
+	<p style="margin: auto; padding-top: 10px; text-align: center; color: %--txt_color--%;">
+	もうしわけございません。<br>
+	現在、広告がありません。</p>
+	</div>
+</body>
+<!-- tmpl:endif -->
+</html>

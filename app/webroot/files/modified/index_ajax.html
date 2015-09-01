@@ -1,0 +1,29 @@
+		<!-- tmpl:loop %--app_loop--% -->
+		<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li  ui-li-has-thumb">
+			<div class="ui-btn-inner ui-li">
+				<div class="ui-btn-text">
+					<a href="%--detail_url--%" class="ui-link-inherit">
+					<p class="ui-li-aside ui-li-desc" style="width:20%">
+						<span class="type">%--ad_kind--%</span>
+						<br>
+						<span class="price">%--ad_price--%</span>
+					</p>
+					<img src="%--image_url--%" class="ui-li-thumb">
+					<h2 class="ui-li-heading">%--ad_title--%</h2>
+					<p class="ui-li-desc">
+						<span class="description">%--ad_detail--%</span>
+					</p>
+					<p class="ui-li-desc" style="margin-top:5px;">
+						<span class="point">%--ad_point--%</span>&nbsp;<span class="point-comment">ゲット</span>
+					</p> </a>
+				</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
+			</div>
+		</li>
+		<!-- tmpl:endloop -->
+		<!-- tmpl:ifdef %--exists_more--% -->
+		<li id="more-button">
+			<a href="javascript:void(0)" onclick="moreApp(%--pos--%);" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
+			<span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">もっと見る</span></span>
+			</a>
+		</li>
+		<!-- tmpl:endif -->

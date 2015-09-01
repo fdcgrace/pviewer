@@ -143,6 +143,7 @@ class TeamsController extends AppController {
 					)
 				);
 
+
 				$content['unassigned'] = $this->Pdetail->find('all', array( 
 						'recursive' => -1, 
 						'conditions' => array(
@@ -156,5 +157,6 @@ class TeamsController extends AppController {
 				return $view->element('project', array('content' => $content));
 			}
 		}
+
 	}
 }
