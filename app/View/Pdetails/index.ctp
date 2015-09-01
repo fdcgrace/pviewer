@@ -237,13 +237,18 @@
 							if($Pdetail['Pdetail']['status'] != $break_row)
 							{
 
+								if(!isset($legendStatusId[$break_row]))
+									$r = '';
+								else
+									$r = $legendStatusId[$break_row];
+
 							echo '
 
-									<tr>
-									<th colspan=3><br><br><br><h2>'.$legendStatusId[$break_row].'</h2></th></tr>
+									<tr >
+									<th colspan=3><br><br><br><h2>'.$r.'</h2></th></tr>
 
 									<tr></tr>
-									<tr><th>Project ID</th>
+									<tr style="color:blue"><th>Project ID</th>
 									<th>Deadline</th>
 									<th>Issue Number</th>
 									<th>Task Description</th>
@@ -339,7 +344,7 @@
 
                 				<div id='add-legend' style='display:none'>
 
-                					<input type="text" id="legend-add" style='float:left' required>
+                					<input type="text" id="legend-add" style='float:left'>
                 					 <div class="colorpicker-component demo demo-auto">
 					                    <input type="hidden" value="#ffffff" id='color-pick'/>
 					                 
@@ -374,7 +379,7 @@
                 	none">
                 		<div id='back'  style='margin-bottom:30px;'><img class='legend-modal' onclick='backFunction()' src='<?php echo $baseUrl; ?>img/back.png' style='width:18px;height=18px'>
                 		</div>
-                		<input type='text' id='edit-status' required>
+                		<input type='text' id='edit-status'>
                 		<input type='button' class='btn btn-primary btn-sm' onclick='editLegend("editLegend");' value="SAVE" id='legend-edit'>
                 		<input type='hidden' id='edit-hidden'>
                 	</div>
