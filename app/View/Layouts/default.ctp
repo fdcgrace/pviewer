@@ -54,7 +54,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			// 'bootstrap-slider',
 			'jquery-ui',
 			//'npm',
-			'custom'
+			'custom',
+			'pdfobject'
 			)
 		);
 
