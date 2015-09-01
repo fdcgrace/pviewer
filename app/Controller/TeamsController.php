@@ -24,9 +24,20 @@ class TeamsController extends AppController {
  * @return void
  */
 	public function index() {
+		$team = $this->Team->find('all', array('conditions' => array('Team.del_flg' => 1)));
+		$project = $this->Project->find('all', array('conditions' => array('Project.del_flg' => 1)));
+		foreach ($team as $key => $leader) {
+			$arr[$leader['Team']['team']] = array($leader['Team']['team']);
+		}
 
-		//$team = $this->Team->find('all', array('conditions' => array('Team.del_flg' => 1)));
-		//$project = $this->Project->find('all', array('conditions' => array('Project.del_flg' => 1)));
+		foreach ($project as $val) {
+			foreach($arr as $key => $value) {
+				if ($value[0] == $val['Team']['team']) {
+					$arr[$key][] = $val;
+
+				}
+			}
+		}
 		//var_dump($arr);
 		//$this->set('team', $arr);
 		//var_dump($this->Paginator->paginate());
@@ -89,6 +100,49 @@ class TeamsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function update() {
+		$this->autoRender = false;
+		if($this->request->is('ajax')) {
+			$data = $this->request->data;
+			$filename = "sql.txt";
+			// var_dump($data);
+			if(isset($this->request->data['member_id'])) {
+				$line = "UPDATE Pdetails SET team_id=".$data['team_id'].
+						", member=".$data['member_id'].
+						", status=".$data['status'].
+						" WHERE id=".$data['issue_id'].
+						";\n";
+			} else {
+				$line = "UPDATE Pdetails SET team_id=".$data['team_id'].
+						", member=0".
+						", status=0".
+						" WHERE id=".$data['issue_id'].
+						";\n";
+			}
+			fopen(WWW_ROOT.$filename, "a");
+			file_put_contents($filename, $line, FILE_APPEND);
+		}
+	}
+
+	public function save() {
+		$this->autoRender = false;
+		$query = array();
+		$filename = "sql.txt";
+		
+		$file = fopen(WWW_ROOT.$filename, "c+");
+		$query = explode("\n", fread($file, filesize($filename)));
+		$length = count($query);
+		unset($query[$length-1]);
+		
+		foreach ($query as $sql) {
+			$this->Pdetail->query($sql);
+		}
+		
+		file_put_contents($filename, "");
+		return $this->redirect(array('action' => 'index'));
+	}
+
 	public function team() {
 		$this->autoRender =  false;
 		if ($this->request->is("ajax")) {

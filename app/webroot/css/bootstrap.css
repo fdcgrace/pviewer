@@ -2264,7 +2264,7 @@ th {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2272,10 +2272,12 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  /*padding: 8px;*/
+  padding: 3px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  /*border-top: 1px solid #ddd;*/
+  border-top: 0px solid #ddd;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -6091,6 +6093,7 @@ button.close {
   height: 0;
   border-color: transparent;
   border-style: solid;
+  border: solid 1px #ccc;
 }
 .tooltip.top .tooltip-arrow {
   bottom: 0;

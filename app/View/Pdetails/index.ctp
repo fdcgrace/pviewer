@@ -248,7 +248,7 @@
 									<th colspan=3><br><br><br><h2>'.$r.'</h2></th></tr>
 
 									<tr></tr>
-									<tr style="color:blue"><th>Project ID</th>
+									<tr ><th>Project ID</th>
 									<th>Deadline</th>
 									<th>Issue Number</th>
 									<th>Task Description</th>

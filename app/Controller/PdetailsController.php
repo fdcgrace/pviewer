@@ -48,7 +48,9 @@ class PdetailsController extends AppController {
 		$this->set('pdetails', $pdetails);
 
 		$projectID = (isset($pdetails[0]['Pdetail']['project_id']))? $pdetails[0]['Pdetail']['project_id']: 0;
+		$teamID = $pdetails[0]['Pdetail']['team_id'];
 		
+		$this->set('t_id', $teamID);
 		$this->set('p_id', $projectID);
 
 
@@ -192,7 +194,6 @@ class PdetailsController extends AppController {
 		$this->set('pdetails', $pdetails);
 
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
-
 		$this->set('p_id', $projectID);
 
 		if ($this->request->is(array('post', 'put'))) {
@@ -458,6 +459,7 @@ class PdetailsController extends AppController {
 
        	 }	
 	}
+
 
 	public function updateBugInfo()
 	{
@@ -730,6 +732,15 @@ class PdetailsController extends AppController {
 		header("Content-type: $type2");
 		header("Content-Disposition: attachment; filename=$file");
 		echo stripslashes($content);
+	}
+
+
+	public function update() {
+		$this->autoRender = false;
+		if($this->request->is('ajax')) {
+			$this->Pdetail->id = $this->request->data['id'];
+			$this->Pdetail->save($this->request->data);
+		}
 	}
 
 }

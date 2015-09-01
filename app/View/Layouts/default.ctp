@@ -34,7 +34,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			//'cake.generic',
 			'bootstrap',
 			'bootstrap-theme',
-			'bootstrap.min',
+
+			'bootstrap-editable',
 			//'docs',
 			'bootstrap-colorpicker.min',
 			'colpick',
@@ -46,7 +47,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'font-awesome.min',
 			'bars-pill',
 			'bars-1to10',
-			'style'
+			'style',
+			'mystyle',
 			)
 		);
 
@@ -56,6 +58,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'jquery.min',
 			// 'bootstrap', 
 			'bootstrap.min',
+			'bootstrap-editable.min',
 			/*'colorpicker',
 			'jquery',
 			'jquery.min',
@@ -71,7 +74,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'custom',
 			'jquery.barrating',
 			'bars'
-			//'npm'
 			)
 		);
 
@@ -128,7 +130,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</div>
 
 
-	<?php  echo $this->element('sql_dump'); ?>
+	<?php // echo $this->element('sql_dump'); ?>
 
 </body>
 </html>

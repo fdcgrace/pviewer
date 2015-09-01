@@ -4,20 +4,21 @@ App::uses('AppModel', 'Model');
  * Project Model
  *
  */
-class Member extends AppModel {
-	// public $actsAs = array('Containable');
-	/*public $hasMany = array(
-		'Pdetail' => array(
-			'className' => 'Pdetail',
-			'foreignKey' => 'pdetail_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-	);*/
+class Team extends AppModel {
+	// public $useTable = 'Project';
+
+	// public $hasMany = array(
+	// 	'Project' => array(
+	// 		'className' => 'Project',
+	// 		'foreignKey' => 'project_id',
+	// 		'conditions' => '',
+	// 		'fields' => '',
+	// 		'order' => ''
+	// 	),
+	// );
 
 	public $validate = array(
-		'member' => array(
+		'team' => array(
 			'nonEmpty' => array(
                 'rule' => array('notEmpty'),
                 'allowEmpty' => false
@@ -25,10 +26,9 @@ class Member extends AppModel {
 		)
 	);
 
-
 	function beforeSave($options = array()) {
 		$check = $this->find('all', array(
-			'conditions' => array('member' => $this->data[$this->alias]['member']))
+			'conditions' => array('team' => $this->data[$this->alias]['team']))
 		);
 		if(count($check) == 0){
 			return true;
