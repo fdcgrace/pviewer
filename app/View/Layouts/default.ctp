@@ -39,11 +39,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'jquery-ui',
 			'jquery-ui.structure',
 			'jquery-ui.theme'
+			//'mystyle'
 			)
 		);
 
 		echo $this->Html->script(array(
-			'jquery',
+			// 'jquery',
 			'jquery.min.js',
 			// 'bootstrap', 
 			'bootstrap.min',
@@ -53,6 +54,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'colpick',
 			'bootstrap-slider',
 			'jquery-ui',
+			'custom'
 			//'npm'
 			)
 		);
@@ -62,6 +64,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 	?>
 </head>
+
+</script>
 <body>
 	<div id="container">
 		<div id="header">
@@ -105,6 +109,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="footer">
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>

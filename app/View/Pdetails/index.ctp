@@ -2,8 +2,11 @@
 	<h3>Project Detail</h3>
 	<div class="row">
 		<div class="col-md-8">
-			<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
-			<?php echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success')); ?>
+
+			<?php 
+				echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary'));
+				echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#addForm'));
+			?>
 		</div>
 		<div class="col-md-4">
 			Legend: 
@@ -77,11 +80,10 @@
 								<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
 								<?php echo $this->Form->submit(__('Update Status'), array('class' => 'btn btn-primary btn-xs'),array('action' => 'index')); ?>
 								<?php //echo $this->Html->link(__('View'), array('action' => 'view', $Pdetail['Pdetail']['id'])); ?>
-								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
-								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']), 'class' => 'btn btn-primary btn-xs')); ?>
-							</td>
-							<td>
+								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm')); ?>
+								<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']))); ?>
 
+								<?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id']), array('confirm' => __('Are you sure you want to delete this Project?'))); ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -102,8 +104,25 @@
 				echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 			?>
 		</div>
+	</div>	
+</div>
+<!--addForm button -->
+<div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
 	</div>
 </div>
+<!--end addForm button -->
+
+<!--editForm button -->
+<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
+	</div>
+</div>
+<!--end editForm button -->
 
 <script>
 $(document).ready(function(){
@@ -129,6 +148,6 @@ $(document).ready(function(){
 	
 		}
 	});
-	
 });
 </script>
+

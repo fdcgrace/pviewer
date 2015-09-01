@@ -28,7 +28,8 @@ class PdetailsController extends AppController {
 		
 		$this->Pdetail->recursive = 0;
 		$condition = array(
-				'project.id' => $id
+				'project.id' => $id,
+				'Pdetail.del_flg' => 1
 			);
 
 		$this->paginate = array(
@@ -70,14 +71,12 @@ class PdetailsController extends AppController {
 			
 			
 		} else {
-			$options = array('conditions' => array('Pdetail.' . $this->Pdetail->primaryKey => $id));
+			$options = array('conditions' => array('Pdetail.' . $this->Pdetail->primaryKey => $id, 'Pdetail.del_flg' => 1));
 			$this->request->data = $this->Pdetail->find('first', $options);
 		}
 
 		$members = $this->Pdetail->Member->find('list', array(
-			'fields' => array(
-				'member'
-				)
+			'fields' => array('member')
 			)
 		);
 
@@ -178,7 +177,6 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function add($id = null) {
-
 		$projectID = $id;
 
 		$this->set('p_id', $projectID);
@@ -212,18 +210,26 @@ class PdetailsController extends AppController {
 		$this->set(compact('members'));
 	}
 
-	public function delete($id = null) {
+	public function delete($id = null, $project_id = null) {
+		echo "index/".$project_id;
 		$this->Pdetail->id = $id;
+		//$getData = $this->Pdetail->find('first', array('field' => array('Pdetail.project_id'), 'conditions' => array('Pdetail.id' => $id)));		//die();
+		//$project_id = $getData['Pdetail']['project_id'];
+		
 		if (!$this->Pdetail->exists()) {
 			throw new NotFoundException(__('Invalid project'));
 		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Pdetail->delete()) {
+		//if ($this->Pdetail->delete()) {
+		if ($this->Pdetail->saveField('del_flg', 0)) {	
 			$this->Session->setFlash(__('The project has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The project could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+
+	//	return $this->redirect(array('action' => 'index'));
+
+		$this->redirect(array('action' => 'index', $project_id));
+
 	}
 }
 

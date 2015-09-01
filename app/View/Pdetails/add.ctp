@@ -1,24 +1,32 @@
 <div class="container-fluid">
 <legend><?php echo __('Add Issue'); ?></legend>
 	<div class="row">
-		<div class="col-md-2">
-			<ul>
-
-				<li><?php echo $this->Html->link(__('List Issue'), array('action' => 'index', $p_id)); ?></li>
-			</ul>
-		</div>
-		<div class="col-md-10">
-		<?php echo $this->Form->create('Pdetail'); ?>
+		<div class="col-md-12">
+		<?php echo $this->Form->create('Pdetail', array('role' => 'form')); ?>
 			<fieldset>
 				
 			<?php
-				echo $this->Form->input('project_id', array('label' => 'Project Name'));
-				echo $this->Form->input('issue_no', array('label' => 'Issue number'));
-				echo $this->Form->input('sub_task', array('label' => 'Sub Task Description'));
-				echo $this->Form->input('task_description', array('label' => 'Task Description'));
-				echo $this->Form->input('member', array('label' => 'Assign To'));
-				echo $this->Form->input('issue_link', array('label' => 'Issue link'));
+				echo "<div class='form-group'>";
+				echo $this->Form->input('project_id', array('label' => 'Project Name', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
+				echo $this->Form->input('issue_no', array('label' => 'Issue number', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
+				echo $this->Form->input('sub_task', array('label' => 'Sub Task Description', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
+				echo $this->Form->input('task_description', array('label' => 'Task Description', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
+				echo $this->Form->input('member', array('label' => 'Assign To', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
+				echo $this->Form->input('issue_link', array('label' => 'Issue link', 'class' => 'form-control'));
+				echo "</div>
+					 <div class='form-group'>";
 				echo $this->Form->input('status', array(
+					'class' => 'form-control',
 					'type'=>'select', 
 					'label' => 'Status', 
 					'empty' => 'Please Select',
@@ -33,10 +41,13 @@
 							)
 						)
 					);
+				echo "</div>";
 			?>
 			</fieldset>
-		<?php echo $this->Form->end(__('Submit')); ?>
+		<div class="submit">
+		    <input type="submit" value="Save" class="btn btn-primary" />
+		    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		</div>
-		
+		</div>
 	</div>
 </div>

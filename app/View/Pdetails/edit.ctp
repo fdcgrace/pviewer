@@ -1,17 +1,70 @@
+<div class="container-fluid projects form">
 <h3>Modify Issue</h3>
-<div class="row">
-	<div class="col-md-8">
-	<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
-	<?php echo $this->Html->link(__('List of Issues'), array('action' => 'index', $p_id), array('class' => 'btn btn-danger')); ?>
-	<?php echo $this->Html->link(__('Create New Issue'), array('action' => 'add'), array('class' => 'btn btn-success')); ?>
+<?php 
+foreach ($pdetails as $Pdetail):
+	echo $this->Form->create('Pdetail');
+	echo "<div class='form-group'>";
+	echo $this->Form->input('date', array('label' => 'Date Assigned', 'type' => 'text', 'value' => $Pdetail['Pdetail']['date'], 'class' => 'form-control'));
+	echo "</div>
+		 <div class='form-group'>";
+	echo $this->Form->input('issue_no', array('label' => 'Issue No.', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_no'], 'class' => 'form-control'));
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->input('sub_task', array('label' => 'Sub Task Description', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['sub_task'], 'class' => 'form-control'));
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->input('task_description', array('label' => 'Task Description', 'type' => 'textarea', 'value' => $Pdetail['Pdetail']['task_description'], 'class' => 'form-control'));
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->input('member', array(
+		'type'=>'select', 
+		'label' => 'Assignee', 
+		'empty' => 'Please Select',
+		'selected' => $Pdetail['Pdetail']['member'],
+		'class' => 'form-control'
+		)
+	);
+	echo "</div>
+	 	<div class='form-group'>";
+	echo $this->Form->input('issue_link', array('label' => 'Issue Link', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_link'], 'class' => 'form-control'));
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->input('status', array(
+		'type'=>'select', 
+		'label' => 'Status', 
+		'empty' => 'Please Select',
+		'default' => $Pdetail['Pdetail']['status'],
+		'selected' => $Pdetail['Pdetail']['status'],
+		'class' => 'form-control',
+		'options' => array(
+				'0' => 'Inactive',
+				'1' => 'In Progress',
+				'2' => 'Pending',
+				'3' => 'For Confirmation',
+				'4' => 'For Testing',
+				'5' => 'Released',
+				'6'	=> 'Closed'
+				)
+			)
+		);
+	echo "</div>
+		<div class='form-group'>";	
+	echo $this->Form->label('Created Date: '). $Pdetail['Pdetail']['created'];
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->label('Modified Date: '). $Pdetail['Pdetail']['modified'];
+	echo "</div>
+		<div class='form-group'>";
+	echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));
+	echo "</div>";
+?>
+<div class="submit">
+	    <input type="submit" value="Save" class="btn btn-primary" />
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	</div>
-	<div class="col-md-4">
-		Legend: 
-		<?php foreach ($legendColor as $key => $value): ?>
-			<span class="label" style="background-color:<?php echo $key;?>" ><?php echo $value;?></span>
-		<?php endforeach;?>
-	</div>
+<?php endforeach; ?>
 </div>
+<<<<<<< HEAD
 <hr>
 <div class="container-fluid">
 	<div class="row">
@@ -114,3 +167,5 @@ $(document).ready(function(){
 
 });
 </script>
+=======
+>>>>>>> 5a3ebafa79420665a21d94b358044a24ecfc135b
