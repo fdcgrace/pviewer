@@ -71,7 +71,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			'colpick',
 			'bootstrap-slider',
 			'jquery-ui',
-
+			'pdfobject',
 			'custom',
 			'jquery.barrating',
 			'bars'

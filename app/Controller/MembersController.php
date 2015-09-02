@@ -25,6 +25,18 @@ class MembersController extends AppController {
 		return $this->redirect($this->referer());
 		}		
 	}
+
+	public function deactivate($id = null){
+		$this->Member->id = $id;
+		$this->Member->saveField("del_flg", 0);
+		$this->redirect($this->referer());
+	}
+
+	public function activate($id = null){
+		$this->Member->id = $id;
+		$this->Member->saveField("del_flg", 1);
+		$this->redirect($this->referer());
+	}
 }
 
 ?>

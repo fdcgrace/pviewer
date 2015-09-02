@@ -41,10 +41,12 @@
 	}*/
 $(document).ready(function() {
 	$(".view").each( function() {
-		$(this).on("click", function() {
-			var filename = $(this).attr('value');
-			loadPDF(filename);
-		});
+		if($(this).attr("flag") == 1) {
+			$(this).on("click", function() {
+				var filename = $(this).attr('value');
+				loadPDF(filename);
+			});
+		}
 	});
 
 	function loadPDF(filename) {
@@ -56,6 +58,13 @@ $(document).ready(function() {
 			}
 		}).embed("pdfRenderer");
 	}
+
+	$(".glyphicon").each(function() {
+		if ($(this).attr("flag") == 0) {
+			$(this).removeAttr("href");
+			$(this).attr("disabled", "disabled");
+		}
+	});
 });
 </script>
 
@@ -79,10 +88,13 @@ $(document).ready(function() {
 						<td><?php echo h($team['Team']['modified']); ?></td>
 						<td><?php echo h($team['Team']['del_flg']); ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link(__(''), array('#'), array('label' => false, 'class' => 'btn glyphicon glyphicon-eye-open view' )); ?>
-							<?php echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#', 'label' => false, 'class' => 'btn glyphicon glyphicon-pencil')); ?>
-							<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to delete # %s?', $team['Team']['id']))); ?>
-						</td>
+							<?php echo $this->Html->link(__(''), array('#'), array('label' => false, 'class' => 'btn glyphicon glyphicon-eye-open view', 'flag' => $team['Team']['del_flg'])); ?>
+							<?php echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#', 'label' => false, 'class' => 'btn glyphicon glyphicon-pencil', 'flag' => $team['Team']['del_flg'])); ?>
+							<?php if ($team['Team']['del_flg']) :?>
+							<?php echo $this->Form->postLink(__(''), array('action' => 'deactivate', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to deactivate # %s?', $team['Team']['id']))); ?>
+							<?php else :?>
+							<?php echo $this->Form->postLink(__(''), array('action' => 'activate', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-user', 'confirm' => __('Are you sure you want to activate # %s?', $team['Team']['id']))); ?>
+							<?php endif;?>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

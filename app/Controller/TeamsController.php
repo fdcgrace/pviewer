@@ -218,4 +218,16 @@ class TeamsController extends AppController {
 		$this->paginate = array('limit' => 5);
 		$this->set('teams', $this->Paginator->paginate());
 	}
+
+	public function deactivate($id = null){
+		$this->Team->id = $id;
+		$this->Team->saveField("del_flg", 0);
+		$this->redirect($this->referer());
+	}
+
+	public function activate($id = null){
+		$this->Team->id = $id;
+		$this->Team->saveField("del_flg", 1);
+		$this->redirect($this->referer());
+	}
 }
