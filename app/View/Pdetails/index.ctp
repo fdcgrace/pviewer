@@ -168,7 +168,7 @@
 
 								if($Pdetail['Pdetail']['status'] == '4')
 								{ ?>
-									<input type='button' value='Bug Info' class='btn btn-info sub-menu' id='bug-info' onclick="checkBugInfo('<?php echo $detId; ?>')">
+									<input type='button' value='Bug Info' class='btn btn-info btn-sm sub-menu' id='bug-info' onclick="checkBugInfo('<?php echo $detId; ?>')">
 								<?php 
 								}
 

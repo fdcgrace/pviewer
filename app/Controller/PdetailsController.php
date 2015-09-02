@@ -53,6 +53,8 @@ class PdetailsController extends AppController {
 		$this->set('t_id', $teamID);
 		$this->set('p_id', $projectID);
 
+
+
 		
 		if ($this->request->is(array('post', 'put'))) {
 		
@@ -183,8 +185,6 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-
-		debug($this->request->data);die();
 
 		$this->Pdetail->recursive = 0;
 		$condition = array(
