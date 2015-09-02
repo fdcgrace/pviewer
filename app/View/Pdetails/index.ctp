@@ -243,9 +243,7 @@
 								else
 									$r = $legendStatusId[$break_row];
 
-							echo '
-
-									<tr >
+							echo '<tr >
 									<th colspan=3><br><br><br><h2>'.$r.'</h2></th></tr>
 
 									<tr></tr>
@@ -1266,20 +1264,12 @@ $(document).ready(function(){
 				url: "pdetails/",
 				data: { 'changeColor' : val, 'color': bcolor},
 				success: function (data) {
-					//alert(val+'|'+bcolor);
 					location.reload();
 				}
 			});
-	
 		}
-	});
+	});	
 
 
-	
-	
 });
-
-
-
-
 </script>

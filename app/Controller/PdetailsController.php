@@ -185,7 +185,10 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-
+		
+		//var_dump($_POST); die();
+		$this->autoRender = false;
+		$content = array();
 		$this->Pdetail->recursive = 0;
 		$condition = array(
 				'pdetail.id' => $id
@@ -193,14 +196,20 @@ class PdetailsController extends AppController {
 
 		$this->paginate = array(
             'limit' => 5,
+            //'order' => $order,
             'conditions' => $condition
         );
 
-		$pdetails = $this->paginate('Pdetail');
-		$this->set('pdetails', $pdetails);
+		 $pdetails = $this->paginate('Pdetail');
 
+
+		 $content['pdetails'] = $pdetails;
+		//$this->set('pdetails', $pdetails);
+	
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
-		$this->set('p_id', $projectID);
+
+		$content['projectID'] = $projectID;
+		//$this->set('p_id', $projectID);
 
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Pdetail->save($this->request->data)) {
@@ -221,7 +230,9 @@ class PdetailsController extends AppController {
 			)
 		);
 
-		$this->set(compact('members'));
+		$content['members'] = $members;
+
+		//$this->set(compact('members'));
 
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -229,8 +240,12 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
-
-		$this->set('legendColor', $legendColor);
+		$content['legendColor'] = $legendColor;
+		//$this->set('legendColor', $legendColor);
+		$view = new View($this, false);
+/*var_dump($pdetails);
+		 die();*/
+    	return $view->element('pdetailsEdit', array('content' => $content));
 
 	}
 
