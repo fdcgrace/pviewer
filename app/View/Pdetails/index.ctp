@@ -43,7 +43,7 @@
 				<div class="panel-body">
 					<table class="table table-striped table-advance table-hover table-responsive" id='tab-click'>
 						<thead>
-							<th>Project ID</th>
+							<th>PID</th>
 							<th>Deadline</th>
 							<th>Issue Number</th>
 							<th>Task Description</th>
@@ -101,7 +101,11 @@
 										</div>
 									</div>
 								</td>
-								<td></td>
+								<td>
+									<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-floppy-disk', 'style' => 'color:#FF1919')); ?>
+									<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil', 'style' => 'color:#FF1919')); ?>
+									<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash', 'style' => 'color:#FF1919')); ?>
+								</td>
 							</tr>
 						</tbody>
 					</table>
