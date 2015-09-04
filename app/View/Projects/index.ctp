@@ -7,11 +7,44 @@
 </style>
 
 <section class="container-fluid" id="content">
+
+
+
 	<div class="row mt">
 		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'btn btn-danger', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
 		<hr>
 		<div class="col-md-12">
+
 			<div class="content-panel">
+
+
+
+		<div data-example-id="simple-responsive-table" class="bs-example">
+    <div class="table-responsive ">
+  <table class="table table-striped table-advance table-hover">
+   <thead>
+    <tr>
+     <th>Project ID</th>
+     <th>Deadline</th>
+     <th>Issue Number</th>
+     <th>Task Description</th>
+     <th>Assignee</th>
+     <th>Issue Link</th>
+     <th>Status</th>
+     <th>Priority</th>
+     <th>Progress</th>
+     <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td><td></td><td></td><td></td>
+   </tr>
+  </tbody>
+  </table>
+ </div>
+</div>
+
 				<table class="table table-striped table-advance table-hover table-responsive">
 						<thead>
 							<tr class="text-center">

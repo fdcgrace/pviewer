@@ -4,3 +4,41 @@
 .br-theme-bars-1to10 .br-widget{
   height: 10px !important;
 }
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+  padding:4px !important;
+}
+.input label{
+  display: none !important;
+}
+.br-theme-bars-1to10{
+  width: 121px;
+}
+.submitButton{
+  float: left;
+}
+.pull-right{
+  float: left !important;
+}
+.submit{
+  width:75px;
+}
+.fright{
+  float: right;
+}
+.fleft{
+  float: left;
+}
+#flashMessage{
+  background-color: #ed412b;
+  color: #fff;
+  padding: 5px;
+}
+.wFirty{
+  width: 50%;
+}
+.buttons{
+  padding: 10px;
+}
+.mar10{
+  margin-right: 10px;
+}
