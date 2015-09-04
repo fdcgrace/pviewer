@@ -57,7 +57,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				//'assets/js/jquery-1.8.3.min',
 				'bars',
 				'jquery.barrating',
-				'assets/js/chart-master/Chart'
+				'assets/js/chart-master/Chart',
+				'bootstrap-colorpicker',
+				'colorpicker-color',
+				'docs',
+				'colpick',
+				'bootstrap-slider',
+				'pdfobject'
 			)
 		);
 	?>
