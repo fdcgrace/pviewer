@@ -44,8 +44,10 @@ class PdetailsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit() {
-
+	public function edit($id = null) {
+		$this->autoRender = false;
+		$view = new View($this, false);
+		return $view->element('editIssue');
 	}
 
 /**
@@ -56,7 +58,9 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function add() {
-		
+		$this->autoRender = false;
+		$view = new View($this, false);
+		return $view->element('newIssue');
 	}
 
 	public function delete() {

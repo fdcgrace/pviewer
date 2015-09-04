@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class ProjectsController extends AppController {
+	public $uses = array('Project', 'Pdetail', 'Team');
 /**
  * Components
  *
@@ -52,6 +53,9 @@ class ProjectsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->autoRender = false;
+		$view = new View($this, false);
+		return $view->element('editProj');
 	}
 
 /**
