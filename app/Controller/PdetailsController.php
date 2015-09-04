@@ -31,7 +31,8 @@ class PdetailsController extends AppController {
 				'Pdetail.del_flg' => 1
 			);
 		$order = array(
-				'Pdetail.priority' => 'desc'
+				/*'Pdetail.priority' => 'desc'*/
+				'Pdetail.status' => 'asc'
 			);
 
 		$this->paginate = array(
