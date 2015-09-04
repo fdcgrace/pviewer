@@ -42,7 +42,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'assets/css/style',
 				'assets/css/style-responsive',
 				'bars-1to10',
-				'bars-pill'
+				'bars-pill',
+				'mystyle'
 			)
 		);
 		

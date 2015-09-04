@@ -34,81 +34,112 @@
 
 	</div>	
 	<hr>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-heading" style="background:#FF1919;color:#FFF;">
-					<h4><i class="fa fa-angle-right"></i> For Testing</h4>
+	<div data-example-id="simple-responsive-table" class="bs-example">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Project ID</th>
+            <th>Deadline</th>
+            <th>Issue Number</th>
+            <th>Task Description</th>
+            <th>Assignee</th>
+            <th>Issue Link</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Progress</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>2015-08-06</td>
+            <td>7875</td>
+            <td>Pagination</td>
+            <td>
+            	<select>
+					<option>Please Select</option>
+				</select>
+            </td>
+            <td>http://redmine.vjsol.jp/issues/7874</td>
+            <td>
+            	<select>
+					<option>Please Select</option>
+				</select>
+            </td>
+            <td>
+            	<div class="input select">
+					<div class="br-wrapper br-theme-bars-pill">
+						<select class="example-pill" style="display: none;" default="default">
+							<option>Lowest</option>
+							<option>Medium</option>
+							<option>Highest</option>
+						</select>
+					</div>
 				</div>
-				<div class="panel-body">
-					<table class="table table-striped table-advance table-hover table-responsive" id='tab-click'>
-						<thead>
-							<th>Project ID</th>
-							<th>Deadline</th>
-							<th>Issue Number</th>
-							<th>Task Description</th>
-							<th>Assignee</th>
-							<th>Issue Link</th>
-							<th>Status</th>
-							<th>Priority</th>	
-							<th>Progress</th>
-							<th class="actions">Actions</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2015-08-06</td>
-								<td>7875</td>
-								<td>Pagination</td>
-								<td>
-									<select>
-										<option>Please Select</option>
-									</select>
-								</td>
-								<td><a>http://redmine.vjsol.jp/issues/7874</a></td>
-								<td>
-									<select>
-										<option>Please Select</option>
-									</select>
-								</td>
-								<td>
-									<div class="input select">
-										<div class="br-wrapper br-theme-bars-pill">
-											<select class="example-pill" style="display: none;" default="default">
-												<option>Lowest</option>
-												<option>Medium</option>
-												<option>Highest</option>
-											</select>
-										</div>
-									</div>
-								</td>
-								<td>
-									<div class="input select">
-										<div class="br-wrapper br-theme-bars-1to10">
-											<select class="example-1to10" style="display: none;">
-												<option>0</option>
-												<option>10</option>
-												<option>20</option>
-												<option>30</option>
-												<option>40</option>
-												<option>50</option>
-												<option>60</option>
-												<option>70</option>
-												<option>80</option>
-												<option>90</option>
-												<option>100</option>
-											</select>
-										</div>
-									</div>
-								</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+            </td>
+            <td>
+            	<div class="input select">
+					<div class="br-wrapper br-theme-bars-1to10 fixWidth">
+						<select class="example-1to10" style="display: none;">
+							<option>0</option>
+							<option>10</option>
+							<option>20</option>
+							<option>30</option>
+							<option>40</option>
+							<option>50</option>
+							<option>60</option>
+							<option>70</option>
+							<option>80</option>
+							<option>90</option>
+							<option>100</option>
+						</select>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>	
+            </td>
+            <td>
+	        	<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+				<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>
+	        	<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+				<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>
+	        	<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+				<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- /.table-responsive -->
+  </div>
 </section>
 <!--addForm button -->
 <div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
