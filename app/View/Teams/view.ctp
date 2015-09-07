@@ -5,11 +5,13 @@
 		<div class="col-md-6">
 			<select id="team" class="form-control" style="width:100%">
 				<option value="">Please Select Team</option>
+				<option value="1">Evan</option>
 			</select>
 		</div>
 		<div class="col-md-6">
 			<select id="team_project" class="form-control" style="width:100%" disabled="disabled">
 				<option value="">Please Select Project</option>
+				<option value="1">Applisquare</option>
 			</select>
 		</div>
 	</div>
@@ -30,3 +32,21 @@
 		<span><?php echo $this->Html->link(__('Save'), array('controller' => 'Teams', 'action' => 'save'), array('class' => 'btn btn-default')); ?></span>
 	</div>
 </section>
+<script>
+	$(function() {
+		var team = "";//"<?php echo $team_session;?>";
+		var project = "";//"<?php echo $proj_session;?>";
+		// alert(team);
+		// alert(project);
+		sessionVal();
+		checkTeam();
+		checkProject();
+
+		function sessionVal() {
+			if(team != "" && project != "") {
+				$("#team").val(team);
+				$("#team_project").val(project);
+			}
+		}
+	});
+</script>

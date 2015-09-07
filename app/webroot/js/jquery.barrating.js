@@ -139,6 +139,7 @@
             var showSelectedRating = function(text) {
                 // text undefined?
                 text = text ? text : self.$elem.data('barrating').currentRatingText;
+                text = text+'%';
 
                 // update .br-current-rating div
                 if (self.options.showSelectedRating) {

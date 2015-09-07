@@ -5,13 +5,40 @@
 		height:25px;
 	}
 </style>
-
 <section class="container-fluid" id="content">
+
 	<div class="row mt">
-		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'btn btn-danger', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
+		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
 		<hr>
 		<div class="col-md-12">
+
 			<div class="content-panel">
+		<div data-example-id="simple-responsive-table" class="bs-example">
+    <div class="table-responsive ">
+  <table class="table table-striped table-advance table-hover">
+   <thead>
+    <tr>
+     <th>Project ID</th>
+     <th>Deadline</th>
+     <th>Issue Number</th>
+     <th>Task Description</th>
+     <th>Assignee</th>
+     <th>Issue Link</th>
+     <th>Status</th>
+     <th>Priority</th>
+     <th>Progress</th>
+     <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td><td></td><td></td><td></td>
+   </tr>
+  </tbody>
+  </table>
+ </div>
+</div>
+
 				<table class="table table-striped table-advance table-hover table-responsive">
 						<thead>
 							<tr class="text-center">
@@ -75,22 +102,36 @@
 			</div>
 		</div>
 	</div>
+	<p>
+		<?php
+			echo $this->Paginator->counter(array(
+				'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+			));
+		?>	
+	</p>
+	<div class="paging">
+		<?php
+			echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+			echo $this->Paginator->numbers(array('separator' => ''));
+			echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+		?>
+	</div>
 </section>
 
-<!--new proj button -->
+<!--new proj modal -->
 <div class="modal fade" id="newProj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
 		<div class="modal-dialog">
 		    <div class="modal-content">
 		    </div>
 	</div>
 </div>
-<!--end new proj button -->
+<!--end new proj modal -->
 
-<!--edit proj button -->
+<!--edit proj modal -->
 <div class="modal fade" id="editProj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
 		<div class="modal-dialog">
 		    <div class="modal-content">
 		    </div>
 	</div>
 </div>
-<!--end edit proj button -->
+<!--end edit proj modal -->

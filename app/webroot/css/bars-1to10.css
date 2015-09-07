@@ -3,7 +3,7 @@
 }
 .br-theme-bars-1to10 .br-widget a {
   display: block;
-  width: 12px;
+  width: 6px;
   padding: 5px 0;
   height: 28px;
   float: left;
@@ -16,11 +16,10 @@
   background-color: #edb867;
 }
 .br-theme-bars-1to10 .br-widget .br-current-rating {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 2;
   float: left;
-  padding: 0 20px 0 20px;
-  color: #edb867;
-  font-weight: 400;
-  display: none;
+  padding-left:4px;
+  color: #000000;
+  font-weight: 300;
 }
