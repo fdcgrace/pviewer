@@ -57,7 +57,34 @@ $(document).ready(function(){
 				}
 			});
 		}
-	});	
+	});
+
+	$(function() {
+    	$( "#datepicker" ).datepicker();
+    	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+  	});	
+  	var currDate = $(this).val();
+    	$.ajax({
+			type: "POST",
+			url: "/pviewer-layout/pdetails/issue/",
+			data: { 'getDate' : currDate},
+			success: function (data) {
+				$(".table-responsive").html(data);
+			}
+		});
+  	
+	$("#datepicker").on("change", function () {
+        var currDate = $(this).val();
+        var teamID = $("#teamID").text();
+    	$.ajax({
+			type: "POST",
+			url: "/pviewer-layout/pdetails/issue/",
+			data: { 'getDate' : currDate, 'teamID' : teamID},
+			success: function (data) {
+				$(".table-responsive").html(data);
+			}
+		});
+    });	
 });
 
 function handleClick(cb) {

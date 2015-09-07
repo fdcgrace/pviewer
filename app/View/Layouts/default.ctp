@@ -46,7 +46,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'mystyle',
 				'bootstrap-colorpicker.min',
 				'colpick',
-				'style'
+				'style',
+				'jquery-ui'
 			)
 		);
 		
@@ -63,7 +64,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'docs',
 				'colpick',
 				'bootstrap-slider',
-				'pdfobject'
+				'pdfobject',
+				'jquery-ui'
 			)
 		);
 	?>

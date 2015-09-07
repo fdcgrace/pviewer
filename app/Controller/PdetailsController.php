@@ -26,10 +26,31 @@ class PdetailsController extends AppController {
  */
 	public function index($id = null) {
 		$this->Pdetail->recursive = 0;
-		$condition = array(
+		$getDate = "";
+$id = 1;
+		if (isset($_POST['getDate'])) {
+			$getDate = $_POST['getDate'];			
+		}
+
+		if (strlen($getDate) > 0) {
+
+			$condition = array(
+				'project.id' => $_POST['teamID'],
+				'Pdetail.del_flg' => 1,
+				'Pdetail.start_date' => $getDate
+			);
+		} else {
+			$condition = array(
+				'project.id' => $id,
+				'Pdetail.del_flg' => 1,
+				'Pdetail.start_date' => '2015-09-02'
+			);
+		}
+
+		/*$condition = array(
 				'project.id' => $id,
 				'Pdetail.del_flg' => 1
-			);
+			);*/
 		$order = array(
 				/*'Pdetail.priority' => 'desc'*/
 				'Pdetail.status' => 'asc'
@@ -149,13 +170,11 @@ class PdetailsController extends AppController {
 			)
 		);
 
-
-		
-		
 		$this->set('legendColorModal', $legendColorModal);
 		$this->set('legendColorStatus', $legendColorStatus);
 		$this->set('legendColor', $legendColor);
 		$this->set('legendStatusId', $legendStatusId);
+
 		if($this->request->is('ajax')){
 			$this->layout = 'default';
 			$this->render('index','ajax');
@@ -783,6 +802,86 @@ class PdetailsController extends AppController {
 			$this->Pdetail->id = $this->request->data['id'];
 			$this->Pdetail->save($this->request->data);
 		}
+	}
+
+	public function issue() {
+		$this->autoRender =  false;
+		$getDate = "";
+$id = 1;
+		if (isset($_POST['getDate'])) {
+			$getDate = $_POST['getDate'];			
+		}
+
+		if (strlen($getDate) > 0) {
+
+			$condition = array(
+				'project.id' => $_POST['teamID'],
+				'Pdetail.del_flg' => 1,
+				'Pdetail.start_date' => $getDate
+			);
+		} else {
+			$condition = array(
+				'project.id' => $id,
+				'Pdetail.del_flg' => 1
+			);
+		}
+
+		$order = array(
+				/*'Pdetail.priority' => 'desc'*/
+				'Pdetail.status' => 'asc'
+			);
+
+		$this->paginate = array(
+
+          
+            'conditions' => $condition,
+            'order' => 'TblColor.status_id desc'
+        );
+
+        $members = $this->Pdetail->Member->find('list', array(
+			'fields' => array('member')
+			)
+		);
+
+		$this->set(compact('members'));
+
+		$legendColor = $this->Tblcolor->find('list', array(
+			'fields' => array(
+				'color', 'status'				
+				)
+			)
+		);
+		$legendColorModal = $this->Tblcolor->find('all', array(
+			'fields' => array(
+				'color', 'status','status_id'				
+				)
+			)
+		);
+		$legendColorStatus = $this->Tblcolor->find('list', array(
+			'fields' => array(
+				'status_id', 'color'				
+				)
+			)
+		);
+
+		$legendStatusId = $this->Tblcolor->find('list', array(
+			'fields' => array(
+				'status_id','status'			
+				)
+			)
+		);
+
+		$pdetails = $this->paginate('Pdetail');
+		//$this->set('pdetails', $pdetails);
+
+		$view = new View($this, false);
+		return $view->element('issue', array(
+				'pdetails' => $pdetails, 
+				'legendColorModal' => $legendColorModal,
+				'legendColorStatus' => $legendColorStatus,
+				'legendColor' => $legendColor,
+				'legendStatusId' => $legendStatusId
+			));
 	}
 
 }
