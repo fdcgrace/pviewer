@@ -71,7 +71,7 @@
 				if (array_key_exists($statusPdetail, $legendColorStatus)) {
 						    echo $legendColorStatus[$statusPdetail];
 						}
-				?>" id='<?php echo $detId; ?>'>
+				?>; color:#000 " id='<?php echo $detId; ?>'>
 				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); ?></th>
 				<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 				<td id='tab-click'><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
