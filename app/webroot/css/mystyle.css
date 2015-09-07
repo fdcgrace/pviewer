@@ -7,9 +7,7 @@
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
   padding:4px !important;
 }
-.input label{
-  display: none !important;
-}
+
 .br-theme-bars-1to10{
   width: 121px;
 }
@@ -41,4 +39,72 @@
 }
 .mar10{
   margin-right: 10px;
+}
+
+.mini-layout{
+    min-height: 200px;
+    background-color:#E6E6E6;
+    width: 100%;
+}
+table {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  padding: 4px;
+  text-align: center;
+}
+th, td {
+  padding: 10px;
+}
+.teams th{
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+}
+
+.btn-orange{
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+  border-color: #FF9933 !important;
+}
+
+th > a {
+  color: #FFFFFF;
+}
+.btn-teams {
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+}
+div.btn-group > .btn-teams{
+  background: #E6E6E6;
+  border: 1px #E6E6E6;
+}
+
+.members th {
+  background: linear-gradient(#00CCFF,#008FB2);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center;
+}
+
+.btn-members {
+  color: #00CCFF;
+}
+div.btn-group > .btn-teams{
+  background: #E6E6E6;
+  border: 1px #E6E6E6;
+}
+.forange{
+  color: #FF9933 !important;
 }

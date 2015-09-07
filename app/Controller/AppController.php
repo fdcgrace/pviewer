@@ -56,7 +56,15 @@ class AppController extends Controller {
 			90 => 90,
 			100 => 100
 		);
+		$this->getStatus = array(
+				0 => 'Deactivate',
+				1 => 'Activate'
+			);
 		$this->set('priorityBar',$this->priorityBar);
 		$this->set('progressBar',$this->progressBar);
+		$this->set('getStatus',$this->getStatus);
+		$this->set('deactivate','Deactivate');
+		$this->set('activate','Activate');
+
 	}
 }
