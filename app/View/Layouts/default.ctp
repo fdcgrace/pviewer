@@ -31,7 +31,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		echo $this->fetch('meta');
 		
-		echo $this->fetch('css');
 		echo $this->Html->css(
 			array(
 				'assets/css/bootstrap',
@@ -41,23 +40,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'assets/lineicons/style',
 				'assets/css/style',
 				'assets/css/style-responsive',
-				'bars-1to10',
-				'bars-pill',
+				// 'bars-1to10',
+				// 'bars-pill',
 				'mystyle',
 				'bootstrap-colorpicker.min',
 				'colpick',
 				'style',
-				'jquery-ui'
+				'jquery-ui',
+				'jquery-ui.structure',
+				'jquery-ui.theme'
 			)
 		);
-		
-		echo $this->fetch('script');
+		echo $this->fetch('css');
+
 		echo $this->Html->script(
 			array(
+				// 'assets/js/jquery-1.8.3.min',
 				'assets/js/jquery',
-				//'assets/js/jquery-1.8.3.min',
-				'bars',
-				'jquery.barrating',
+				'jquery-ui',
+				// 'bars',
+				// 'jquery.barrating',
 				'assets/js/chart-master/Chart',
 				'bootstrap-colorpicker',
 				'colorpicker-color',
@@ -65,9 +67,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'colpick',
 				'bootstrap-slider',
 				'pdfobject',
-				'jquery-ui'
+				'custom'
 			)
 		);
+		echo $this->fetch('script');
+
 	?>
 </head>
 <body>
@@ -76,12 +80,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		TOP BAR CONTENT & NOTIFICATIONS
 		*********************************************************************************************************************************************************** -->
       	<!--header start-->
-      	<header class="header black-bg">
+      	<header class="header black-bg" style="z-index:99">
 			<div class="sidebar-toggle-box">
 			  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 			</div>
 	            <!--logo start-->
-	            <a href="index.html" class="logo"><b>FDC-Project Viewer</b></a>
+	            <!-- <a href="index.html" class="logo"><b>FDC-Project Viewer</b></a> -->
+	            <?php echo $this->Html->link($this->Html->tag('b','FDC-Project Viewer'), array('controller' => 'pages', 'action' => 'display'), array('escape' => false, 'class' => 'logo'));?>
 	            <!--logo end-->
 	            <div class="nav notify-row" id="top_menu">
 	                <!--  notification start -->
@@ -235,7 +240,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		*********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
 		<aside>
-		    <div id="sidebar"  class="nav-collapse ">
+		    <div id="sidebar"  class="nav-collapse " style="z-index:98">
 		        <!-- sidebar menu start-->
 		        <ul class="sidebar-menu" id="nav-accordion">
 		        
@@ -279,7 +284,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<section class="wrapper">
 				<?php echo $this->Session->flash(); ?>
 				<?php echo $this->fetch('content'); ?>
-				</section>
+			</section>
 		</section>
 
 		<?php 
@@ -294,7 +299,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					'assets/js/gritter-conf',
 					'assets/js/sparkline-chart',
 					'assets/js/zabuto_calendar',
-					'assets/js/jquery.dcjqaccordion.2.7.js'
+					'assets/js/jquery.dcjqaccordion.2.7.js',
 				)
 			);
 		?>
@@ -304,7 +309,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<br><br>
 	<!--footer start-->
 	<footer class="site-footer">
-	  <div class="text-center">
+	  <div class="text-center" style="text-align:center;">
 	      FDC - Project Viewer
 	     <!-- <a href="index.html#" class="go-top">
 	          <i class="fa fa-angle-up"></i>

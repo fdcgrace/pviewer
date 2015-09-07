@@ -26,63 +26,15 @@ class PdetailsController extends AppController {
  */
 	public function index($id = null) {
 		$this->Pdetail->recursive = 0;
-		$getDate = "";
-$id = 1;
-		if (isset($_POST['getDate'])) {
-			$getDate = $_POST['getDate'];			
-		}
-
-		if (strlen($getDate) > 0) {
-
-			$condition = array(
-				'project.id' => $_POST['teamID'],
-				'Pdetail.del_flg' => 1,
-				'Pdetail.start_date' => $getDate
-			);
-		} else {
-			$condition = array(
-				'project.id' => $id,
-				'Pdetail.del_flg' => 1,
-				'Pdetail.start_date' => '2015-09-02'
-			);
-		}
-
-		/*$condition = array(
-				'project.id' => $id,
-				'Pdetail.del_flg' => 1
-			);*/
-		$order = array(
-				/*'Pdetail.priority' => 'desc'*/
-				'Pdetail.status' => 'asc'
-			);
-
-		$this->paginate = array(
-
-          
-            'conditions' => $condition,
-            'order' => 'TblColor.status_id desc'
-        );
-
-		
-
-
-		$pdetails = $this->paginate('Pdetail');
-		$this->set('pdetails', $pdetails);
+		$this->Session->write('project_id',$id);
 
 		$projectID = (isset($pdetails[0]['Pdetail']['project_id']))? $pdetails[0]['Pdetail']['project_id']: 0;
-		$teamID = $pdetails[0]['Pdetail']['team_id'];
+		$teamID = (isset($pdetails[0]['Pdetail']['team_id']))? $pdetails[0]['Pdetail']['team_id']: 0;
 		
 		$this->set('t_id', $teamID);
 		$this->set('p_id', $projectID);
-
-
-
 		
 		if ($this->request->is(array('post', 'put'))) {
-		
-
-			
-
 			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
 			//if($_POST['progress']!='' && !empty($_POST['id'])){
 				$arrData = array('progress' => $_POST['progress']);
@@ -103,7 +55,7 @@ $id = 1;
 		        }else{
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
-			}else if(!empty($_POST['changeColor']) && !empty($_POST['color'])) {
+			} else if(!empty($_POST['changeColor']) && !empty($_POST['color'])) {
 
 				$r = trim($_POST['changeColor']);	
 
@@ -118,20 +70,15 @@ $id = 1;
 				$this->Tblcolor->set($arrData);
 		        if($this->Tblcolor->save()){
 		           $this->Session->setFlash(__('The details has been saved.'));
-		        }else{
+		        } else{
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
 			}else{
-				
 				if ($this->Pdetail->save($this->request->data)) {
 					$this->Session->setFlash(__('The details has been updated.'));
 					return $this->redirect(array('action' => 'index', $id));
-				} else {
-					
 				}
 			}
-			
-			
 		} else {
 			$options = array('conditions' => array('Pdetail.' . $this->Pdetail->primaryKey => $id, 'Pdetail.del_flg' => 1));
 			$this->request->data = $this->Pdetail->find('first', $options);
@@ -204,8 +151,7 @@ $id = 1;
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
-		
+	public function edit($id = null) {		
 		//var_dump($_POST); die();
 		$this->autoRender = false;
 		$content = array();
@@ -220,10 +166,8 @@ $id = 1;
             'conditions' => $condition
         );
 
-		 $pdetails = $this->paginate('Pdetail');
-
-
-		 $content['pdetails'] = $pdetails;
+		$pdetails = $this->paginate('Pdetail');
+		$content['pdetails'] = $pdetails;
 		//$this->set('pdetails', $pdetails);
 	
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
@@ -266,7 +210,6 @@ $id = 1;
 /*var_dump($pdetails);
 		 die();*/
     	return $view->element('pdetailsEdit', array('content' => $content));
-
 	}
 
 /**
@@ -277,6 +220,7 @@ $id = 1;
  * @return void
  */
 	public function add($id = null) {
+		$this->autoRender = false;
 		$projectID = $id;
 
 		$this->set('p_id', $projectID);
@@ -307,7 +251,9 @@ $id = 1;
 			)
 		);
 
-		$this->set(compact('members'));
+		// $this->set(compact('members'));
+		$view = new View($this, false);
+		return $view->element('newIssue');
 	}
 
 	public function delete($id = null, $project_id = null) {
@@ -325,41 +271,34 @@ $id = 1;
 		} else {
 			$this->Session->setFlash(__('The project could not be deleted. Please, try again.'));
 		}
-
-	//	return $this->redirect(array('action' => 'index'));
-
 		$this->redirect(array('action' => 'index', $project_id));
-
 	}
-	public function deleteBugInfo()
-	{
-		
 
+	public function deleteBugInfo()	{
 		 $this->autoRender = false;
 		 $bugId = $_POST['bugId'];
 		 $this->Bug_info->delete($bugId);
 		 echo json_encode($bugId);
 	}
-	public function deleteLegend()
-	{
+
+	public function deleteLegend()	{
 		 $this->autoRender = false;
 		 $status = $_POST['status'];
 	     $user = $this->Tblcolor->findByStatus($status);
 		 $this->Tblcolor->delete($user['Tblcolor']['id']);
 		 echo json_encode($user['Tblcolor']['id']);
 	}
-	public function editLegend()
-	{
-		 $this->autoRender = false;
+
+	public function editLegend() {
+		$this->autoRender = false;
 		$statusOld = $_POST['statusOld'];
 		$statusNew = $_POST['statusNew'];
 		$statusFindNew['Tblcolor']['id'] = null;
-		 $statusFind = $this->Tblcolor->findByStatus($statusOld);
-		 $statusFindNew = $this->Tblcolor->findByStatus($statusNew);
-		 $statusIdNew = $statusFindNew['Tblcolor']['id'];
+		$statusFind = $this->Tblcolor->findByStatus($statusOld);
+		$statusFindNew = $this->Tblcolor->findByStatus($statusNew);
+		$statusIdNew = $statusFindNew['Tblcolor']['id'];
 
-		 if($statusIdNew == '' || $statusIdNew == null)
-		 {
+		if($statusIdNew == '' || $statusIdNew == null) {
 
 			 $statusId = $statusFind['Tblcolor']['id'];
 			 $this->Tblcolor->id = $statusId;
@@ -369,26 +308,19 @@ $id = 1;
 			 $this->Tblcolor->save();
 
 			 echo json_encode(1);
-		 }
-		 else
-		 {
+		} else {
 		 	echo json_encode(0);
-		 }
+		}
 	}
-	public function insertLegend()
-	{
-		
+
+	public function insertLegend()	{
 		$this->autoRender = false;
 		$newStatus = $_POST['newStatus'];
 		$colorStatus = $_POST['colorStatus'];
-
-
 		$maxstat = $this->Tblcolor->find('all',array('fields' => 'MAX(status_id) as maxstat'));
-
-
 		$ifStatusExists = $this->Tblcolor->find('count',array('conditions' => array('OR' => array('status' => $newStatus,'status' => trim($newStatus)))));
-		if($ifStatusExists <= 0)
-		{
+		
+		if ($ifStatusExists <= 0)	{
 		$this->Tblcolor->set(array(
 			      'status' => $newStatus,
 			      'status_id' => $maxstat[0][0]['maxstat']+1,
@@ -396,47 +328,17 @@ $id = 1;
 				));
 		 $this->Tblcolor->save();
 		 echo json_encode(1);
-		}
-		else
-		echo json_encode(0);
-	}
-	public function test821()
-	{
-		$t = $_FILES['userfile'];
-		echo "<script>alert('$t')</script>";
-		if(isset($_FILES['userfile']))
-		{
-			echo "<script>alert('dfdfdfdf')</script>";
-		       /* for($i=0;$i<count($_FILES['userfile']['name']);$i++)
-		        {
-
-		        $uploaddir = 'uploads/';
-		        $uploadfile = $uploaddir . basename($_FILES['userfile']['name'][$i]);
-
-		        echo '<pre>';
-		        if (move_uploaded_file($_FILES['userfile']['tmp_name'][$i], $uploadfile)) {
-		            echo "File is valid, and was successfully uploaded.\n";
-		        } else {
-		            echo "Possible file upload attack!\n";
-		        }
-
-		        }
-
-		        echo 'Here is some more debugging info:';
-		        print_r($_FILES);
-
-		        print "</pre>";
-*/
+		} else {
+			echo json_encode(0);			
 		}
 	}
-	public function getModifiedFiles()
-	{
+
+	public function getModifiedFiles()	{
 		$this->autoRender = false;
 		$issueId = $_POST['issueId'];
 		$type = $_POST['type'];
 
-		if($type == 'modified')
-		{
+		if($type == 'modified')	{
 			$findModified = $this->Issue_spec->find('all', array(
 				'fields' => array(
 					'specs_id','file','type','id',"`date_modified` AS `date`"			
@@ -447,9 +349,7 @@ $id = 1;
 			);
 			$extractModified = Set::extract('/Issue_spec/.', $findModified);
 			echo json_encode($extractModified);
-		}
-		else if($type == 'released')
-		{
+		}	else if($type == 'released') {
 			$findReleased = $this->Issue_spec->find('all', array(
 				'fields' => array(
 					'specs_id','file','type','id',"`date_released` AS `date`"			
@@ -461,10 +361,9 @@ $id = 1;
 			$extractReleased = Set::extract('/Issue_spec/.', $findReleased);
 			echo json_encode($extractReleased);
 		}
-
 	}
-	public function insertText()
-	{
+
+	public function insertText() {
 		$this->autoRender = false;
 		if ($this->request->is('post')) {
 		 	$count = count($this->data['pdetails']['text']);
@@ -488,8 +387,6 @@ $id = 1;
 						        )
 						    
 						);
-
-
 		//		debug($data);			    
 				 $this->Issue_spec->save($data);
 				 /*$filename = "C:/xampp/htdocs/pviewer/app/webroot/files/".$this->data['pdetails']['category'].'/'.$this->data['pdetails']['text'][$i];	
@@ -499,28 +396,13 @@ $id = 1;
 		        } else {
 		            echo "Possible file upload attack!\n";
 		        }	  */  
-	       
-						
-						
-
-
-		       
-
-		        
-
 	        }
-		 	
-           
-        //   echo $filename;
-
 	        $this->redirect($this->referer());
-
        	 }	
 	}
 
 
-	public function updateBugInfo()
-	{
+	public function updateBugInfo()	{
 		$this->autoRender = false;
 		 if ($this->request->is('post')) {	
 
@@ -532,34 +414,27 @@ $id = 1;
 			$whoFound = $this->data['pdetails']['whofound'];
 			$bugReason = $this->data['pdetails']['bugreason'];
 
-
-			$data = 
-						    array(
-						            'bug_description'=>$bugDescription,
-						            'bug_steps'=>$bugSteps,
-						            'bug_status'=>$bugStatus,
-						            'status_after'=>$statusAfter,
-						            'who_found'=>$whoFound,
-						            'bug_reason'=>$bugReason
-						        
-						    
+			$data = array(
+				            'bug_description'=>$bugDescription,
+				            'bug_steps'=>$bugSteps,
+				            'bug_status'=>$bugStatus,
+				            'status_after'=>$statusAfter,
+				            'who_found'=>$whoFound,
+				            'bug_reason'=>$bugReason	        
 						);
 
-				 $this->Bug_info->id = $issueidbug;
-				 $this->Bug_info->set($data);
-				 $this->Bug_info->save();
-
-
-
+			$this->Bug_info->id = $issueidbug;
+			$this->Bug_info->set($data);
+			$this->Bug_info->save();
 		 }
 		 	$this->redirect($this->referer());
 	}
-	public function insertBugInfo()
-	{
-		 $this->autoRender = false;
-		 if ($this->request->is('post')) {	
 
-		 	$issueidbug = $this->data['pdetails']['issueid-bug'];
+	public function insertBugInfo()	{
+		$this->autoRender = false;
+		if ($this->request->is('post')) {	
+
+			$issueidbug = $this->data['pdetails']['issueid-bug'];
 			$bugDescription  = $this->data['pdetails']['bugdescription'];
 			$bugSteps = $this->data['pdetails']['bugsteps'];
 			$bugStatus = $this->data['pdetails']['bugstatus'];
@@ -569,8 +444,8 @@ $id = 1;
 
 
 			$id  = $this->Bug_info->find('all', array(
-			'conditions' => array('issue_id' => $issueidbug)
-			)
+				'conditions' => array('issue_id' => $issueidbug)
+				)
 			);
 
 		/*	if(count($id) > 0)
@@ -597,34 +472,28 @@ $id = 1;
 			else
 			{*/
 
-				$this->Bug_info->create();
-
-				$data = 
-							  array(
-							        'Bug_info' => array(
-							            'issue_id'=>$issueidbug,
-							            'bug_description'=>$bugDescription,
-							            'bug_steps'=>$bugSteps,
-							            'bug_status'=>$bugStatus,
-							            'status_after'=>$statusAfter,
-							            'who_found'=>$whoFound,
-							            'bug_reason'=>$bugReason
-							        )
-							    
-							);
-		    
-				 $this->Bug_info->save($data);
+			$this->Bug_info->create();
+			$data = 
+						  array(
+						        'Bug_info' => array(
+						            'issue_id'=>$issueidbug,
+						            'bug_description'=>$bugDescription,
+						            'bug_steps'=>$bugSteps,
+						            'bug_status'=>$bugStatus,
+						            'status_after'=>$statusAfter,
+						            'who_found'=>$whoFound,
+						            'bug_reason'=>$bugReason
+						        )
+						    
+						);
+	    
+			 $this->Bug_info->save($data);
 			//}
-
-	
-
-
-
 		 }
 		  	$this->redirect($this->referer());
 	}
-	public function viewBugInfo()
-	{
+
+	public function viewBugInfo()	{
 		$this->autoRender = false;
 		$issueId = $_POST['issueId'];
 
@@ -634,12 +503,10 @@ $id = 1;
 		);
 
 		$returnInfo = Set::extract('/Bug_info/.', $infoRecord);
-
 		echo json_encode($returnInfo);
-
 	}
-	public function editBugInfo()
-	{
+
+	public function editBugInfo()	{
 		$this->autoRender = false;
 		$bugId = $_POST['bugId'];
 
@@ -652,21 +519,18 @@ $id = 1;
 
 		echo json_encode($returnInfo);
 	}
-	public function insertFiles()
-	{
+
+	public function insertFiles()	{
 		$this->autoRender = false;
 		 if ($this->request->is('post')) {
 		 	$count = count($this->data['pdetails']['file']);
 		 	$arrayDates = array();
 
-		 	for($i=0;$i<$count;$i++)
-	        {
+		 	for($i=0;$i<$count;$i++) {
 	        	$fileName = $this->data['pdetails']['file'][$i]['name'];
 				$tmpName  = $this->data['pdetails']['file'][$i]['tmp_name'];
 				$fileSize = $this->data['pdetails']['file'][$i]['size'];
 				$fileType = $this->data['pdetails']['file'][$i]['type'];
-
-				
 			
 				$fp      = fopen($tmpName, 'r');
 				$content = fread($fp, filesize($tmpName));
@@ -704,27 +568,13 @@ $id = 1;
 		        } else {
 		            echo "Possible file upload attack!\n";
 		        }	    
-	       
-						
-						 
-
-		       //	
-		       
-
-		        
 
 	        }
 		 	$this->redirect($this->referer());
-           
-    //       echo $filename;
-	   //      $this->redirect($this->referer());
-
-
-
        	 }	
 	}
-	public function getIssueFiles()
-	{
+
+	public function getIssueFiles()	{
 		$this->autoRender = false;
 		$issueid = $_POST['issueid'];
 		$r = '';
@@ -747,11 +597,9 @@ $id = 1;
 		
 		//echo json_encode($result);
 	}
-	public function testJson()
-	{
-		$this->autoRender = false;
-		
 
+	public function testJson()	{
+		$this->autoRender = false;
 		$legendStatusId = $this->Issue_spec->find('all', array(
 			'fields' => array(
 				'specs_id','file','type','id'			
@@ -764,14 +612,11 @@ $id = 1;
 		$things = Set::extract('/Issue_spec/.', $legendStatusId);
 		//debug($things);
 //$userNames = Set::extract($legendStatusId, '{n}.Issue_spec.file','Issue_spec.type');
-
-
-
 //debug($userNames);
-	echo json_encode($things);
+		echo json_encode($things);
 	}
-	public function downloadFile()
-	{
+
+	public function downloadFile()	{
 		$this->autoRender = false;
 		$id= $_GET['id'];
 
@@ -796,7 +641,6 @@ $id = 1;
 
 	public function update() {
 		$this->autoRender = false;
-
 		debug($this->request->data);die();
 		if($this->request->is('ajax')) {
 			$this->Pdetail->id = $this->request->data['id'];
@@ -806,44 +650,35 @@ $id = 1;
 
 	public function issue() {
 		$this->autoRender =  false;
-		$getDate = "";
-$id = 1;
-		if (isset($_POST['getDate'])) {
-			$getDate = $_POST['getDate'];			
-		}
 
-		if (strlen($getDate) > 0) {
+		// var_dump($_POST);
 
-			$condition = array(
-				'project.id' => $_POST['teamID'],
-				'Pdetail.del_flg' => 1,
-				'Pdetail.start_date' => $getDate
-			);
+		$conditions = array(
+			'Pdetail.del_flg' => 1
+		);
+
+		if (isset($_POST['projID'])){
+			$conditions['Pdetail.project_id'] = $_POST['projID'];
+		} 
+
+		if (isset($_POST['getDate'])){
+			$conditions['Pdetail.start_date'] = $_POST['getDate'];
 		} else {
-			$condition = array(
-				'project.id' => $id,
-				'Pdetail.del_flg' => 1
-			);
+			$conditions['Pdetail.del_flg'] = 1;
 		}
+		
+		// var_dump($conditions);
+		$this->Paginator->settings = array(
+			'conditions' => $conditions,
+			'order' => 'TblColor.status_id desc'
+		);
 
-		$order = array(
-				/*'Pdetail.priority' => 'desc'*/
-				'Pdetail.status' => 'asc'
-			);
-
-		$this->paginate = array(
-
-          
-            'conditions' => $condition,
-            'order' => 'TblColor.status_id desc'
-        );
+		$pdetails = $this->paginate('Pdetail');
 
         $members = $this->Pdetail->Member->find('list', array(
 			'fields' => array('member')
 			)
 		);
-
-		$this->set(compact('members'));
 
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -851,12 +686,14 @@ $id = 1;
 				)
 			)
 		);
+
 		$legendColorModal = $this->Tblcolor->find('all', array(
 			'fields' => array(
 				'color', 'status','status_id'				
 				)
 			)
 		);
+
 		$legendColorStatus = $this->Tblcolor->find('list', array(
 			'fields' => array(
 				'status_id', 'color'				
@@ -870,9 +707,6 @@ $id = 1;
 				)
 			)
 		);
-
-		$pdetails = $this->paginate('Pdetail');
-		//$this->set('pdetails', $pdetails);
 
 		$view = new View($this, false);
 		return $view->element('issue', array(

@@ -62,24 +62,37 @@ $(document).ready(function(){
 	$(function() {
     	$( "#datepicker" ).datepicker();
     	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    	var currDate = $("#datepicker").val();
+	  	var projID = $(".table-responsive").attr('id');
+	    	$.ajax({
+				type: "POST",
+				url: "/pviewer-layout/pdetails/issue/",
+				data: { 'getDate' : currDate, 'projID' : projID},
+				success: function (data) {
+					$(".table-responsive").html(data);
+				}
+			});
   	});	
-  	var currDate = $(this).val();
-    	$.ajax({
-			type: "POST",
-			url: "/pviewer-layout/pdetails/issue/",
-			data: { 'getDate' : currDate},
-			success: function (data) {
-				$(".table-responsive").html(data);
-			}
-		});
+
+  	$("#view-all").on("click", function() {
+	  	var projID = $(".table-responsive").attr('id');
+  		$.ajax({
+				type: "POST",
+				url: "/pviewer-layout/pdetails/issue/",
+				data: {'projID' : projID},
+				success: function (data) {
+					$(".table-responsive").html(data);
+				}
+			});
+  	});
   	
 	$("#datepicker").on("change", function () {
         var currDate = $(this).val();
-        var teamID = $("#teamID").text();
+        var projID = $(".table-responsive").attr('id');
     	$.ajax({
 			type: "POST",
 			url: "/pviewer-layout/pdetails/issue/",
-			data: { 'getDate' : currDate, 'teamID' : teamID},
+			data: { 'getDate' : currDate, 'projID' : projID},
 			success: function (data) {
 				$(".table-responsive").html(data);
 			}
