@@ -11,19 +11,69 @@ class MembersController extends AppController {
 		$this->set('members', $this->Paginator->paginate());
 	}
 
-	public function add($id = null) {
-		// $this->autoRender = false;
-		$teamID = $id;
-		if($this->request->is('post')) {
-			if($this->Member->save($this->request->data)) {	
-				$this->Session->write('result', 'success');
-				$this->Session->write('message', 'Member saved.');
+	public function add() {
+		$this->autoRender = false;
+		if ($this->request->is('post')) {
+			$this->Member->create();
+			if ($this->Member->save($this->request->data)) {
+				$this->Session->setFlash(__('The Member has been saved.'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->write('result', 'warning');
-				$this->Session->write('message', 'Could not save. Member already exists.');
+				$this->Session->setFlash(__('The Member could not be saved. Please, try again.'));
 			}
-		return $this->redirect($this->referer());
-		}		
+		}
+
+		$teams = $this->Member->Team->find('list', array(
+			'fields' => array(
+				'team'
+				)
+			)
+		);
+		$view = new View($this, false);
+		return $view->element('addMember', array('teams' => $teams));
+	}
+
+	public function edit($id = null) {
+		
+		$this->autoRender = false;
+		$content = array();
+		if (!$this->Member->exists($id)) {
+			throw new NotFoundException(__('Invalid Team'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+
+			$this->Member->id = $id;
+			$this->Member->set($this->request->data);
+	        if($this->Member->save()){
+	           $this->Session->setFlash(__('The Member has been saved.'));
+				//return $this->redirect(array('action' => 'index'));
+	        }else{
+	            $this->Session->setFlash(__('The Member could not be saved. Please, try again.'));
+	          //  return $this->redirect(array('action' => 'index'));
+	        }   
+	        return $this->redirect(array('action' => 'index'));
+		} else {
+			$options = array('conditions' => array('Member.' . $this->Member->primaryKey => $id));
+			$this->request->data = $this->Member->find('first', $options);
+		}
+
+		$options = array('conditions' => array('Member.' . $this->Member->primaryKey => $id));
+		$members = $this->Member->find('first', $options);
+		$content['members'] = $members;
+
+		$team = $this->Member->Team->find('list', array(
+			'fields' => array(
+				'team'
+				)
+			)
+		);
+
+
+		$content['team'] = $team;
+	
+		$view = new View($this, false);
+    	return $view->element('editMember', array('content' => $content));
+		
 	}
 
 	public function deactivate($id = null){

@@ -1,7 +1,6 @@
 <?php $team = $content['team'];?>
 <?php $members = $content['members'];?>
 <?php $pdetails = $content['pdetails'][0];?>
->>>>>>> 44616ae3d0c104e71e06c29fc589e0c0148efb05
 <div id="team_content" class="panel panel-primary">
 	<div class="panel-heading" role="tab" id="headingOne">
   		<h4 class="panel-title">

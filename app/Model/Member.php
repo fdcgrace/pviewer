@@ -16,6 +16,8 @@ class Member extends AppModel {
 		),
 	);*/
 
+	public $displayField = 'team';
+
 	public $validate = array(
 		'member' => array(
 			'nonEmpty' => array(
@@ -25,15 +27,26 @@ class Member extends AppModel {
 		)
 	);
 
+	public $belongsTo = array(
+		'Team' => array(
+			'className' => 'Team',
+			'foreignKey' => 'team_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+	);
+
 
 	function beforeSave($options = array()) {
-		$check = $this->find('all', array(
-			'conditions' => array('member' => $this->data[$this->alias]['member']))
-		);
-		if(count($check) == 0){
-			return true;
-		} else {
-			return false;
+		if(!empty($_POST['member_id'])){
+			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member'], 'Member.id != ' => $_POST['member_id']));
+			$check = $this->find('all', $conditions);
+			if(count($check) == 0){
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 }
