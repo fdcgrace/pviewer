@@ -5,49 +5,94 @@
 		height:25px;
 	}
 </style>
+<section class="container-fluid" id="content">
 
-<section class="container-fluid flip-scroll" id="content">
 	<div class="row mt">
 		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
 		<hr>
 		<div class="col-md-12">
+
 			<div class="content-panel">
+		<div data-example-id="simple-responsive-table" class="bs-example">
+    <div class="table-responsive ">
+  <table class="table table-striped table-advance table-hover">
+   <thead>
+    <tr>
+     <th>Project ID</th>
+     <th>Deadline</th>
+     <th>Issue Number</th>
+     <th>Task Description</th>
+     <th>Assignee</th>
+     <th>Issue Link</th>
+     <th>Status</th>
+     <th>Priority</th>
+     <th>Progress</th>
+     <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td><td></td><td></td><td></td>
+   </tr>
+  </tbody>
+  </table>
+ </div>
+</div>
 
-				<div data-example-id="simple-responsive-table" class="bs-example">
-					<div class="table-responsive ">
-						<table class="table table-striped table-advance table-hover">
-							<thead>
-								<tr>
-								<th><?php echo $this->Paginator->sort('Project Name'); ?></th>
-								<th><?php echo $this->Paginator->sort('Link'); ?></th>
-								<th><?php echo $this->Paginator->sort('Team Assigned'); ?></th>
-								<th><?php echo $this->Paginator->sort('Number of Task'); ?></th>
-								<th><?php echo $this->Paginator->sort('Created Date'); ?></th>
-								<th><?php echo $this->Paginator->sort('Modified Date'); ?></th>
-								<th class="actions"><?php echo __('Actions'); ?></th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($projects as $project): ?>
-								<tr>
-									<td><?php echo h($project['Project']['p_name']); ?></td>
-									<td><a href="<?php echo h($project['Project']['link']); ?>" target="_blank"><?php echo h($project['Project']['link']); ?></a></td>
-									<td><?php echo h($project['Leader']['team']); ?></td>
-									<td><?php echo h($project[0]['total_num_task']); ?></td>
-									<td><?php echo h($project['Project']['created']); ?></td>
-									<td><?php echo h($project['Project']['modified']); ?></td>
-									<td class="actions">
-
-										<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id'])); ?>
-										<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id']), array('data-toggle' => 'modal', 'data-target' => '#editProj')); ?>
-										<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
-
-									</td>
-								</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
+				<table class="table table-striped table-advance table-hover table-responsive">
+						<thead>
+							<tr class="text-center">
+								<th>Project Name</th>
+								<th>Link</th>
+								<th>Team Assigned</th>
+								<th># of Task</th>
+								<th>Created Date</th>
+								<th>Modified Date</th>
+								<th class="actions">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Applisquare</td>
+								<td><a href="http://applisquare.fdc-inc.com/ad/index_ad_with_filtering.php?sid=e756f06691759ffd5ebed8f1bcb0ac80&ucd=XXX&carrier=4&ad_type=paid" target="_blank">http://applisquare.fdc-inc.com/ad/index_ad_with_filtering.php...</a></td>
+								<td>Evan</td>
+								<td>3</td>
+								<td>2015-08-06</td>
+								<td>2015-08-06</td>
+								<td class="actions">
+									<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+									<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+									<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>Native Camp</td>
+								<td></td>
+								<td>Rich</td>
+								<td>5</td>
+								<td>0000-00-00</td>
+								<td>0000-00-00</td>
+								<td class="actions">
+									<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+									<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+									<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>L-Charge</td>
+								<td><a href="http://l-charge.fdc-inc.com/index_smt_ca.php?s=421" target="_blank">http://l-charge.fdc-inc.com/index_smt_ca.php?s=421</a></td>
+								<td>Evan</td>
+								<td>4</td>
+								<td>0000-00-00</td>
+								<td>0000-00-00</td>
+								<td class="actions">
+									<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', 1), array('class' => 'glyphicon glyphicon-eye-open')); ?>
+									<?php echo $this->Html->link(__(''), array('action' => 'edit', 1), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil')); ?>
+									<?php echo $this->Form->postLink(__(''), array('action' => 'delete', 1), array('confirm' => __('Are you sure you want to delete # %s?', 1), 'class' => 'glyphicon glyphicon-trash')); ?>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<br> <br>

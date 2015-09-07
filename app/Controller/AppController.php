@@ -31,4 +31,32 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	public $priorityBar;
+	public $progressBar;
+
+	
+	public function beforeFilter() {
+		$this->priorityBar = array(
+			1 => 'Lowest',
+			2 => 'Medium',
+			3 => 'Highest'
+		);
+
+		$this->progressBar = array(
+			0 => 0,
+			10 => 10,
+			20 => 20,
+			30 => 30,
+			40 => 40,
+			50 => 50,
+			60 => 60,
+			70 => 70,
+			80 => 80,
+			90 => 90,
+			100 => 100
+		);
+		$this->set('priorityBar',$this->priorityBar);
+		$this->set('progressBar',$this->progressBar);
+	}
 }

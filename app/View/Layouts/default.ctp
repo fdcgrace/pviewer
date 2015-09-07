@@ -43,9 +43,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'assets/css/style-responsive',
 				'bars-1to10',
 				'bars-pill',
-				'jquery-ui',
-				'jquery-ui.structure',
-				'jquery-ui.theme'
+				'mystyle',
+				'bootstrap-colorpicker.min',
+				'colpick',
+				'style'
 			)
 		);
 		
@@ -58,14 +59,19 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'bars',
 				'jquery.barrating',
 				'assets/js/chart-master/Chart',
-				'custom'
+				'bootstrap-colorpicker',
+				'colorpicker-color',
+				'docs',
+				'colpick',
+				'bootstrap-slider',
+				'pdfobject'
 			)
 		);
 	?>
 </head>
 <body>
 	<section id="container">
-		<!-- **********************************************************************************************************************************************************
+		<!-- *****************(*****************************************************************************************************************************************
 		TOP BAR CONTENT & NOTIFICATIONS
 		*********************************************************************************************************************************************************** -->
       	<!--header start-->

@@ -1,8 +1,12 @@
+<?php $team = $content['team'];?>
+<?php $members = $content['members'];?>
+<?php $pdetails = $content['pdetails'][0];?>
+>>>>>>> 44616ae3d0c104e71e06c29fc589e0c0148efb05
 <div id="team_content" class="panel panel-primary">
 	<div class="panel-heading" role="tab" id="headingOne">
   		<h4 class="panel-title">
     		<a role="button" data-toggle="collapse" data-parent="#team" href="#member" aria-expanded="true" aria-controls="collapseOne">
-      		Evan
+      		<?php echo $team['Team']['team'];?>
 			</a>
   		</h4>
 	</div>
@@ -18,23 +22,29 @@
 					<th>Deadline</th>
 				</thead>
 				<tbody>
+				<?php foreach ($members as $member): ?>
 					<tr>
-						<td rowspan="1" style="border-bottom:0;"></td>
+						<td rowspan="1" style="border-bottom:0;"><?php echo $member['Member']['member'];?></td>
 						<td colspan="5" style="border-bottom:0;">
 							<table id="team_issue" class="table table-hover" style="word-wrap:break-word;table-layout: fixed;" border="0">
-								<tbody team="1" member="1">
-									<tr class="info" id='1' data="1">
-										<td>7874</td>
-										<td>Testing</td>
-										<td style="word-wrap:break-word"><a href="http://redmine.vjsol.jp/issues/7874" target="_blank">http://redmine.vjsol.jp/issues/7874</a></td>
-										<td>For Testing</td>
-										<td>0000-00-00</td>
+								<tbody team="<?php echo h($team['Team']['id']);?>" member="<?php echo h($member['Member']['id']);?>">
+								<?php foreach ($pdetails['Pdetail'] as $pdetail):?>
+								<?php if($pdetail['member'] == $member['Member']['id']):?>
+									<tr class="info" id=<?php echo h($pdetail['id']); ?> data="<?php echo h($pdetail['status']); ?>">
+										<td><?php echo h($pdetail['issue_no']); ?></td>
+										<td><?php echo h($pdetail['task_description']); ?></td>
+										<td style="word-wrap:break-word"><a href="<?php echo h($pdetail['issue_link']); ?>" target="_blank"><?php echo h($pdetail['issue_link']); ?></a></td>
+										<td><?php echo h($pdetail['status']); ?></td>
+										<td><?php echo h($pdetail['deadline']); ?></td>
 									</tr>
+								<?php endif; ?>
+								<?php endforeach;?>
 									<tr class="notSortable" ><td></td><td></td><td></td><td></td><td></td></tr>
 								</tbody>
 							</table>
 						</td>
 					</tr>
+				<?php endforeach;?>
 				</tbody>
 			</table>
 		</div>
