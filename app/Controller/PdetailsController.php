@@ -19,6 +19,11 @@ class PdetailsController extends AppController {
 	public $components = array('Paginator', 'Session');
 	public $helper = array('Form', 'Html', 'Js');
 
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 1);
+	}
 /**
  * index method
  *
@@ -662,7 +667,7 @@ class PdetailsController extends AppController {
 		} 
 
 		if (isset($_POST['getDate'])){
-			$conditions['Pdetail.start_date'] = $_POST['getDate'];
+			$conditions['Pdetail.created'] = $_POST['getDate'];
 		} else {
 			$conditions['Pdetail.del_flg'] = 1;
 		}
@@ -670,7 +675,10 @@ class PdetailsController extends AppController {
 		// var_dump($conditions);
 		$this->Paginator->settings = array(
 			'conditions' => $conditions,
-			'order' => 'TblColor.status_id desc'
+			'order' => array(
+						'TblColor.status_id' =>'desc', 
+						'Pdetail.priority' => 'desc'
+			)
 		);
 
 		$pdetails = $this->paginate('Pdetail');
@@ -711,11 +719,38 @@ class PdetailsController extends AppController {
 		$view = new View($this, false);
 		return $view->element('issue', array(
 				'pdetails' => $pdetails, 
+				'members' => $members, 
 				'legendColorModal' => $legendColorModal,
 				'legendColorStatus' => $legendColorStatus,
 				'legendColor' => $legendColor,
 				'legendStatusId' => $legendStatusId
 			));
+	}
+
+	public function copy() {
+		$this->autoRender = false;
+		$this->Pdetail->recursive = -1;
+		$pdetails = $this->Pdetail->find('all', array(
+			'conditions' => array(
+					'Pdetail.project_id' => $_POST['projID'],
+					'Pdetail.created' => $_POST['currDate']
+				)
+			)
+		);
+		foreach ($pdetails as $Pdetail) {
+			unset($Pdetail['Pdetail']['id']);
+			unset($Pdetail['Pdetail']['created']);
+			unset($Pdetail['Pdetail']['modified']);
+			$this->Pdetail->create();
+			$this->Pdetail->set($Pdetail);
+			if ($this->Pdetail->save($Pdetail)){
+				// $this->Session->setFlash(__('The issues have been copied.'));
+			} else {
+				// $this->Session->setFlash(__('The issues could not be copied. Try again.'));
+				break;
+			}
+		}
+		$this->redirect(array('action' => 'index', $_POST['projID']));
 	}
 
 }

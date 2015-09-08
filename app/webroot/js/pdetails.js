@@ -85,6 +85,20 @@ $(document).ready(function(){
 				}
 			});
   	});
+
+  	$("#copy-all").on("click", function() {
+  		var projID = $(".table-responsive").attr('id');
+  		var today = $.datepicker.formatDate('yy-mm-dd', new Date());
+    	var currDate = $("#datepicker").val();
+  		$.ajax({
+				type: "POST",
+				url: "/pviewer-layout/pdetails/copy/",
+				data: {'projID' : projID, 'today': today, 'currDate': currDate},
+				success: function (data) {
+					$(".table-responsive").html(data);
+				}
+			});
+  	});
   	
 	$("#datepicker").on("change", function () {
         var currDate = $(this).val();
@@ -97,7 +111,18 @@ $(document).ready(function(){
 				$(".table-responsive").html(data);
 			}
 		});
+		display();
     });	
+
+    var display = function (callback) {
+    	var today = $.datepicker.formatDate('yy-mm-dd', new Date());
+    	var currDate = $("#datepicker").val();
+		if(today != currDate) {
+			$("#copy-all").show();
+		} else {
+			$("#copy-all").hide();
+		}
+    }
 });
 
 function handleClick(cb) {

@@ -7,6 +7,7 @@ echo $this->Html->css('bars-pill', null, array('inline' => true));
 echo $this->Html->script('jquery.barrating', array('inline' => true));
 echo $this->Html->script('bars', array('inline' => true));
 ?>
+
 <div class="panel panel-default">
 	<table class="table">
 		<thead>
@@ -26,7 +27,6 @@ echo $this->Html->script('bars', array('inline' => true));
 		<tbody>
 			<?php
 			if(count($pdetails) > 0) {
-				//var_dump($)
 				$selectedStatus = array();
 				$tempar = array();
 				$temp2 = array();
@@ -49,7 +49,6 @@ echo $this->Html->script('bars', array('inline' => true));
 						echo $this->Form->create('Pdetail');
 						$detId = $Pdetail['Pdetail']['id'];
 					}
-					// var_dump($Pdetail['Pdetail']['status'] != prev($tempar));
 			?>
 			<tr style="background-color:<?php
 				if (array_key_exists($statusPdetail, $legendColorStatus)) {
@@ -63,13 +62,15 @@ echo $this->Html->script('bars', array('inline' => true));
 				<td>
 					<div class="pull-right sub-menu">
 						<?php
-						 echo $this->Form->input('member', array(
+						/*echo $this->Form->input('member', array(
 							'type'=>'select', 
 							'label' => '', 
 							'empty' => 'Please Select',
 							'selected' => $Pdetail['Pdetail']['member']
 							)
-						); ?>
+						);*/
+						echo  $members[$Pdetail['Pdetail']['member']];
+						?>
 					</div>
 				</td>
 				<td>
@@ -82,14 +83,16 @@ echo $this->Html->script('bars', array('inline' => true));
 				</td>
 				<td>
 					<div class="pull-right sub-menu">
-						<?php echo $this->Form->input('status', array(
-						'type'=>'select', 
-						'label' => '', 
-						'default' => $Pdetail['Pdetail']['status'],
-						'selected' => $Pdetail['Pdetail']['status'],
-						'options' => $legendStatusId
+						<?php 
+						/*echo $this->Form->input('status', array(
+							'type'=>'select', 
+							'label' => '', 
+							'default' => $Pdetail['Pdetail']['status'],
+							'selected' => $Pdetail['Pdetail']['status'],
+							'options' => $legendStatusId
 							)
-						); 
+						); */
+						echo $pdetailStatus[$Pdetail['Pdetail']['status']];
 						echo $this->Form->hidden('projID', array('value' => $Pdetail['Pdetail']['project_id'], 'id' => 'projID'));
 						echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id'], 'id' => 'pID'));
 						?>
@@ -99,7 +102,7 @@ echo $this->Html->script('bars', array('inline' => true));
 					<?php 
 						echo $this->Form->input('priority', array(
 							'type'=>'select', 
-							'label' => '',
+							'label' => false,
 							'class' => 'example-pill',
 							'selected' => $Pdetail['Pdetail']['priority'],
 							'default' => $Pdetail['Pdetail']['priority'],
@@ -116,7 +119,7 @@ echo $this->Html->script('bars', array('inline' => true));
 					<?php 
 						echo $this->Form->input('progress', array(
 							'type'=>'select', 
-							'label' => '',
+							'label' => false,
 							'class' => 'example-1to10',
 							'selected' => $Pdetail['Pdetail']['progress'],
 							'default' => $Pdetail['Pdetail']['progress'],
@@ -156,7 +159,6 @@ echo $this->Html->script('bars', array('inline' => true));
 
 				<td>
 				<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
-				<?php echo $this->Form->submit(__('Update'), array('class' => 'btn btn-primary btn-xs submitButton'),array('action' => 'index')); ?>
 				<?php echo $this->Html->link(__(''), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
 				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id'], 'class' => 'glyphicon glyphicon-trash'), array('confirm' => __('Are you sure you want to delete this Project?'), 'class' => 'glyphicon glyphicon-trash')); ?>
 				</td>

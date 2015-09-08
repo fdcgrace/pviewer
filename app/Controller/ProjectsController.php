@@ -18,6 +18,11 @@ class ProjectsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 1);
+	}
+
 /**
  * index method
  *
