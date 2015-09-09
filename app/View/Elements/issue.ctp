@@ -69,7 +69,11 @@ echo $this->Html->script('bars', array('inline' => true));
 							'selected' => $Pdetail['Pdetail']['member']
 							)
 						);*/
-						echo  $members[$Pdetail['Pdetail']['member']];
+						if ($Pdetail['Pdetail']['member'] > 0) {
+							echo  $members[$Pdetail['Pdetail']['member']];	
+						} else {
+							echo "No person assigned";
+						}
 						?>
 					</div>
 				</td>
@@ -133,7 +137,7 @@ echo $this->Html->script('bars', array('inline' => true));
 					$(document).ready(function(){
 						var id = "<?php echo $Pdetail['Pdetail']['id']; ?>";
 						var projID = <?php echo $Pdetail['Pdetail']['id']; ?>;
-						var selected =  <?php echo $Pdetail['Pdetail']['priority']; ?>;
+						var selected =  <?php echo ($Pdetail['Pdetail']['priority']) ? $Pdetail['Pdetail']['priority'] : '1'; ?>;
 						//priority
 						for (i = 1; i <= selected; i++) { 
 							$("#"+id).find('[href="#"]').attr("gval", id);
@@ -145,7 +149,7 @@ echo $this->Html->script('bars', array('inline' => true));
 						}
 						//progressBar
 						var progID = "<?php echo $Pdetail['Pdetail']['id']; ?>p";
-						var progressBar =  <?php echo $Pdetail['Pdetail']['progress']; ?>;
+						var progressBar =  <?php echo ($Pdetail['Pdetail']['progress']) ? $Pdetail['Pdetail']['progress'] : '1'; ?>;
 						for (p = 0; p <= progressBar; p++) { 
 							$("#"+progID).find('[href="#"]').attr("gval", id);
 						    if(p != progressBar){
