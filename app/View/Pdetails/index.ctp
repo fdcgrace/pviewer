@@ -15,7 +15,7 @@
 				<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
 			</div>
 			<?php 
-				date_default_time  zone_set("Asia/Manila"); 
+				date_default_timezone_set("Asia/Manila"); 
 				$todayDate = date("Y-m-d"); 
 				$baseUrl= Router::url('/', true);
 				//echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary'));
