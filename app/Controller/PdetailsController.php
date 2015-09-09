@@ -659,7 +659,7 @@ class PdetailsController extends AppController {
 		// var_dump($_POST);
 
 		$conditions = array(
-			'Pdetail.del_flg' => 1
+			'Pdetail.del_flg' => 1,
 		);
 
 		if (isset($_POST['projID'])){
@@ -676,8 +676,9 @@ class PdetailsController extends AppController {
 		$this->Paginator->settings = array(
 			'conditions' => $conditions,
 			'order' => array(
-						'TblColor.status_id' =>'desc', 
-						'Pdetail.priority' => 'desc'
+						'Pdetail.priority' => 'desc',
+						'TblColor.status_id' =>'desc'
+						
 			)
 		);
 
@@ -729,7 +730,7 @@ class PdetailsController extends AppController {
 
 	public function copy() {
 		$this->autoRender = false;
-		date_default_timezone_set('Asia/Manila');
+		date_default_timezone_set('US/Pacific');
 		$this->Pdetail->recursive = -1;
 		$result = array();
 

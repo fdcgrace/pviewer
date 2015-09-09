@@ -62,18 +62,7 @@ echo $this->Html->script('bars', array('inline' => true));
 				<td>
 					<div class="pull-right sub-menu">
 						<?php
-						/*echo $this->Form->input('member', array(
-							'type'=>'select', 
-							'label' => '', 
-							'empty' => 'Please Select',
-							'selected' => $Pdetail['Pdetail']['member']
-							)
-						);*/
-						if ($Pdetail['Pdetail']['member'] > 0) {
-							echo  $members[$Pdetail['Pdetail']['member']];	
-						} else {
-							echo "No person assigned";
-						}
+							echo  $Pdetail['Pdetail']['member'] <> '' ? $members[$Pdetail['Pdetail']['member']]  : '';
 						?>
 					</div>
 				</td>
@@ -137,7 +126,7 @@ echo $this->Html->script('bars', array('inline' => true));
 					$(document).ready(function(){
 						var id = "<?php echo $Pdetail['Pdetail']['id']; ?>";
 						var projID = <?php echo $Pdetail['Pdetail']['id']; ?>;
-						var selected =  <?php echo ($Pdetail['Pdetail']['priority']) ? $Pdetail['Pdetail']['priority'] : '1'; ?>;
+						var selected =  <?php echo $Pdetail['Pdetail']['priority']; ?>;
 						//priority
 						for (i = 1; i <= selected; i++) { 
 							$("#"+id).find('[href="#"]').attr("gval", id);
@@ -149,7 +138,7 @@ echo $this->Html->script('bars', array('inline' => true));
 						}
 						//progressBar
 						var progID = "<?php echo $Pdetail['Pdetail']['id']; ?>p";
-						var progressBar =  <?php echo ($Pdetail['Pdetail']['progress']) ? $Pdetail['Pdetail']['progress'] : '1'; ?>;
+						var progressBar =  <?php echo $Pdetail['Pdetail']['progress']; ?>;
 						for (p = 0; p <= progressBar; p++) { 
 							$("#"+progID).find('[href="#"]').attr("gval", id);
 						    if(p != progressBar){
