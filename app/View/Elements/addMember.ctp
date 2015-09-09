@@ -14,7 +14,7 @@
 				 <div class='form-group'>";
 			echo $this->Form->input('team_id', array('class' => 'form-control', 'type' => 'select', 'options' => $teams, 'empty' => 'Please Select Team'));
 			echo "</div>";
-			echo "<div class='form-group'>";
+			/*echo "<div class='form-group'>";
 			echo $this->Form->input('del_flg', array(
 								'type'=>'select', 
 								'label' => 'Status ',
@@ -24,7 +24,7 @@
 								'options'=> $getStatus
 								)
 							);
-			echo "</div>"; 
+			echo "</div>"; */
 		?>
 		</fieldset>
 		<div class="buttons">

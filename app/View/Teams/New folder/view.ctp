@@ -1,5 +1,6 @@
 
 <?php 	
+
 	$res = $this->Session->read('result');
 	if (isset($res)) {
 		if ($res == 'success') { ?>
@@ -12,9 +13,9 @@
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Error!</strong><?php echo $this->Session->read('message');?>
 			</div>
-<?php 	} unset($_SESSION['result']); }
+<?php 	} unset($_SESSION['result']); } ?>
 
-		if((null === $this->Session->read('team')) && (null === $this->Session->read('team')) ) {
+<?php 	if((null === $this->Session->read('team')) && (null === $this->Session->read('team')) ) {
 			$team_session = "";
 			$proj_session = "";
 		} else {
@@ -37,6 +38,8 @@
 	$(function() {
 		var team = "<?php echo $team_session;?>";
 		var project = "<?php echo $proj_session;?>";
+		// alert(team);
+		// alert(project);
 		sessionVal();
 		checkTeam();
 		checkProject();
@@ -50,7 +53,17 @@
 	});
 </script>
 
-<div class="container-fluid martop">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8">
+			<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
+			<?php echo $this->Html->link(__('Member List'), array('controller' => 'Members', 'action' => 'index'), array('class' => 'btn btn-info')); ?>
+			<?php echo $this->Html->link(__('Team Leader List'), array('controller' => 'Teams', 'action' => 'view'), array('class' => 'btn btn-warning')); ?>
+			<?php echo $this->Html->link(__('Add Team Leader'), '#', array('class' => 'btn btn-success', 'data-target' => '#add', 'data-toggle' => 'modal')); ?>
+			<?php echo $this->Html->link(__('Save'), array('controller' => 'Teams', 'action' => 'save'), array('class' => 'btn btn-default')); ?>
+		</div>
+	</div>
+	<hr>
 	<div class="row">
 		<div class="col-md-3">
 			<select id="team" class="form-control" style="width:100%">
@@ -70,7 +83,7 @@
 		</div>
 	</div>
 	<br><br>
-	<div class="row" id="show-results">
+	<div class="row">
 		<div class="col-md-6">
 			<div id="team_body" class="panel-group" role="tablist" aria-multiselectable="true">
 				<!--append view file for team here-->

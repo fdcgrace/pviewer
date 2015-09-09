@@ -6,6 +6,7 @@
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
   padding:4px !important;
+  border-top:none !important;
 }
 
 .br-theme-bars-1to10{
@@ -46,7 +47,7 @@
     background-color:#E6E6E6;
     width: 100%;
 }
-table {
+/*table {
   width: 100%;
   height: 100%;
   border-radius: 15px;
@@ -55,7 +56,7 @@ table {
 }
 th, td {
   padding: 10px;
-}
+}*/
 .teams th{
   background: linear-gradient(#FF944D,#FF6600);
   color: #FFFFFF;
@@ -74,9 +75,9 @@ th, td {
   border-color: #FF9933 !important;
 }
 
-th > a {
+/*th > a {
   color: #FFFFFF;
-}
+}*/
 .btn-teams {
   background: linear-gradient(#FF944D,#FF6600);
   color: #FFFFFF;
@@ -98,6 +99,13 @@ div.btn-group > .btn-teams{
   text-align: center;
 }
 
+.members th a{
+  color:#fff;
+}
+.teams th a{
+  color:#fff;
+}
+
 .btn-members {
   color: #00CCFF;
 }
@@ -108,3 +116,10 @@ div.btn-group > .btn-teams{
 .forange{
   color: #FF9933 !important;
 }
+.pagination-margin{
+  margin: 10px 0 0 14px;
+}
+.martop{
+  margin: 50px 0 0 0;
+}
+

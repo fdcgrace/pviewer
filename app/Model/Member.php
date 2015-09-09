@@ -41,12 +41,15 @@ class Member extends AppModel {
 	function beforeSave($options = array()) {
 		if(!empty($_POST['member_id'])){
 			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member'], 'Member.id != ' => $_POST['member_id']));
-			$check = $this->find('all', $conditions);
-			if(count($check) == 0){
-				return true;
-			} else {
-				return false;
-			}
+		} else {
+			
+			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member']));	
+		}
+		$check = $this->find('all', $conditions);
+		if(count($check) == 0){
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
