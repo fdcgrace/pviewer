@@ -729,7 +729,7 @@ class PdetailsController extends AppController {
 
 	public function copy() {
 		$this->autoRender = false;
-		date_default_timezone_set('US/Pacific');
+		date_default_timezone_set('Asia/Manila');
 		$this->Pdetail->recursive = -1;
 		$result = array();
 
