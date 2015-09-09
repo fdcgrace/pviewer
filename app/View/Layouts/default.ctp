@@ -254,7 +254,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		            <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
-		                    "javascript:;", array('escape' => false, 'id' => 1, 'class' => 'parent'));?>
+		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
 		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
@@ -263,14 +263,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		            <li class="sub-menu">  
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-cogs')).$this->Html->tag('span','Teams'), 
-		                    "javascript:;", array('escape' => false, 'id' => 2, 'class' => 'parent'));?>
+		                    "javascript:;", array('escape' => false, 'cid' => 2, 'class' => 'parent'));?>
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Teams'), array('controller' => 'teams', 'action' => 'index'));?></li>
 		                </ul>
 		            </li>
 		            <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-book')).$this->Html->tag('span','Members'), 
-		                    "javascript:;", array('escape' => false, 'id' => 3, 'class' => 'parent'));?>
+		                    "javascript:;", array('escape' => false, 'cid' => 3, 'class' => 'parent'));?>
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Members'), array('controller' => 'members', 'action' => 'index'));?></li>
 		                </ul>
@@ -285,7 +285,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			$(document).ready(function() {
 				var id = <?php echo $controllerID; ?>;
 				$("a.parent").each(function() {
-					if($(this).attr('id') == id) {
+					if($(this).attr('cid') == id) {
 						$(this).addClass('active');
 					} else {
 						// $(this).removeClass('active');

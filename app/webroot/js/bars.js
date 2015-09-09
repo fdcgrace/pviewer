@@ -10,7 +10,7 @@ $(function() {
                         url: "pdetails/",
                         data: { 'progress' : value, 'id' : id},
                         success: function (data) {
-                            location.reload();
+                            // location.reload();
                         }
                     });
                 }    
@@ -30,7 +30,7 @@ $(function() {
                         url: "pdetails/",
                         data: { 'priority' : value, 'id' : id},
                         success: function (data) {
-                            location.reload();
+                            // location.reload();
                         }
                     });
                 }    

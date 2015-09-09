@@ -1,16 +1,25 @@
 <section class="container-fluid" id="content">
+	<div class="alert alert-success" style="display:none">
+		<strong>Success!</strong> Issues success
+	</div>
 	<h3>Project Detail</h3>
+	<hr>
+	<p>To view issues, select date from Calendar. Issue is shown by date and grouped by status.</p>
 	<div id="datepicker"></div>
 	<div class="row mt">
 		<div class="col-md-5">
+			<div style="float:left; padding-right:10px;">
+				<?php echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
+			</div>
+			<div style="float:left;">
+				<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
+			</div>
 			<?php 
-				date_default_timezone_set("Asia/Manila"); 
+				date_default_time  zone_set("Asia/Manila"); 
 				$todayDate = date("Y-m-d"); 
 				$baseUrl= Router::url('/', true);
 				//echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary'));
 				//echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#addForm'));
-				echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));
-				echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));
 			?>
 		</div>
 		<div class="col-md-7" style="text-align:right;">

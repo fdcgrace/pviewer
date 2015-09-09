@@ -729,7 +729,10 @@ class PdetailsController extends AppController {
 
 	public function copy() {
 		$this->autoRender = false;
+		date_default_timezone_set('US/Pacific');
 		$this->Pdetail->recursive = -1;
+		$result = array();
+
 		$pdetails = $this->Pdetail->find('all', array(
 			'conditions' => array(
 					'Pdetail.project_id' => $_POST['projID'],
@@ -737,21 +740,58 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
+
+		$current = $this->Pdetail->find('all', array(
+			'conditions' => array(
+					'Pdetail.project_id' => $_POST['projID'],
+					'Pdetail.created' => $_POST['today']
+				),
+			'fields' => array(
+					'Pdetail.project_id',
+					'Pdetail.deadline',
+					'Pdetail.issue_no',
+					'Pdetail.sub_task',
+					'Pdetail.task_description',
+					'Pdetail.member',
+					'Pdetail.issue_link',
+					'Pdetail.status',
+					'Pdetail.comment',
+					'Pdetail.del_flg',
+					'Pdetail.team_id',
+					'Pdetail.start_date'
+					// 'Pdetail.priority',
+					// 'Pdetail.progress'
+				)
+			)
+		);
+
+		// var_dump($_POST['currDate']);
+		// var_dump($_POST['today']);
+
 		foreach ($pdetails as $Pdetail) {
 			unset($Pdetail['Pdetail']['id']);
 			unset($Pdetail['Pdetail']['created']);
 			unset($Pdetail['Pdetail']['modified']);
-			$this->Pdetail->create();
-			$this->Pdetail->set($Pdetail);
-			if ($this->Pdetail->save($Pdetail)){
-				// $this->Session->setFlash(__('The issues have been copied.'));
-			} else {
-				// $this->Session->setFlash(__('The issues could not be copied. Try again.'));
-				break;
+			unset($Pdetail['Pdetail']['priority']);
+			unset($Pdetail['Pdetail']['progress']);
+			// var_dump($Pdetail);
+			// var_dump($current);
+			// var_dump(!in_array($Pdetail, $current));
+			if(!in_array($Pdetail, $current)) {
+				$this->Pdetail->create();
+				$this->Pdetail->set($Pdetail);
+				if ($this->Pdetail->save($Pdetail)){
+					// $this->Session->setFlash(__('The issues have been copied.'));
+				} else {
+					// $this->Session->setFlash(__('The issues could not be copied. Try again.'));
+					break;
+				}
+				// var_dump($Pdetail);
 			}
 		}
-		$this->redirect(array('action' => 'index', $_POST['projID']));
+		// die();
+		return $this->redirect(array('action' => 'index', $_POST['projID']));
 	}
 
-}
+}   
 

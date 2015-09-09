@@ -95,9 +95,17 @@ $(document).ready(function(){
 				url: "/pviewer-layout/pdetails/copy/",
 				data: {'projID' : projID, 'today': today, 'currDate': currDate},
 				success: function (data) {
-					$(".table-responsive").html(data);
+					// $(".table-responsive").html(data);
+					// $("#datepicker").val(today);
+					location.reload();
+					$(".alert-success").show();
+				},
+				error: function(data) {
+					location.reload();
+					$(".alert-danger").show();	
 				}
 			});
+
   	});
   	
 	$("#datepicker").on("change", function () {
@@ -117,7 +125,7 @@ $(document).ready(function(){
     var display = function (callback) {
     	var today = $.datepicker.formatDate('yy-mm-dd', new Date());
     	var currDate = $("#datepicker").val();
-		if(today != currDate) {
+		if(currDate < today) {
 			$("#copy-all").show();
 		} else {
 			$("#copy-all").hide();
