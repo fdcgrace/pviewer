@@ -73,7 +73,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 
 	?>
-	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
 <body>
 	<section id="container">
@@ -245,7 +244,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		        <!-- sidebar menu start-->
 		        <ul class="sidebar-menu" id="nav-accordion">
 		        
-		        	  <p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+		        	  <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="60"></a></p>
 		        	  <h5 class="centered">Admin</h5>
 		        	  	
 		            <li class="mt">
@@ -257,7 +256,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li class="active"><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
+		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
 		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
 		                </ul>
 		            </li>

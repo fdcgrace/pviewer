@@ -656,6 +656,8 @@ class PdetailsController extends AppController {
 	public function issue() {
 		$this->autoRender =  false;
 
+		// var_dump($_POST);
+
 		$conditions = array(
 			'Pdetail.del_flg' => 1,
 		);
@@ -715,16 +717,6 @@ class PdetailsController extends AppController {
 			)
 		);
 
-		if(isset($_POST['selected'])){
-			$selected = $_POST['selected'];	
-		} else {
-			$selected = $_POST['getDate'];
-		}
-
-		/*$_SESSION['getdate'] = '01/26/2014';//$getdate;
-
-		var_dump($_SESSION);*/
-
 		$view = new View($this, false);
 		return $view->element('issue', array(
 				'pdetails' => $pdetails, 
@@ -732,8 +724,7 @@ class PdetailsController extends AppController {
 				'legendColorModal' => $legendColorModal,
 				'legendColorStatus' => $legendColorStatus,
 				'legendColor' => $legendColor,
-				'legendStatusId' => $legendStatusId,
-				'selected' => $selected
+				'legendStatusId' => $legendStatusId
 			));
 	}
 

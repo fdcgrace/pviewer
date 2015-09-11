@@ -174,17 +174,3 @@ echo $this->Html->script('bars', array('inline' => true));
 		</tbody>
 	</table>
 </div>
-
-<!-- <input type="text" name="selected" id="selected" value="<?php //echo $selected; ?>"> -->
-<script type="text/javascript">
-/*	$(document).ready(function(){
-		var selected = $('#selected').val();
-		alert('issue--'+selected);
-		//setdatepicker(selected);
-		if(selected){
-			$("#datepicker").datepicker({
-			    defaultDate: selected
-			});
-		}
-	});*/
-</script>
