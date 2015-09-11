@@ -11,7 +11,6 @@
 		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
 		<hr>
 		<div class="col-md-12">
-
 			<div class="content-panel">
 				<div data-example-id="simple-responsive-table" class="bs-example">
 					<div class="table-responsive ">

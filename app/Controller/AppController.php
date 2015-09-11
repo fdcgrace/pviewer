@@ -58,6 +58,16 @@ class AppController extends Controller {
 			100 => 100
 		);
 
+		$this->getStatus = array(
+				0 => 'Deactivate',
+				1 => 'Activate'
+			);
+		$this->set('priorityBar',$this->priorityBar);
+		$this->set('progressBar',$this->progressBar);
+		$this->set('getStatus',$this->getStatus);
+		$this->set('deactivate','Deactivate');
+		$this->set('activate','Activate');
+
 		$this->pdetailStatus = array(
 			0 => 'Inactive',
 			1 => 'In Progress',
@@ -67,9 +77,7 @@ class AppController extends Controller {
 			5 => 'Released',
 			6 => 'Closed'
 		);
-
-		$this->set('priorityBar',$this->priorityBar);
-		$this->set('progressBar',$this->progressBar);
 		$this->set('pdetailStatus',$this->pdetailStatus);
+
 	}
 }

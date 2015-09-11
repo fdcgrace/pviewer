@@ -58,47 +58,31 @@ $(document).ready(function(){
 			});
 		}
 	});
-	// window.setdatepicker=function(selected){
- //    	if(selected){
-	// 		$("#datepicker").datepicker({
-	// 		    defaultDate: selected
-	// 		});
-	// 	}else{
-	// 		$( "#datepicker" ).datepicker();
-	// 	}
-
-	// }
-
-	// setdatepicker();
-
 
 	function loader(){
 		var path = baseUrl+'/app/webroot/img/loading.gif';
   		$('.table-responsive').css('text-align','center');
 	  	$('.table-responsive').html('<img id="loader-img" alt="" src="'+path+'" width="100"/>');
-	  	setTimeout(hide, 5000);  // 5 seconds
+	  	setTimeout(hide, 10000);  // 10 seconds
 	  	var hide = function(){
 		    $('.table-responsive').style.display = "none";
 		}
   	}
 
-	$(function() {
-    	$( "#datepicker" ).datepicker();
-		var currDate = $("#datepicker").val();
-    	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	  	var projID = $(".table-responsive").attr('id');
-	  	
-	  	loader();
-
-	    	$.ajax({
-				type: "POST",
-				url: "/pviewer-layout/pdetails/issue/",
-				data: { 'getDate' : currDate, 'projID' : projID},
-				success: function (data) {
-					$(".table-responsive").html(data);
-				}
-			});
-  	});
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	var currDate = $("#datepicker").val();
+  	var projID = $(".table-responsive").attr('id');
+  	loader();
+    	$.ajax({
+			type: "POST",
+			url: baseUrl+"/pdetails/issue/",
+			data: { 'getDate' : currDate, 'projID' : projID},
+			success: function (data) {
+			
+				$(".table-responsive").html(data);
+			}
+		});
 
   	$("#view-all").on("click", function() {
 	  	var projID = $(".table-responsive").attr('id');
@@ -133,17 +117,12 @@ $(document).ready(function(){
 			});
 
   	});
-
-  	
   	
 	$("#datepicker").on("change", function () {
 
         var currDate = $(this).val();
-        var getdate = $('#selected').val(currDate);
         var projID = $(".table-responsive").attr('id');
-
         loader();
-
     	$.ajax({
 			type: "POST",
 			url: baseUrl+"/pdetails/issue/",
@@ -182,7 +161,7 @@ function handleClick(cb) {
 function showBugList(ischecked){
 	var issue = $('#issueid-bug').val();
 
-	$('#lala').append("<tr><center><th>Bug Description</th><th>Steps on how bug is produced</th><th>Status	</th><th>Status after fix	</th><th>Who found the bug</th><th>Reason of Bug</th><th colspan='2'>Action</th></center></tr>");
+	$('#tbody-bug').append("<tr><center><th>Bug Description</th><th>Steps on how bug is produced</th><th>Status	</th><th>Status after fix	</th><th>Who found the bug</th><th>Reason of Bug</th><th colspan='2'>Action</th></center></tr>");
 
 	$.ajax({
             type: "POST",
@@ -195,7 +174,7 @@ function showBugList(ischecked){
 			    var dates = [];
 			    $.each(rows, function () {
 			        console.log(this.issue_id);
-			        $('#lala').append("<tr><td>"+this.bug_description+"</td><td>"+this.bug_steps+"</td><td>"+this.bug_status+"</td><td>"+this.status_after+"</td><td>"+this.who_found+"</td><td>"+this.bug_reason+'</td><td><input type="button" class="btn btn-primary" value="EDIT" onclick="editBug('+"'"+this.id+"'"+')"></td><td><input type="button" class="btn btn-primary" value="DELETE" onclick="deleteBug('+"'"+this.id+"'"+')"></td></tr>')
+			        $('#tbody-bug').append("<tr><td>"+this.bug_description+"</td><td>"+this.bug_steps+"</td><td>"+this.bug_status+"</td><td>"+this.status_after+"</td><td>"+this.who_found+"</td><td>"+this.bug_reason+'</td><td><div onclick="editBug('+"'"+this.id+"'"+')"><span class="glyphicon glyphicon-pencil"></span></div></td><td><div  onclick="deleteBug('+"'"+this.id+"'"+')"><span class="glyphicon glyphicon-trash"></span></div></td></tr>')
 			    });
             	
 			    $('#div-bugs').show();
@@ -242,7 +221,7 @@ function checkBugInfo(issueId){
 	$('#addBugInfo2').hide();
 	$('#div-bugs').hide();
 	$( "#show-all" ).prop( "checked", false );
-	$('#lala').empty();	
+	$('#tbody-bug').empty();	
 	$("#myModal4").modal('show');
 }
 function changeBgcolor(label,removeBg){
@@ -275,6 +254,7 @@ function deleteBug(bugId){
 	            
 	            success: function(rows){
 	            	alert('Bug Deleted');
+	            	$('#myModal4').close();
 	            },
 	            error: function(data){
 	        }

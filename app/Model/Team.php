@@ -27,9 +27,17 @@ class Team extends AppModel {
 	);
 
 	function beforeSave($options = array()) {
-		$check = $this->find('all', array(
-			'conditions' => array('team' => $this->data[$this->alias]['team']))
-		);
+		if(!empty($_POST['id'])){
+			$conditions = array('conditions' => array('team' => $this->data[$this->alias]['team'], 'id != ' => $_POST['id']));
+		} else {
+			if (!empty($_POST['team'])) {
+				$conditions = array('conditions' => array('team' => $this->data[$this->alias]['team']));
+			} else {
+				return true;
+			}			
+		}
+		$check = $this->find('all', $conditions);
+		
 		if(count($check) == 0){
 			return true;
 		} else {

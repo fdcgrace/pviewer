@@ -40,8 +40,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				'assets/lineicons/style',
 				'assets/css/style',
 				'assets/css/style-responsive',
-				// 'bars-1to10',
-				// 'bars-pill',
+				'bars-1to10',
+				'bars-pill',
 				'mystyle',
 				'bootstrap-colorpicker.min',
 				'bootstrap-colorpicker',
@@ -59,8 +59,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				// 'assets/js/jquery-1.8.3.min',
 				'assets/js/jquery',
 				'jquery-ui',
-				// 'bars',
-				// 'jquery.barrating',
+				'bars',
+				'jquery.barrating',
 				'assets/js/chart-master/Chart',
 				'bootstrap-colorpicker',
 				'colorpicker-color',
@@ -258,7 +258,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li class="active"><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
+		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
 		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
 		                </ul>
 		            </li>
@@ -334,6 +334,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	  </div>
 	</footer>
 	<!--footer end-->
-	<?php //echo $this->element('sql_dump'); ?>
+	<?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>

@@ -19,7 +19,7 @@ MAIN SIDEBAR MENU
                 <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
                     "javascript:;", array('escape' => false));?>
                 <ul class="sub">
-                  <li ><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
+                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
                   <li><?php echo $this->Html->link(__('New Project'), array('controller' => 'projects', 'action' => 'add')); ?></li>
                 </ul>
             </li>
