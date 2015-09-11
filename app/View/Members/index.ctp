@@ -1,5 +1,4 @@
 <?php 
-	echo $this->Html->css(array('mystyle'));
 	echo $this->Html->script(array('definedjs'));
 ?>
 <div class="container-fluid">
@@ -49,7 +48,7 @@
 		</div>
 	</div>
 	</div>
-	<div class=" row paging btn-group">
+	<div class=" row paging btn-group pagination-margin">
 	<?php
 		echo $this->Paginator->prev('< ' . __(''), array('tag' => false, 'class' => 'btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn btn-sm btn-primary prev disabled'));
 		echo $this->Paginator->numbers(array('separator' => '', 'class' => 'btn btn-sm btn-default'));

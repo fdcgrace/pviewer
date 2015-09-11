@@ -6,13 +6,12 @@
 	}
 </style>
 
-<section class="container-fluid " id="content">
+<section class="container-fluid flip-scroll" id="content">
 	<div class="row mt">
 		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
 		<hr>
 		<div class="col-md-12">
 			<div class="content-panel">
-
 				<div data-example-id="simple-responsive-table" class="bs-example">
 					<div class="table-responsive ">
 						<table class="table table-striped table-advance table-hover">
@@ -75,18 +74,18 @@
 
 <!--new proj modal -->
 <div class="modal fade" id="newProj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
-		<div class="modal-dialog">
-		    <div class="modal-content">
-		    </div>
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
 	</div>
 </div>
 <!--end new proj modal -->
 
 <!--edit proj modal -->
 <div class="modal fade" id="editProj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
-		<div class="modal-dialog">
-		    <div class="modal-content">
-		    </div>
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
 	</div>
 </div>
 <!--end edit proj modal -->

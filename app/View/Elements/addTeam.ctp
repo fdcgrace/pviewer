@@ -8,7 +8,7 @@
 			echo "<div class='form-group'>";
 			echo $this->Form->input('team', array('label' => 'Name', 'class' => 'form-control', 'name' => 'team'));
 			echo "</div>";
-			echo "<div class='form-group'>";
+			/*echo "<div class='form-group'>";
 			echo $this->Form->input('del_flg', array(
 								'type'=>'select', 
 								'label' => 'Status ',
@@ -18,7 +18,7 @@
 								'options'=> $getStatus
 								)
 							);
-			echo "</div>"; 
+			echo "</div>"; */
 		?>
 		</fieldset>
 		<div class="buttons">

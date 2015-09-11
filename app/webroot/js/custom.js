@@ -1,4 +1,6 @@
 $(function() {
+
+	
 	var team="";
 	var project="";
 
@@ -17,6 +19,9 @@ $(function() {
 		} else {
 			$("#team_project").attr("disabled", "disabled");
 			$("#team_project").val("");
+			//$('#show-results').hide();
+			$("#project_content").remove();
+			$("#team_content").remove();
 		}
 	}
 
@@ -38,6 +43,12 @@ $(function() {
 	}
 
 	$("#team").change(function() {
+		$('#team_project').val("");
+		var val = $('#team_project').val();
+		if(val == '')
+			//$('#show-results').hide();
+			$("#project_content").remove();
+			$("#team_content").remove();
 		checkTeam();
 		team = $(this).val();
 	});
@@ -50,7 +61,7 @@ $(function() {
 	function getTeam(callback) {
 		var content;
 		$.ajax({
-			url: "/pviewer/Teams/team/",
+			url: "/pviewer-layout/Teams/team/",
 			type: "POST",
 			data:{
 				"team_id": $("#team").val(),
@@ -60,6 +71,10 @@ $(function() {
 				if ($("#team_content:visible").length > 0) {
 					$("#team_content").remove();
 				}
+				//$("#show-results").show();
+				//$("#team_content:first").hide();
+				$("#project_content").show();
+				$("#team_content").show();
 				$("#team_body").append(data);
 				callback();
 			} 
@@ -69,7 +84,7 @@ $(function() {
 	function getProject(callback) {
 		var content;
 		$.ajax({
-			url: "/pviewer/Teams/project/",
+			url: "/pviewer-layout/Teams/project/",
 			type: "POST",
 			data:{
 				"project_id": $("#team_project").val()
@@ -118,7 +133,7 @@ $(function() {
 				},
 				receive: function(e, ui) {
 					$.ajax({
-						url:"/pviewer/Teams/update/",
+						url:"/pviewer-layout/Teams/update/",
 						type:"POST",
 						data:{
 							"team_id":$(this).attr('team'), 
@@ -145,7 +160,7 @@ $(function() {
 				},
 				receive: function(e, ui) {
 					$.ajax({
-						url:"/pviewer/Teams/update/",
+						url:"/pviewer-layout/Teams/update/",
 						type:"POST",
 						data:{
 							"team_id":$(this).attr('team'),
@@ -158,5 +173,4 @@ $(function() {
 			}).disableSelection();
 		}
 	}
-	
 });

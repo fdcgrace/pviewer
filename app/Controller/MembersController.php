@@ -6,6 +6,11 @@ class MembersController extends AppController {
 
 	public $components = array('Paginator', 'Session');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 3);
+	}
+
 	public function index() {
 		$this->paginate = array('limit' => 5);
 		$this->set('members', $this->Paginator->paginate());
@@ -17,10 +22,10 @@ class MembersController extends AppController {
 			$this->Member->create();
 			if ($this->Member->save($this->request->data)) {
 				$this->Session->setFlash(__('The Member has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The Member could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The Member could not be saved. Name already exist.'));
 			}
+			return $this->redirect(array('action' => 'index'));
 		}
 
 		$teams = $this->Member->Team->find('list', array(
@@ -46,10 +51,8 @@ class MembersController extends AppController {
 			$this->Member->set($this->request->data);
 	        if($this->Member->save()){
 	           $this->Session->setFlash(__('The Member has been saved.'));
-				//return $this->redirect(array('action' => 'index'));
 	        }else{
 	            $this->Session->setFlash(__('The Member could not be saved. Please, try again.'));
-	          //  return $this->redirect(array('action' => 'index'));
 	        }   
 	        return $this->redirect(array('action' => 'index'));
 		} else {

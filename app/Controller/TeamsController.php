@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class TeamsController extends AppController {
 
-	public $uses = array('Team', 'Project', 'Pdetail', 'Member');
+	public $uses = array('Team', 'Project', 'Pdetail', 'Member', 'Tblcolors');
 
 /**
  * Components
@@ -17,6 +17,11 @@ class TeamsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session');
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 2);
+	}
 
 /**
  * index method
@@ -64,28 +69,20 @@ class TeamsController extends AppController {
 		$this->set('team', $team);
 		// $this->set('members', $members);
 		$this->set('pdetails', $pdetails);
+
+		
 	}
 
 	public function add() {
-		/*if($this->request->is('post')) {
-			if($this->Team->save($this->request->data)) {	
-				$this->Session->write('result', 'success');
-				$this->Session->write('message', 'Team name saved.');
-			} else {
-				$this->Session->write('result', 'warning');
-				$this->Session->write('message', 'Could not save. Team name already exists.');
-			}
-		}		
-		return $this->redirect(array('action' => 'index'));*/
 		$this->autoRender = false;
 		if ($this->request->is('post')) {
 			$this->Team->create();
 			if ($this->Team->save($this->request->data)) {
 				$this->Session->setFlash(__('The Team has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The Team could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The Team could not be saved. Name already exist.'));
 			}
+			return $this->redirect(array('action' => 'index'));
 		}
 
 		$teams = $this->Member->Team->find('list', array(
@@ -106,15 +103,14 @@ class TeamsController extends AppController {
 			throw new NotFoundException(__('Invalid Team'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-
 			$this->Team->id = $id;
 			$this->Team->set($this->request->data);
 	        if($this->Team->save()){
 	           $this->Session->setFlash(__('The Team has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 	        }else{
-	            $this->Session->setFlash(__('The Team could not be saved. Please, try again.'));
-	        }   
+	            $this->Session->setFlash(__('The Team could not be saved. Name already exist.'));
+	        }  
+	        return $this->redirect(array('action' => 'index')); 
 		} else {
 			$options = array('conditions' => array('Team.' . $this->Team->primaryKey => $id));
 			$this->request->data = $this->Team->find('first', $options);
@@ -222,6 +218,9 @@ class TeamsController extends AppController {
 					)
 				);
 			}
+			$stat = $this->Tblcolors->find('all', array('fields' => array('status_id','status')));
+			$content['stat']=$stat;
+
 			$view = new View($this, false);
 			return $view->element('team', array('content' => $content));
 		}
