@@ -7,7 +7,7 @@ MAIN SIDEBAR MENU
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
         
-        	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        	  <p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
         	  <h5 class="centered">Admin</h5>
         	  	
             <li class="mt">
@@ -19,7 +19,7 @@ MAIN SIDEBAR MENU
                 <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
                     "javascript:;", array('escape' => false));?>
                 <ul class="sub">
-                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
+                  <li ><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
                   <li><?php echo $this->Html->link(__('New Project'), array('controller' => 'projects', 'action' => 'add')); ?></li>
                 </ul>
             </li>

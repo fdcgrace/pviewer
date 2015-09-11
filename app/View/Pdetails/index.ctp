@@ -144,7 +144,6 @@
         </div>
     </div>
 </div>
-
 <?php echo $this->element('pdetailsIssueSpecs'); ?> <!--Issue Specs Page -->
 
 <?php echo $this->element('pdetailsBugInfo'); ?> <!--Bug Info Page -->
