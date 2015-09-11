@@ -18,6 +18,11 @@ class TeamsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 2);
+	}
+
 /**
  * index method
  *

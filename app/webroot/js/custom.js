@@ -173,5 +173,4 @@ $(function() {
 			}).disableSelection();
 		}
 	}
-	
 });

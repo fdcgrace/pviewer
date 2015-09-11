@@ -14,8 +14,7 @@
 
     root = typeof window !== "undefined" && window !== null ? window : global;
 
-    root.BarRating = BarRating = (function() {
-
+    root.BarRating = BarRating = (function() {        
         function BarRating() {
             var self = this;
 

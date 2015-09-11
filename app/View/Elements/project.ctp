@@ -11,7 +11,7 @@
 	<div id="issue" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 		<div id="headingTwo"  class="panel-body">
 			<table id="project_table" class="table table-hover" style="word-wrap:break-word;table-layout:fixed;">
-				<!--insert if condition to check if there are issues-->	
+				<!--insert if condition to check if there are issues-->
 				<?php if($unassigned):?>
 				<thead>
 					<th>Issue No.</th>
