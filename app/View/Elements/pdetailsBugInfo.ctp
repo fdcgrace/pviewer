@@ -3,14 +3,14 @@
 <div id="myModal4" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content" max-width=>
-            <div class="modal-header">
+            <div class="modal-header2">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Bug Info</h4>
             </div>
             <div class="modal-body">
                <div id='div-bugs'  style='display:none' > 
                <div class="scroll">
-                        <table id='table-bug' style='width:130%' >
+                        <table id='table-bug' style='width:130%;height:140px' >
                             <tbody id='tbody-bug'>
                                 <tr>
                                     <th>Bug Description </th>

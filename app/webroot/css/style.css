@@ -122,7 +122,18 @@ div.scroll {
 }
 #tbody-bug th{
     font-weight: bold;
-    line-height: 30px;
+    color:white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FFB973;
+    background: #FFB973 -webkit-gradient(linear, left top, left bottom, from(#D96C00), to(#FFB973)) no-repeat;
+    background: #FFB973 -moz-linear-gradient(top, #D96C00, #FFB973) no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#FFB973) no-repeat;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#D96C00)" no-repeat;
+
+
+
 }
 
 #tbody-bug tr{
@@ -130,6 +141,8 @@ div.scroll {
 }
 #tbody-bug td{
   border: 1px solid silver;
+   padding-left: 10px;
+    padding-right: 10px;
 }
 #tbody-bug th{
   border: 1px solid silver;
