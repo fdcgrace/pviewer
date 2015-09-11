@@ -137,6 +137,7 @@ $(document).ready(function(){
   	
   	
 	$("#datepicker").on("change", function () {
+
         var currDate = $(this).val();
         var getdate = $('#selected').val(currDate);
         var projID = $(".table-responsive").attr('id');
@@ -433,10 +434,9 @@ function editDeleteLegend(func,status,status_id)
 function editLegend(func)
 {
 
-
 	 var statusOld = $('#edit-hidden').val();
 	 var statusNew = $('#edit-status').val();
-
+	 	
 	 if(statusNew == '')
 	 {
 	 	alert('Status Field should not be empty!');
@@ -447,7 +447,7 @@ function editLegend(func)
 
 		 $.ajax({
 	            type: "POST",
-	            url: baseUrl+func,
+	            url: baseUrl+'/pdetails/'+func,
 	            data: { 
 	            	statusOld : statusOld,
 	            	statusNew : statusNew
@@ -455,17 +455,18 @@ function editLegend(func)
 	            
 	            success: function(data){
 	            	
-	            //	alert(data);
+	            
 	            	if(data == 0)
 	            	alert('Status already exist');
 	            	else
-	             window.location.href=baseUrl+'pdetails/index/1';
+	             window.location.href=baseUrl+'/pdetails/index/1';
 	               
 	            },
-	            error: function(data){
-	             window.location.href=baseUrl+'/pdetails/index/1';
-	            //cannot connect to server
-	        }
+	            error: function(xhr, textStatus, error){
+			      console.log(xhr.statusText);
+			      console.log(textStatus);
+			      console.log(error);
+			  }
 	       });
 	}
 }

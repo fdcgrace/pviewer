@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <center>
                 	<div id='div-bugs'  style='display:none' >	
-                    	<table class='table table-responsive' style='max-width:900px'>
+                    	<table style='max-width:900px'>
                     		<tbody id='lala'>
                     			<tr>
                     				<th>Bug Description	</th>

@@ -719,6 +719,7 @@ class PdetailsController extends AppController {
 			$selected = $_POST['selected'];	
 		} else {
 			$selected = $_POST['getDate'];
+
 		}
 
 		/*$_SESSION['getdate'] = '01/26/2014';//$getdate;

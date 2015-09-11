@@ -1,9 +1,17 @@
+
 <section class="container-fluid" id="content">
 	<div class="alert alert-success" style="display:none">
 		<strong>Success!</strong> Issues success
 	</div>
 	<h3>Project Detail</h3>
 	<hr>
+
+
+
+
+
+
+
 	<p>To view issues, select date from Calendar. Issue is shown by date and grouped by status.</p>
 	<div id="datepicker"></div>
 	<div class="row mt">
@@ -27,6 +35,7 @@
 			<?php
 				$statusArray= array();
 				$colorArray = array();
+				$selectedStatus = array();
 				foreach ($legendStatusId as $statusId => $status) {
 					$statusArray[] = $status;
 				}
@@ -35,6 +44,7 @@
 					<span class="label color-box" style="background-color:<?php echo $key;?>"  id="<?php echo $key;?>">
 						<?php 
 							$colorArray[] = $key;
+							$selectedStatus[] = $value;
 							echo $value;
 						?>
 					</span> &nbsp;
@@ -91,6 +101,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Legend Settings</h4>
             </div>
@@ -107,6 +118,7 @@
                 		<tr>
                 			<td colspan='2'><input type='radio' id='radio-legend'>Add Legend
                 				<div id='add-legend' style='display:none'>
+                					
                 					<input type="text" id="legend-add" style='float:left'>
                 					 <div class="colorpicker-component demo demo-auto">
 					                    <input type="hidden" value="#ffffff" id='color-pick'/>		                 
@@ -118,7 +130,7 @@
                 		</tr>
                 		<?php
                 		  foreach ($legendColorModal as $value): 
-                		  	echo $value['Tblcolor']['color'];
+                		  //	echo $value['Tblcolor']['color'];
                 		  	?>
                 		<tr>
                 			<td>
@@ -134,12 +146,19 @@
             	</div>	
             	<div id="divEdit" style="display:none">
             		<div id="back" style='margin-bottom:30px;'>
-            			<img class='legend-modal' onclick='backFunction()' src='<?php echo $baseUrl; ?>img/back.png' style='width:18px;height=18px'>
+            			<div onclick='backFunction()'> BACK >> </div>
+            		<!-- 	<img class='legend-modal' onclick='backFunction()' src='<?php echo $baseUrl; ?>img/back.png' style='width:18px;height=18px'> -->
             		</div>
             		<input type='text' id='edit-status'>
             		<input type='button' class='btn btn-primary btn-sm' onclick='editLegend("editLegend");' value="SAVE" id='legend-edit'>
             		<input type='hidden' id='edit-hidden'>
             	</div>
+
+
+
+
+
+
             </div>
         </div>
     </div>

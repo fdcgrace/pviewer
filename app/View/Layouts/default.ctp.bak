@@ -43,8 +43,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				// 'bars-1to10',
 				// 'bars-pill',
 				'mystyle',
+				'docs',
 				'bootstrap-colorpicker.min',
-				'bootstrap-colorpicker',
 				'colpick',
 				'style',
 				'jquery-ui',
@@ -59,6 +59,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				// 'assets/js/jquery-1.8.3.min',
 				'assets/js/jquery',
 				'jquery-ui',
+				'bootstrap.min.js',
 				// 'bars',
 				// 'jquery.barrating',
 				'assets/js/chart-master/Chart',
@@ -74,6 +75,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 
 	?>
+	
 	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
 <body>
