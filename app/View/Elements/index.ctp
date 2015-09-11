@@ -1,9 +1,6 @@
 <section class="container-fluid" id="content">
-
 	<h3>Project Detail</h3>
-
 	<div id="datepicker"></div>
-
 	<div class="row mt">
 		<div class="col-md-3">
 			<?php 
@@ -83,12 +80,7 @@
 
 
 <div class="bs-example"></div>
-
-
-
    <!-- Button HTML (to Trigger Modal) -->
-    
-    
     <!-- Modal HTML -->
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">

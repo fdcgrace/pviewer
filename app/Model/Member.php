@@ -5,17 +5,6 @@ App::uses('AppModel', 'Model');
  *
  */
 class Member extends AppModel {
-	// public $actsAs = array('Containable');
-	/*public $hasMany = array(
-		'Pdetail' => array(
-			'className' => 'Pdetail',
-			'foreignKey' => 'pdetail_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-	);*/
-
 	public $displayField = 'team';
 
 	public $validate = array(
@@ -41,8 +30,7 @@ class Member extends AppModel {
 	function beforeSave($options = array()) {
 		if(!empty($_POST['member_id'])){
 			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member'], 'Member.id != ' => $_POST['member_id']));
-		} else {
-			
+		} else {		
 			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member']));	
 		}
 		$check = $this->find('all', $conditions);

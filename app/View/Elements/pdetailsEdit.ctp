@@ -2,6 +2,7 @@
 <h3>Modify Issue</h3>
 <?php 
 $pdetails = $content['pdetails'];
+$stat = $content['stat'];
 foreach ($pdetails as $Pdetail):
 	echo $this->Form->create('Pdetail');
 	echo "<div class='form-group'>";
@@ -30,24 +31,15 @@ foreach ($pdetails as $Pdetail):
 	echo $this->Form->input('issue_link', array('label' => 'Issue Link', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_link'], 'class' => 'form-control'));
 	echo "</div>
 		<div class='form-group'>";
-	echo $this->Form->input('status', array(
-		'type'=>'select', 
-		'label' => 'Status', 
-		'empty' => 'Please Select',
-		'default' => $Pdetail['Pdetail']['status'],
-		'selected' => $Pdetail['Pdetail']['status'],
-		'class' => 'form-control',
-		'options' => array(
-				'0' => 'Inactive',
-				'1' => 'In Progress',
-				'2' => 'Pending',
-				'3' => 'For Confirmation',
-				'4' => 'For Testing',
-				'5' => 'Released',
-				'6'	=> 'Closed'
-				)
-			)
-		);
+		echo $this->Form->input('status', array(
+							'type'=>'select', 
+							'label' => 'Status',
+							'class' => 'form-control',
+							'selected' => $Pdetail['Pdetail']['status'],
+							'default' => $Pdetail['Pdetail']['status'],
+							'options'=> $stat
+							)
+						);
 	echo "</div>
 		<div class='form-group'>";	
 	echo $this->Form->label('Created Date: '). $Pdetail['Pdetail']['created'];

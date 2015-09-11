@@ -34,6 +34,6 @@ class Project extends AppModel {
 	);
 
 	public function beforeSave($options = array()) {
-		die('here');
+
 	}
 }

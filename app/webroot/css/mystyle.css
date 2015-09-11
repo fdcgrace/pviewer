@@ -11,10 +11,6 @@
   border-top:none !important;
 }
 
-.input label{
-  /*display: none !important;*/
-}
-
 .br-theme-bars-1to10{
   width: 121px;
 }
@@ -24,9 +20,7 @@
 .pull-right{
   float: left !important;
 }
-.submit{
- /* width:75px;*/
-}
+
 .fright{
   float: right;
 }
@@ -74,9 +68,6 @@
   border-color: #FF9933 !important;
 }
 
-/*th > a {
-  color: #FFFFFF;
-}*/
 .btn-teams {
   background: linear-gradient(#FF944D,#FF6600);
   color: #FFFFFF;

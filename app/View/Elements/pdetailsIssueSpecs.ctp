@@ -1,7 +1,7 @@
 <div id="myModal3" class="modal fade">
 	<?php
-	date_default_timezone_set("Asia/Manila"); 
-     				$todayDate = date("Y-m-d"); 
+		date_default_timezone_set("Asia/Manila"); 
+     	$todayDate = date("Y-m-d"); 
 	?>
     <div class="modal-dialog">
         <div class="modal-content">

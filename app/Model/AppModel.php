@@ -39,17 +39,6 @@ class AppModel extends Model {
             )
 		)
 	);
-
-	/*function beforeSave($options = array()) {
-		$check = $this->find('all', array(
-			'conditions' => array('team' => $this->data[$this->alias]['team']))
-		);
-		if(count($check) == 0){
-			return true;
-		} else {
-			return false;
-		}
-	}*/
 }
 
 

@@ -26,9 +26,8 @@
 										<td><?php echo $team['Team']['del_flg'] == 0 ? $deactivate : $activate; ?></td>
 										<td class="actions">
 											<?php echo $this->Html->link(__(''), array('#'), array('label' => false, 'class' => 'btn glyphicon glyphicon-eye-open view', 'flag' => $team['Team']['del_flg'])); ?>
-											<?php echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
-
-											<?php //echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#', 'label' => false, 'class' => 'btn glyphicon glyphicon-pencil', 'flag' => $team['Team']['del_flg'])); ?>
+											<?php echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); 
+											?>
 											<?php if ($team['Team']['del_flg']) :?>
 											<?php echo $this->Form->postLink(__(''), array('action' => 'deactivate', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to deactivate # %s?', $team['Team']['id']))); ?>
 											<?php else :?>
