@@ -9,6 +9,10 @@
   border-top:none !important;
 }
 
+.input label{
+  /*display: none !important;*/
+}
+
 .br-theme-bars-1to10{
   width: 121px;
 }
@@ -19,7 +23,7 @@
   float: left !important;
 }
 .submit{
-  width:75px;
+ /* width:75px;*/
 }
 .fright{
   float: right;
@@ -41,22 +45,12 @@
 .mar10{
   margin-right: 10px;
 }
-
 .mini-layout{
     min-height: 200px;
     background-color:#E6E6E6;
     width: 100%;
 }
-/*table {
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  padding: 4px;
-  text-align: center;
-}
-th, td {
-  padding: 10px;
-}*/
+
 .teams th{
   background: linear-gradient(#FF944D,#FF6600);
   color: #FFFFFF;
@@ -64,6 +58,9 @@ th, td {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-weight: normal;
   text-align: center; 
+
+.form{
+  padding: 0 10px 10px 10px;
 }
 
 .btn-orange{
@@ -122,4 +119,13 @@ div.btn-group > .btn-teams{
 .martop{
   margin: 50px 0 0 0;
 }
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
+    src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.woff') format('woff'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  }
 

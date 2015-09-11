@@ -52,6 +52,7 @@
 									</tr>
 								<?php endif; ?>
 								<?php endforeach;?>
+
 									<tr class="notSortable" ><td></td><td></td><td></td><td></td><td></td></tr>
 								</tbody>
 							</table>

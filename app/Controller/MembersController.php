@@ -6,6 +6,11 @@ class MembersController extends AppController {
 
 	public $components = array('Paginator', 'Session');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 3);
+	}
+
 	public function index() {
 		$this->paginate = array('limit' => 5);
 		$this->set('members', $this->Paginator->paginate());
