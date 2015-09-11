@@ -41,7 +41,6 @@ class PdetailsController extends AppController {
 		
 		if ($this->request->is(array('post', 'put'))) {
 			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
-			//if($_POST['progress']!='' && !empty($_POST['id'])){
 				$arrData = array('progress' => $_POST['progress']);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
@@ -51,7 +50,6 @@ class PdetailsController extends AppController {
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
 		    } else if((isset($_POST['priority']) &&!empty($_POST['priority'])) && (isset($_POST['id']) && !empty($_POST['id']))){
-		    //} else if(!empty($_POST['priority']) && !empty($_POST['id'])){
 				$arrData = array('priority' => $_POST['priority']);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
@@ -63,7 +61,6 @@ class PdetailsController extends AppController {
 			} else if(!empty($_POST['changeColor']) && !empty($_POST['color'])) {
 
 				$r = trim($_POST['changeColor']);	
-
 				$getData = $this->Tblcolor->find('first', array(
 					'conditions' => array('status' => $r),
 					'fields' => array('id')
@@ -108,6 +105,7 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
+
 		$legendColorStatus = $this->Tblcolor->find('list', array(
 			'fields' => array(
 				'status_id', 'color'				
@@ -158,7 +156,6 @@ class PdetailsController extends AppController {
  */
 
 	public function edit($id = null) {		
-		//var_dump($_POST); die();
 		$this->autoRender = false;
 		$content = array();
 		$this->Pdetail->recursive = 0;
@@ -168,18 +165,14 @@ class PdetailsController extends AppController {
 
 		$this->paginate = array(
             'limit' => 5,
-            //'order' => $order,
             'conditions' => $condition
         );
 
 		$pdetails = $this->paginate('Pdetail');
 		$content['pdetails'] = $pdetails;
-		//$this->set('pdetails', $pdetails);
 	
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
-
 		$content['projectID'] = $projectID;
-		//$this->set('p_id', $projectID);
 
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Pdetail->save($this->request->data)) {
@@ -202,7 +195,23 @@ class PdetailsController extends AppController {
 
 		$content['members'] = $members;
 
-		//$this->set(compact('members'));
+		$legendColorModal = $this->Tblcolor->find('all', array(
+			'fields' => array(
+				'color', 'status','status_id'				
+				),
+			'order' => array(
+					'status_id' => 'asc'
+				)
+			)
+		);
+
+		foreach($legendColorModal as $key => $value) {
+			foreach ($value as $key1 => $nval) {
+				$stat[] =  $nval['status'];		
+			}
+		}
+		
+		$content['stat'] = $stat;
 
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -211,7 +220,6 @@ class PdetailsController extends AppController {
 			)
 		);
 		$content['legendColor'] = $legendColor;
-		//$this->set('legendColor', $legendColor);
 		$view = new View($this, false);
     	return $view->element('pdetailsEdit', array('content' => $content));
 	}
@@ -261,13 +269,10 @@ class PdetailsController extends AppController {
 
 	public function delete($id = null, $project_id = null) {
 		$this->Pdetail->id = $id;
-		//$getData = $this->Pdetail->find('first', array('field' => array('Pdetail.project_id'), 'conditions' => array('Pdetail.id' => $id)));		//die();
-		//$project_id = $getData['Pdetail']['project_id'];
-		
+	
 		if (!$this->Pdetail->exists()) {
 			throw new NotFoundException(__('Invalid project'));
 		}
-		//if ($this->Pdetail->delete()) {
 		if ($this->Pdetail->saveField('del_flg', 0)) {	
 			$this->Session->setFlash(__('The project has been deleted.'));
 		} else {
@@ -301,7 +306,6 @@ class PdetailsController extends AppController {
 		$statusIdNew = $statusFindNew['Tblcolor']['id'];
 
 		if($statusIdNew == '' || $statusIdNew == null) {
-
 			 $statusId = $statusFind['Tblcolor']['id'];
 			 $this->Tblcolor->id = $statusId;
 			 $this->Tblcolor->set(array(
@@ -372,15 +376,10 @@ class PdetailsController extends AppController {
 		 	echo $count.'fg';
 		 	debug($this->data['pdetails']);
 
-		 	for($i=0;$i<$count;$i++)
-	        {
-
-	    //		echo $this->data['pdetails']['file'][$i]['name'].'sharona';
-	        		
+		 	for($i=0;$i<$count;$i++) {
 	        	$this->Issue_spec->create();
 	        	
-	        		$data = 
-						    array(
+	        		$data = array(
 						        'Issue_spec' => array(
 						            'issue_id'=>$this->data['pdetails']['issueid'],
 						            'specs_id'=>$this->data['pdetails']['specsid'],
@@ -388,16 +387,8 @@ class PdetailsController extends AppController {
 						            'type'=>$this->data['pdetails']['type']
 						        )
 						    
-						);
-		//		debug($data);			    
+						);			    
 				 $this->Issue_spec->save($data);
-				 /*$filename = "C:/xampp/htdocs/pviewer/app/webroot/files/".$this->data['pdetails']['category'].'/'.$this->data['pdetails']['text'][$i];	
-				 echo '<pre>';
-		        if (move_uploaded_file($this->data['pdetails']['file'][$i]['tmp_name'], $filename)) {
-		            echo "File is valid, and was successfully uploaded.\n";
-		        } else {
-		            echo "Possible file upload attack!\n";
-		        }	  */  
 	        }
 	        $this->redirect($this->referer());
        	 }	
@@ -417,12 +408,12 @@ class PdetailsController extends AppController {
 			$bugReason = $this->data['pdetails']['bugreason'];
 
 			$data = array(
-				            'bug_description'=>$bugDescription,
-				            'bug_steps'=>$bugSteps,
-				            'bug_status'=>$bugStatus,
-				            'status_after'=>$statusAfter,
-				            'who_found'=>$whoFound,
-				            'bug_reason'=>$bugReason	        
+			            'bug_description'=>$bugDescription,
+			            'bug_steps'=>$bugSteps,
+			            'bug_status'=>$bugStatus,
+			            'status_after'=>$statusAfter,
+			            'who_found'=>$whoFound,
+			            'bug_reason'=>$bugReason	        
 						);
 
 			$this->Bug_info->id = $issueidbug;
@@ -435,7 +426,6 @@ class PdetailsController extends AppController {
 	public function insertBugInfo()	{
 		$this->autoRender = false;
 		if ($this->request->is('post')) {	
-
 			$issueidbug = $this->data['pdetails']['issueid-bug'];
 			$bugDescription  = $this->data['pdetails']['bugdescription'];
 			$bugSteps = $this->data['pdetails']['bugsteps'];
@@ -444,55 +434,27 @@ class PdetailsController extends AppController {
 			$whoFound = $this->data['pdetails']['whofound'];
 			$bugReason = $this->data['pdetails']['bugreason'];
 
-
 			$id  = $this->Bug_info->find('all', array(
 				'conditions' => array('issue_id' => $issueidbug)
 				)
 			);
 
-		/*	if(count($id) > 0)
-			{
-				echo "a";
-				$bugIssueId = $id[0]['Bug_info']['id'];
-				$data = 
-						    array(
-						            'bug_description'=>$bugDescription,
-						            'bug_steps'=>$bugSteps,
-						            'bug_status'=>$bugStatus,
-						            'status_after'=>$statusAfter,
-						            'who_found'=>$whoFound,
-						            'bug_reason'=>$bugReason
-						        
-						    
-						);
-
-				 $this->Bug_info->id = $bugIssueId;
-				 $this->Bug_info->set($data);
-				 $this->Bug_info->save();
-
-			}
-			else
-			{*/
-
 			$this->Bug_info->create();
-			$data = 
-						  array(
-						        'Bug_info' => array(
-						            'issue_id'=>$issueidbug,
-						            'bug_description'=>$bugDescription,
-						            'bug_steps'=>$bugSteps,
-						            'bug_status'=>$bugStatus,
-						            'status_after'=>$statusAfter,
-						            'who_found'=>$whoFound,
-						            'bug_reason'=>$bugReason
-						        )
-						    
-						);
+			$data = array(
+				        'Bug_info' => array(
+				            'issue_id'=>$issueidbug,
+				            'bug_description'=>$bugDescription,
+				            'bug_steps'=>$bugSteps,
+				            'bug_status'=>$bugStatus,
+				            'status_after'=>$statusAfter,
+				            'who_found'=>$whoFound,
+				            'bug_reason'=>$bugReason
+				        )
+					);
 	    
 			 $this->Bug_info->save($data);
-			//}
-		 }
-		  	$this->redirect($this->referer());
+		}
+		$this->redirect($this->referer());
 	}
 
 	public function viewBugInfo()	{
@@ -538,33 +500,26 @@ class PdetailsController extends AppController {
 				$content = fread($fp, filesize($tmpName));
 				$content = addslashes($content);
 				fclose($fp);
-
-	    		//echo $this->data['pdetails']['file'][$i]['name'].'sharona';
-	        		
+	
 	        	$this->Issue_spec->create();
-	        	
-	        		$data = 
-						    array(
-						        'Issue_spec' => array(
-						            'issue_id'=>$this->data['pdetails']['issueid'],
-						            'specs_id'=>$this->data['pdetails']['specsid'],
-						            'file'=>$this->data['pdetails']['file'][$i]['name'],
-						            'type'=>$this->data['pdetails']['type'],
-						            'type2' => $fileType,
-						            'size' => $fileSize,
-						            'content' => $content
-						            
-						        )
-						    
+	        	$data = array(
+					        'Issue_spec' => array(
+					            'issue_id'=>$this->data['pdetails']['issueid'],
+					            'specs_id'=>$this->data['pdetails']['specsid'],
+					            'file'=>$this->data['pdetails']['file'][$i]['name'],
+					            'type'=>$this->data['pdetails']['type'],
+					            'type2' => $fileType,
+					            'size' => $fileSize,
+					            'content' => $content
+					        )
 						);
 						if(isset($this->data['pdetails']['dateModified']))
-					 	$data['Issue_spec']['date_modified'] = $this->data['pdetails']['dateModified'];
+					 		$data['Issue_spec']['date_modified'] = $this->data['pdetails']['dateModified'];
 						else
-						$data['Issue_spec']['date_released'] = $this->data['pdetails']['dateReleased'];    
+							$data['Issue_spec']['date_released'] = $this->data['pdetails']['dateReleased'];    
 
-				 $this->Issue_spec->save($data);
-				 $filename = "C:/xampp/htdocs/pviewer/app/webroot/files/".$this->data['pdetails']['category'].'/'.$this->data['pdetails']['file'][$i]['name'];	
-				 echo '<pre>';
+				$this->Issue_spec->save($data);
+				$filename = $this->base."/app/webroot/files/".$this->data['pdetails']['category'].'/'.$this->data['pdetails']['file'][$i]['name'];	
 		        if (move_uploaded_file($this->data['pdetails']['file'][$i]['tmp_name'], $filename)) {
 		            echo "File is valid, and was successfully uploaded.\n";
 		        } else {
@@ -593,29 +548,6 @@ class PdetailsController extends AppController {
 			$fileLink = '<a href="<?php  echo  ?>">'.$value['Issue_spec']['file'].'</a>';
 			$r .= $value['Issue_spec']['file'].'|'.$value['Issue_spec']['specs_id'].'|'.$value['Issue_spec']['type'].'|'.$fileId.'@';	
 		}
-
-		echo $r;
-		//$result = Set::combine($legendStatusId, '{n}.Issue_spec.id', '{n}.Issue_spec.file', '{n}.Issue_spec.type', '{n}.Issue_spec.specs_id');
-		
-		//echo json_encode($result);
-	}
-
-	public function testJson()	{
-		$this->autoRender = false;
-		$legendStatusId = $this->Issue_spec->find('all', array(
-			'fields' => array(
-				'specs_id','file','type','id'			
-				),
-			'conditions' => array('issue_id' => 4)
-			)
-		);
-		echo $today;
-
-		$things = Set::extract('/Issue_spec/.', $legendStatusId);
-		//debug($things);
-//$userNames = Set::extract($legendStatusId, '{n}.Issue_spec.file','Issue_spec.type');
-//debug($userNames);
-		echo json_encode($things);
 	}
 
 	public function downloadFile()	{
@@ -653,8 +585,6 @@ class PdetailsController extends AppController {
 	public function issue() {
 		$this->autoRender =  false;
 
-		// var_dump($_POST);
-
 		$conditions = array(
 			'Pdetail.del_flg' => 1,
 		);
@@ -669,7 +599,6 @@ class PdetailsController extends AppController {
 			$conditions['Pdetail.del_flg'] = 1;
 		}
 		
-		// var_dump($conditions);
 		$this->Paginator->settings = array(
 			'conditions' => $conditions,
 			'order' => array(
@@ -685,6 +614,7 @@ class PdetailsController extends AppController {
 			'fields' => array('member')
 			)
 		);
+		
 
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -757,14 +687,11 @@ class PdetailsController extends AppController {
 					'Pdetail.del_flg',
 					'Pdetail.team_id',
 					'Pdetail.start_date',
-					 'Pdetail.priority',
+					'Pdetail.priority',
 					// 'Pdetail.progress'
 				)
 			)
 		);
-
-		// var_dump($_POST['currDate']);
-		// var_dump($_POST['today']);
 
 		foreach ($pdetails as $Pdetail) {
 			unset($Pdetail['Pdetail']['id']);
@@ -772,9 +699,7 @@ class PdetailsController extends AppController {
 			unset($Pdetail['Pdetail']['modified']);
 			//unset($Pdetail['Pdetail']['priority']);
 			unset($Pdetail['Pdetail']['progress']);
-			// var_dump($Pdetail);
-			// var_dump($current);
-			// var_dump(!in_array($Pdetail, $current));
+
 			if(!in_array($Pdetail, $current)) {
 				$this->Pdetail->create();
 				$this->Pdetail->set($Pdetail);
@@ -784,10 +709,8 @@ class PdetailsController extends AppController {
 					// $this->Session->setFlash(__('The issues could not be copied. Try again.'));
 					break;
 				}
-				// var_dump($Pdetail);
 			}
 		}
-		// die();
 		return $this->redirect(array('action' => 'index', $_POST['projID']));
 	}
 

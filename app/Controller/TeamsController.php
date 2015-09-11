@@ -39,38 +39,21 @@ class TeamsController extends AppController {
 			foreach($arr as $key => $value) {
 				if ($value[0] == $val['Team']['team']) {
 					$arr[$key][] = $val;
-
 				}
 			}
 		}
-		//var_dump($arr);
-		//$this->set('team', $arr);
-		//var_dump($this->Paginator->paginate());
 		$pdetails = $this->Project->find('all', array( 'recursive' => 1, 
 					   'contain' => 
 					   		array( 'Pdetail' => 
-					   					array( 'conditions' => array('Pdetail.team_id !=' => 0)
-					   					)
+			   					array( 'conditions' => array('Pdetail.team_id !=' => 0)
+			   					)
 					   		)
 				)
 		);
-		/*$unassigned = $this->Project->find('all', 
-				array( 'recursive' => 1, 
-					   'contain' => 
-					   		array( 'Pdetail' => 
-					   					array( 'conditions' => array('Pdetail.member_id' => null, 'Pdetail.status' => 0)
-					   					)
-					   		)
-				)
-		);*/
 
 		$team = $this->Team->find('all');
-		// $members = $this->Member->find('all');
 		$this->set('team', $team);
-		// $this->set('members', $members);
 		$this->set('pdetails', $pdetails);
-
-		
 	}
 
 	public function add() {
@@ -84,7 +67,6 @@ class TeamsController extends AppController {
 			}
 			return $this->redirect(array('action' => 'index'));
 		}
-
 		$teams = $this->Member->Team->find('list', array(
 			'fields' => array(
 				'team'
@@ -96,7 +78,6 @@ class TeamsController extends AppController {
 	}
 
 	public function edit($id = null) {
-		
 		$this->autoRender = false;
 		$content = array();
 		if (!$this->Team->exists($id)) {
@@ -148,7 +129,7 @@ class TeamsController extends AppController {
 		if($this->request->is('ajax')) {
 			$data = $this->request->data;
 			$filename = "sql.txt";
-			// var_dump($data);
+
 			if(isset($this->request->data['member_id'])) {
 				$line = "UPDATE Pdetails SET team_id=".$data['team_id'].
 						", member=".$data['member_id'].

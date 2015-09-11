@@ -1,11 +1,8 @@
 <?php
-// $this->start('css');
-echo $this->Html->css('bars-1to10', null, array('inline' => true));
-echo $this->Html->css('bars-pill', null, array('inline' => true));
-// echo $this->end();
-
-echo $this->Html->script('jquery.barrating', array('inline' => true));
-echo $this->Html->script('bars', array('inline' => true));
+	echo $this->Html->css('bars-1to10', null, array('inline' => true));
+	echo $this->Html->css('bars-pill', null, array('inline' => true));
+	echo $this->Html->script('jquery.barrating', array('inline' => true));
+	echo $this->Html->script('bars', array('inline' => true));
 ?>
 
 <div class="panel panel-default">
@@ -45,10 +42,12 @@ echo $this->Html->script('bars', array('inline' => true));
 
 					if ($Pdetail['Pdetail']['status'] != prev($tempar)) {
 						$statusPdetail = $Pdetail['Pdetail']['status'];
+						//var_dump($Pdetail['Pdetail']);
 						$selectedStatus[] = $statusPdetail;
 						echo $this->Form->create('Pdetail');
 						$detId = $Pdetail['Pdetail']['id'];
 					}
+					//var_dump($legendColorStatus);
 			?>
 			<tr style="background-color:<?php
 				if (array_key_exists($statusPdetail, $legendColorStatus)) {
@@ -77,17 +76,16 @@ echo $this->Html->script('bars', array('inline' => true));
 				<td>
 					<div class="pull-right sub-menu">
 						<?php 
-						/*echo $this->Form->input('status', array(
-							'type'=>'select', 
-							'label' => '', 
-							'default' => $Pdetail['Pdetail']['status'],
-							'selected' => $Pdetail['Pdetail']['status'],
-							'options' => $legendStatusId
-							)
-						); */
-						echo $pdetailStatus[$Pdetail['Pdetail']['status']];
-						echo $this->Form->hidden('projID', array('value' => $Pdetail['Pdetail']['project_id'], 'id' => 'projID'));
-						echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id'], 'id' => 'pID'));
+							echo $stat = $Pdetail['Pdetail']['status'];
+							foreach ($legendColorModal as $key => $value) {
+								foreach ($value as $nkey => $nval) {
+									if($stat == $nval['status_id']){
+								        echo $nval['status']; 
+								    }
+								}
+							}
+							echo $this->Form->hidden('projID', array('value' => $Pdetail['Pdetail']['project_id'], 'id' => 'projID'));
+							echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id'], 'id' => 'pID'));
 						?>
 					</div>
 				</td>

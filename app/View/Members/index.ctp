@@ -1,6 +1,4 @@
-<?php 
-	echo $this->Html->script(array('definedjs'));
-?>
+<?php  echo $this->Html->script(array('definedjs')); ?>
 <div class="container-fluid">
 	<!-- <h3>Member List</h3> -->
 	<h3> Member List <?php echo $this->Html->link('', array('controller' => 'members', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#addForm', 'id' => 'addBtn')); ?> </h3>

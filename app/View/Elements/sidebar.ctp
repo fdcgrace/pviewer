@@ -6,9 +6,8 @@ MAIN SIDEBAR MENU
     <div id="sidebar"  class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-        
-        	  <p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-        	  <h5 class="centered">Admin</h5>
+        	<p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        	<h5 class="centered">Admin</h5>
         	  	
             <li class="mt">
                 <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-dashboard')).$this->Html->tag('span','Dashboard'), 

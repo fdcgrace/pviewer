@@ -18,8 +18,6 @@
 				date_default_timezone_set("Asia/Manila"); 
 				$todayDate = date("Y-m-d"); 
 				$baseUrl= Router::url('/', true);
-				//echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary'));
-				//echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#addForm'));
 			?>
 		</div>
 		<div class="col-md-7" style="text-align:right;">

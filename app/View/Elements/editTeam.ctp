@@ -1,9 +1,6 @@
 <?php $team = $content['team']; ?>
 <div class="modal-body">
     <?php
-    	//var_dump($team);
-		/* create form with proper enctype */
-		//echo $this->Form->create('team', array('action' => 'edit'));
 		echo $this->Form->create('Team');
 		echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $team['Team']['id'], 'class' => 'form-control', 'name' => 'id'));
 		echo "<div class='form-group'>";

@@ -79,7 +79,6 @@ $(document).ready(function(){
 			url: baseUrl+"/pdetails/issue/",
 			data: { 'getDate' : currDate, 'projID' : projID},
 			success: function (data) {
-				alert(data);
 				$(".table-responsive").html(data);
 			}
 		});
@@ -105,8 +104,6 @@ $(document).ready(function(){
 				url: baseUrl+"/pdetails/copy/",
 				data: {'projID' : projID, 'today': today, 'currDate': currDate},
 				success: function (data) {
-					// $(".table-responsive").html(data);
-					// $("#datepicker").val(today);
 					location.reload();
 					$(".alert-success").show();
 				},
@@ -182,8 +179,8 @@ function showBugList(ischecked){
             error: function(data){
         }
        });
-
 }
+
 function editBug(bugId){
 	$('#div-bugs').hide();
 	$('#addBugInfo').hide();
@@ -193,12 +190,10 @@ function editBug(bugId){
             url: baseUrl+'/pdetails/editBugInfo',
             data: { bugId : bugId },
             dataType: 'json', 
-            
             success: function(rows){
             	var data = {};
 			    var dates = [];
 			    $.each(rows, function () {
-
 			        console.log(this.issue_id);
 			        $("#bug-id2").val(this.id);
 			        $("#bug-desc2").val(this.bug_description);
@@ -214,6 +209,7 @@ function editBug(bugId){
         	}
        });
 }
+
 function checkBugInfo(issueId){
 	$('#issueid-bug').val(issueId);
 	$('#addBugInfo').show();
@@ -223,8 +219,8 @@ function checkBugInfo(issueId){
 	$('#lala').empty();	
 	$("#myModal4").modal('show');
 }
-function changeBgcolor(label,removeBg){
 
+function changeBgcolor(label,removeBg){
 	var removeLabel = label.replace('label', '' );
 	$('#specsid').val(removeLabel);
 	var genIssue = $('#general-issueid').val();
@@ -250,7 +246,6 @@ function deleteBug(bugId){
 	            url: baseUrl+'/pdetails/deleteBugInfo',
 	            data: { bugId : bugId },
 	            dataType: 'json', 
-	            
 	            success: function(rows){
 	            	alert('Bug Deleted');
 	            },
@@ -266,15 +261,12 @@ function viewIssueDetails(id){
 	$('#links1').empty();
 	$('#php4').empty();
 	$('#html4').empty();
-
 	$.ajax({
             type: "POST",
             url: baseUrl+'/pdetails/getIssueFiles',
             data: { issueid : id }, 
-            
             success: function(data){
             	var implodeRow = data.split('@');
-
             	for(var j=0;j<implodeRow.length;j++){
             		var implodeSpecs = implodeRow[j].split('|');
             		var file = implodeSpecs[0];
@@ -284,7 +276,7 @@ function viewIssueDetails(id){
             		var extension = file.substr( (file.lastIndexOf('.') +1) );
 
             		if(type == 'file')
-            			var appendVal = "<a href='/pviewer/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />"
+            			var appendVal = "<a href='"+baseUrl+"/pdetails/downloadFile?id="+id+"'>"+file+"</a><br />"
             		else
             			var appendVal = file+'<br />';
 
@@ -373,57 +365,41 @@ function viewModifiedRelease(genIssue,type){
     	}
    });
 }
+
 function backFunction() {
 	$("#divEdit").hide();
 	$('#table-legend').show();
 }
-function editDeleteLegend(func,status,status_id)
-{
 
-			var hideStatus = $('#hide-status').val();
+function editDeleteLegend(func,status,status_id) {
+	var hideStatus = $('#hide-status').val();
+	var implodeStat = hideStatus.split('|');
+	var ifStatIsSelected = jQuery.inArray(status_id, implodeStat);
 
-			var implodeStat = hideStatus.split('|');
-
-
-			var ifStatIsSelected = jQuery.inArray(status_id, implodeStat);
-		
-			if(ifStatIsSelected < 0)
-			{
-	            $.ajax({
-	            type: "POST",
-	            url: baseUrl+'/pdetails/'+func,
-	            data: { status : status }, 
-	            
-	            success: function(data){
-
-	             window.location.href=baseUrl+'/pdetails/index/1';
-	               
-	            },
-	            error: function(data){
-	            //cannot connect to server
-	        }
-	       });
-	        	}
-	        else
-	        {
-	        	alert('Status cannot be deleted');
-	        }
+	if(ifStatIsSelected < 0) {
+        $.ajax({
+        type: "POST",
+        url: baseUrl+'/pdetails/'+func,
+        data: { status : status }, 
+        success: function(data){
+        	window.location.href=baseUrl+'/pdetails/index/1';
+        },
+        error: function(data){
+        //cannot connect to server
+    	}
+   		});
+    } else {
+    	alert('Status cannot be deleted');
+    }
 }
-function editLegend(func)
-{
 
-
+function editLegend(func) {
 	 var statusOld = $('#edit-hidden').val();
 	 var statusNew = $('#edit-status').val();
 
-	 if(statusNew == '')
-	 {
+	 if(statusNew == '') {
 	 	alert('Status Field should not be empty!');
-	 }
-	 else
-	 {
-
-
+	 } else {
 		 $.ajax({
 	            type: "POST",
 	            url: baseUrl+'/pdetails/'+func,
@@ -431,75 +407,57 @@ function editLegend(func)
 	            	statusOld : statusOld,
 	            	statusNew : statusNew
 	             }, 
-	            
 	            success: function(data){
-	            	
-	            //	alert(data);
 	            	if(data == 0)
-	            	alert('Status already exist');
+	            		alert('Status already exist');
 	            	else
-	             window.location.href=baseUrl+'/pdetails/index/1';
-	               
+	             		window.location.href=baseUrl+'/pdetails/index/1';
 	            },
 	            error: function(data){
-	             window.location.href=baseUrl+'/pdetails/index/1';
-	            //cannot connect to server
-	        }
+	            	window.location.href=baseUrl+'/pdetails/index/1';
+	            	//cannot connect to server
+	        	}
 	       });
 	}
 }
-function showEdit(status)
-{
-	//alert($('#divEdit').text());
+
+function showEdit(status){
 		$("#divEdit").show();
 		$('#edit-status').val(status);
 		$('#edit-hidden').val(status);	
 		$('#table-legend').hide();
 }
-function insertLegend(func)
-{
+
+function insertLegend(func) {
 	var newStatus = $('#legend-add').val();
 	var colorStatus =  $('#color-pick').val();
-
-
 	var hideColor = $('#hide-color').val();
 	var implodeColor = hideColor.split('|');
-
-
 	var ifStatIsSelected = jQuery.inArray(colorStatus, implodeColor);
-
 
 	if(newStatus == '')
 		alert('Status field should not be empty');
-	else if(ifStatIsSelected > 0)
-	{
+	else if(ifStatIsSelected > 0) {
 		alert('Please choose another color');	
-	}
-	else
-	{
+	} else {
 		 $.ajax({
 	            type: "POST",
 	            url: baseUrl+'/pdetails/'+func,
 	            data: { 
 	            	newStatus : newStatus,
 	            	colorStatus :colorStatus
-	             }, 
-	            
+	            }, 
 	            success: function(data){
-
-
-	             if(data == 1)
-	             {
-	             alert('Status Added');
-	             window.location.href=baseUrl+'/pdetails/index/1';
-	         	 }
-	         	 else
-	         	 	alert('Status Already Exist');
-	               
+					if(data == 1) {
+		            	alert('Status Added');
+		            	window.location.href=baseUrl+'/pdetails/index/1';
+		         	} else {
+		         	 	alert('Status Already Exist');
+		         	}
 	            },
 	            error: function(data){
-	            //cannot connect to server
-	        }
+	            	//cannot connect to server
+	        	}
 	       });
 	}	
 }

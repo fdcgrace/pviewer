@@ -2,16 +2,12 @@
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
-
-
-
 h1 {
   font-size: 60px;
   text-align: center;
   line-height: 1.5;
   color: #FFF;
 } 
-
 
 p {
 	font-size:22px;
@@ -63,7 +59,6 @@ p {
     background-color:#ffffff;
 }
 
-
 .tabs input[type=radio] {
     display:none;
 }
@@ -76,9 +71,6 @@ p {
     background: #08C;
     color: white;
 }
-
-
-
 
 #relatedContent {
 	display: block;
@@ -104,14 +96,11 @@ p {
  	max-width: 100%;
 }
 #left-column {
-  float: right;/*
-  border-right: solid #2c3e50;*/
+  float: right;
   width: 50%;
- 
 }
 
 #right-column {
-    float: right;
-  width: 50%;
-    
+  float: right;
+  width: 50%;  
 }

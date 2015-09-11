@@ -67,7 +67,7 @@ class AppController extends Controller {
 		$this->set('getStatus',$this->getStatus);
 		$this->set('deactivate','Deactivate');
 		$this->set('activate','Activate');
-
+/*
 		$this->pdetailStatus = array(
 			0 => 'Inactive',
 			1 => 'In Progress',
@@ -77,7 +77,7 @@ class AppController extends Controller {
 			5 => 'Released',
 			6 => 'Closed'
 		);
-		$this->set('pdetailStatus',$this->pdetailStatus);
+		$this->set('pdetailStatus',$this->pdetailStatus);*/
 
 	}
 }

@@ -4,7 +4,6 @@ $(function() {
             theme: 'bars-1to10',
             onSelect:function(value) {
                     var id = $(this).attr('gval');
-                    //alert('Selected rating: ' + value+'-'+id);
                     $.ajax({
                         type: "POST",
                         url: "pdetails/",
@@ -24,7 +23,6 @@ $(function() {
             showSelectedRating: false,
             onSelect:function(value) {
                     var id = $(this).attr('gval');
-                   // alert('Selected rating: ' + value+'-'+id);
                     $.ajax({
                         type: "POST",
                         url: "pdetails/",
@@ -35,32 +33,6 @@ $(function() {
                     });
                 }    
         });
-
-        $('#example-reversed').barrating('show', {
-            theme: 'bars-reversed',
-            showSelectedRating: true,
-            reverse: true
-        });
-
-        $('#example-horizontal').barrating('show', {
-            theme: 'bars-horizontal',
-            reverse: true
-        });
-
-        $('#example-fontawesome').barrating({
-            theme: 'fontawesome-stars',
-            showSelectedRating: false
-        });
-
-        $('#example-css').barrating({
-            theme: 'css-stars',
-            showSelectedRating: false
-        });
-
-        $('#example-bootstrap').barrating({
-            theme: 'bootstrap-stars',
-            showSelectedRating: false
-        });                
     }
 
     function ratingDisable() {

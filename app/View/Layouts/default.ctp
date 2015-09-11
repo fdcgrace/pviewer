@@ -28,9 +28,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 	<?php
 		echo $this->Html->meta('icon');
-
 		echo $this->fetch('meta');
-		
 		echo $this->Html->css(
 			array(
 				'assets/css/bootstrap',
@@ -52,10 +50,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			)
 		);
 		echo $this->fetch('css');
-
 		echo $this->Html->script(
 			array(
-				// 'assets/js/jquery-1.8.3.min',
+				//'assets/js/jquery-1.8.3.min',
 				'assets/js/jquery',
 				'jquery-ui',
 				'bars',
@@ -71,7 +68,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			)
 		);
 		echo $this->fetch('script');
-
 	?>
 	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
@@ -86,7 +82,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 			</div>
 	            <!--logo start-->
-	            <!-- <a href="index.html" class="logo"><b>FDC-Project Viewer</b></a> -->
 	            <?php echo $this->Html->link($this->Html->tag('b','FDC-Project Viewer'), array('controller' => 'pages', 'action' => 'display'), array('escape' => false, 'class' => 'logo'));?>
 	            <!--logo end-->
 	            <div class="nav notify-row" id="top_menu">
@@ -317,22 +312,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					'assets/js/jquery.dcjqaccordion.2.7.js',
 				)
 			);
-		?>
-	    <!--<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>-->
-	    
+		?>	    
 	</section>
 	<br><br>
 	<!--footer start-->
 	<footer class="site-footer">
 	  <div class="text-center" style="text-align:center;">
 	      FDC - Project Viewer
-	     <!-- <a href="index.html#" class="go-top">
-	          <i class="fa fa-angle-up"></i>
-	      </a>
-	  	  -->
 	  </div>
 	</footer>
 	<!--footer end-->
-	<?php echo $this->element('sql_dump'); ?>
+	<?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>
