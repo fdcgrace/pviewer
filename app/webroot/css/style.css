@@ -2,12 +2,16 @@
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
+
+
+
 h1 {
   font-size: 60px;
   text-align: center;
   line-height: 1.5;
   color: #FFF;
 } 
+
 
 p {
 	font-size:22px;
@@ -59,6 +63,7 @@ p {
     background-color:#ffffff;
 }
 
+
 .tabs input[type=radio] {
     display:none;
 }
@@ -71,6 +76,9 @@ p {
     background: #08C;
     color: white;
 }
+
+
+
 
 #relatedContent {
 	display: block;
@@ -96,11 +104,46 @@ p {
  	max-width: 100%;
 }
 #left-column {
-  float: right;
+  float: right;/*
+  border-right: solid #2c3e50;*/
   width: 50%;
+ 
 }
 
 #right-column {
-  float: right;
-  width: 50%;  
+    float: right;
+  width: 50%;
+    
+}
+div.scroll {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+#tbody-bug th{
+    font-weight: bold;
+    color:white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FFB973;
+    background: #FFB973 -webkit-gradient(linear, left top, left bottom, from(#D96C00), to(#FFB973)) no-repeat;
+    background: #FFB973 -moz-linear-gradient(top, #D96C00, #FFB973) no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#FFB973) no-repeat;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#D96C00)" no-repeat;
+
+
+
+}
+
+#tbody-bug tr{
+  border: 1px solid silver;
+}
+#tbody-bug td{
+  border: 1px solid silver;
+   padding-left: 10px;
+    padding-right: 10px;
+}
+#tbody-bug th{
+  border: 1px solid silver;
 }
