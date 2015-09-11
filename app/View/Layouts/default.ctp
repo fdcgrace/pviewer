@@ -73,6 +73,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 
 	?>
+	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
 <body>
 	<section id="container">

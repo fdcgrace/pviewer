@@ -59,26 +59,35 @@ $(document).ready(function(){
 		}
 	});
 
-	$(function() {
-    	$( "#datepicker" ).datepicker();
-    	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-    	var currDate = $("#datepicker").val();
-	  	var projID = $(".table-responsive").attr('id');
-	    	$.ajax({
-				type: "POST",
-				url: "/pviewer-layout/pdetails/issue/",
-				data: { 'getDate' : currDate, 'projID' : projID},
-				success: function (data) {
-					$(".table-responsive").html(data);
-				}
-			});
-  	});	
+	function loader(){
+		var path = baseUrl+'/app/webroot/img/loading.gif';
+  		$('.table-responsive').css('text-align','center');
+	  	$('.table-responsive').html('<img id="loader-img" alt="" src="'+path+'" width="100"/>');
+	  	setTimeout(hide, 10000);  // 10 seconds
+	  	var hide = function(){
+		    $('.table-responsive').style.display = "none";
+		}
+  	}
+
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	var currDate = $("#datepicker").val();
+  	var projID = $(".table-responsive").attr('id');
+  	loader();
+    	$.ajax({
+			type: "POST",
+			url: baseUrl+"/pdetails/issue/",
+			data: { 'getDate' : currDate, 'projID' : projID},
+			success: function (data) {
+				$(".table-responsive").html(data);
+			}
+		});
 
   	$("#view-all").on("click", function() {
 	  	var projID = $(".table-responsive").attr('id');
   		$.ajax({
 				type: "POST",
-				url: "/pviewer-layout/pdetails/issue/",
+				url: baseUrl+"/pdetails/issue/",
 				data: {'projID' : projID},
 				success: function (data) {
 					$(".table-responsive").html(data);
@@ -92,7 +101,7 @@ $(document).ready(function(){
     	var currDate = $("#datepicker").val();
   		$.ajax({
 				type: "POST",
-				url: "/pviewer-layout/pdetails/copy/",
+				url: baseUrl+"/pdetails/copy/",
 				data: {'projID' : projID, 'today': today, 'currDate': currDate},
 				success: function (data) {
 					// $(".table-responsive").html(data);
@@ -111,9 +120,10 @@ $(document).ready(function(){
 	$("#datepicker").on("change", function () {
         var currDate = $(this).val();
         var projID = $(".table-responsive").attr('id');
+        loader();
     	$.ajax({
 			type: "POST",
-			url: "/pviewer-layout/pdetails/issue/",
+			url: baseUrl+"/pdetails/issue/",
 			data: { 'getDate' : currDate, 'projID' : projID},
 			success: function (data) {
 				$(".table-responsive").html(data);
@@ -153,7 +163,7 @@ function showBugList(ischecked){
 
 	$.ajax({
             type: "POST",
-            url: 'http://localhost/pviewer/pdetails/viewBugInfo',
+            url: baseUrl+'/pdetails/viewBugInfo',
             data: { issueId : issue },
             dataType: 'json', 
             
@@ -179,7 +189,7 @@ function editBug(bugId){
 	$('#addBugInfo2').show();
 	$.ajax({
             type: "POST",
-            url: 'http://localhost/pviewer/pdetails/editBugInfo',
+            url: baseUrl+'/pdetails/editBugInfo',
             data: { bugId : bugId },
             dataType: 'json', 
             
@@ -236,7 +246,7 @@ function deleteBug(bugId){
 	if(confirm("Are you sure?")){
    	 	$.ajax({
 	            type: "POST",
-	            url: 'http://localhost/pviewer/pdetails/deleteBugInfo',
+	            url: baseUrl+'/pdetails/deleteBugInfo',
 	            data: { bugId : bugId },
 	            dataType: 'json', 
 	            
@@ -258,7 +268,7 @@ function viewIssueDetails(id){
 
 	$.ajax({
             type: "POST",
-            url: 'http://localhost/pviewer/pdetails/getIssueFiles',
+            url: baseUrl+'/pdetails/getIssueFiles',
             data: { issueid : id }, 
             
             success: function(data){
@@ -315,7 +325,7 @@ function toggleDate(counter){
 function viewModifiedRelease(genIssue,type){
    $.ajax({
         type: "POST",
-        url: 'http://localhost/pviewer/pdetails/getModifiedFiles',
+        url: baseUrl+'/pdetails/getModifiedFiles',
         data: { issueId : genIssue, type: type }, 
         dataType: 'json',
         success: function(rows){
@@ -380,12 +390,12 @@ function editDeleteLegend(func,status,status_id)
 			{
 	            $.ajax({
 	            type: "POST",
-	            url: 'http://localhost/pviewer/pdetails/'+func,
+	            url: baseUrl+'/pdetails/'+func,
 	            data: { status : status }, 
 	            
 	            success: function(data){
 
-	             window.location.href='http://localhost/pviewer/pdetails/index/1';
+	             window.location.href=baseUrl+'/pdetails/index/1';
 	               
 	            },
 	            error: function(data){
@@ -415,7 +425,7 @@ function editLegend(func)
 
 		 $.ajax({
 	            type: "POST",
-	            url: 'http://localhost/pviewer/pdetails/'+func,
+	            url: baseUrl+'/pdetails/'+func,
 	            data: { 
 	            	statusOld : statusOld,
 	            	statusNew : statusNew
@@ -427,11 +437,11 @@ function editLegend(func)
 	            	if(data == 0)
 	            	alert('Status already exist');
 	            	else
-	             window.location.href='http://localhost/pviewer/pdetails/index/1';
+	             window.location.href=baseUrl+'/pdetails/index/1';
 	               
 	            },
 	            error: function(data){
-	             window.location.href='http://localhost/pviewer/pdetails/index/1';
+	             window.location.href=baseUrl+'/pdetails/index/1';
 	            //cannot connect to server
 	        }
 	       });
@@ -468,7 +478,7 @@ function insertLegend(func)
 	{
 		 $.ajax({
 	            type: "POST",
-	            url: 'http://localhost/pviewer/pdetails/'+func,
+	            url: baseUrl+'/pdetails/'+func,
 	            data: { 
 	            	newStatus : newStatus,
 	            	colorStatus :colorStatus
@@ -480,7 +490,7 @@ function insertLegend(func)
 	             if(data == 1)
 	             {
 	             alert('Status Added');
-	             window.location.href='http://localhost/pviewer/pdetails/index/1';
+	             window.location.href=baseUrl+'/pdetails/index/1';
 	         	 }
 	         	 else
 	         	 	alert('Status Already Exist');
