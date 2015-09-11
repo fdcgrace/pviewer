@@ -106,6 +106,7 @@
                 <h4 class="modal-title">Legend Settings</h4>
             </div>
             <div class="modal-body">
+            	<center>
             	<div id='table-legend'>
             		<?php
 						$imploded = implode('|', $selectedStatus);
@@ -118,7 +119,7 @@
                 		<tr>
                 			<td colspan='2'><input type='radio' id='radio-legend'>Add Legend
                 				<div id='add-legend' style='display:none'>
-                					
+
                 					<input type="text" id="legend-add" style='float:left'>
                 					 <div class="colorpicker-component demo demo-auto">
 					                    <input type="hidden" value="#ffffff" id='color-pick'/>		                 
@@ -137,8 +138,17 @@
 								<span class="label color-box2" style="background-color:<?php echo $value['Tblcolor']['color'];?>; z-index: 1022;"  id="<?php echo $value['Tblcolor']['color'];?>"><?php echo $value['Tblcolor']['status'];?></span>
 							</td>
 							<td> 
-								<input type='button' class='btn btn-primary btn-sm' onclick='showEdit("<?php echo $value['Tblcolor']['status']; ?>")' value='EDIT'>
-								<input type='button' class='btn btn-primary btn-sm' onclick='if(confirm("Are you Sure?") == true)editDeleteLegend("deleteLegend","<?php echo $value['Tblcolor']['status']; ?>","<?php echo $value['Tblcolor']['status_id']; ?>")' value="DELETE" id='legend-delete'>
+							
+									
+								<button id="btn1" type="button" onclick='showEdit("<?php echo $value['Tblcolor']['status']; ?>")'>
+							    <span class="glyphicon glyphicon-pencil"></span>
+								</button>
+
+								<button onclick='if(confirm("Are you Sure?") == true)editDeleteLegend("deleteLegend","<?php echo $value['Tblcolor']['status']; ?>","<?php echo $value['Tblcolor']['status_id']; ?>")'id='legend-delete'>
+							    <span class="glyphicon glyphicon-trash"></span>
+								</button>
+
+								
 							</td>
 						</tr>
 						<?php endforeach;?>
@@ -155,6 +165,7 @@
             	</div>
 
 
+            </center>
 
 
 
