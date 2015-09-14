@@ -112,6 +112,9 @@ div.btn-group > .btn-teams{
 .martop{
   margin: 50px 0 0 0;
 }
+.martop10{
+  margin-top: 10px !important;
+}
 
 @font-face {
     font-family: 'Glyphicons Halflings';
@@ -122,3 +125,12 @@ div.btn-group > .btn-teams{
       url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
   }
 
+.datepicker{ z-index: 9999999;}
+
+
+.ui-datepicker{
+z-index: 10000 !important;
+}
+.border-none{
+  border: none !important;
+}

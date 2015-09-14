@@ -254,8 +254,8 @@ function deleteBug(bugId){
 	            dataType: 'json', 
 	            
 	            success: function(rows){
-	            	alert('Bug Deleted');
-	            		location.reload();
+	            	     alert('Bug Deleted');
+	            		 location.reload();
 	            },
 	            error: function(data){
 	        }
@@ -399,7 +399,7 @@ function editDeleteLegend(func,status,status_id)
 	            
 	            success: function(data){
 
-	             location.reload();
+	               location.reload();
 	               
 	            },
 	            error: function(data){
@@ -440,7 +440,7 @@ function editLegend(func)
 	            	if(data == 0)
 	            	alert('Status already exist');
 	            	else
-	            location.reload();
+	                 location.reload();
 	               
 	            },
 	            error: function(xhr, textStatus, error){
@@ -494,7 +494,7 @@ function insertLegend(func)
 	             if(data == 1)
 	             {
 	             alert('Status Added');
-	            location.reload();
+	              location.reload();
 	         	 }
 	         	 else
 	         	 	alert('Status Already Exist');

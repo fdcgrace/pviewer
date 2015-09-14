@@ -3,13 +3,9 @@
 	<div class="alert alert-success" style="display:none">
 		<strong>Success!</strong> Issues success
 	</div>
-	<h3>Project Detail</h3>
+	<h3>Project Detail
+	</h3>
 	<hr>
-
-
-
-
-
 
 	<p>To view issues, select date from Calendar. Issue is shown by date and grouped by status.</p>
 	<div id="datepicker"></div>
@@ -51,7 +47,7 @@
 	</div>	
 	<hr>
 	<div data-example-id="simple-responsive-table" class="bs-example">
-	    <div class="table-responsive" id="<?php echo $this->Session->read('project_id');?>">
+	    <div style="border:none;" class="table-responsive " id="<?php echo $this->Session->read('project_id');?>">
 			
 	    </div><!-- /.table-responsive -->
 	    <p>

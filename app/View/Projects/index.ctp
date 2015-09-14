@@ -8,7 +8,11 @@
 
 <section class="container-fluid flip-scroll" id="content">
 	<div class="row mt">
-		<h3> Project List <?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); ?> </h3>
+		<h3> Project List 
+			<?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); 
+			
+			?>
+			</h3>
 		<hr>
 		<div class="col-md-12">
 			<div class="content-panel">

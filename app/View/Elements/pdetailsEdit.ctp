@@ -3,12 +3,16 @@
 <?php 
 $pdetails = $content['pdetails'];
 $stat = $content['stat'];
+$members = $content['members'];
 foreach ($pdetails as $Pdetail):
 	echo $this->Form->create('Pdetail');
 	echo "<div class='form-group'>";
-	echo $this->Form->input('date', array('label' => 'Date Assigned', 'type' => 'text', 'value' => $Pdetail['Pdetail']['deadline'], 'class' => 'form-control'));
+	echo $this->Form->input('start_date', array('label' => 'Start Date', 'type' => 'text', 'value' => $Pdetail['Pdetail']['start_date'], 'class' => 'form-control datepicker', 'id' => 'start'));
 	echo "</div>
-		 <div class='form-group'>";
+		<div class='form-group'>";
+	echo $this->Form->input('deadline', array('label' => 'Deadline', 'type' => 'text', 'value' => $Pdetail['Pdetail']['deadline'], 'class' => 'form-control datepicker', 'id' => 'end'));
+	echo "</div>
+		<div class='form-group'>";
 	echo $this->Form->input('issue_no', array('label' => 'Issue No.', 'type' => 'text', 'value' => $Pdetail['Pdetail']['issue_no'], 'class' => 'form-control'));
 	echo "</div>
 		<div class='form-group'>";
@@ -23,7 +27,8 @@ foreach ($pdetails as $Pdetail):
 		'label' => 'Assignee', 
 		'empty' => 'Please Select',
 		'selected' => $Pdetail['Pdetail']['member'],
-		'class' => 'form-control'
+		'class' => 'form-control',
+		'options' => $members
 		)
 	);
 	echo "</div>
@@ -59,10 +64,29 @@ foreach ($pdetails as $Pdetail):
 </div>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('body').on('hidden.bs.modal', '.modal', function () {
-			$(this).removeData('bs.modal');
-		});
+$(document).ready(function(){
+	$('body').on('hidden.bs.modal', '.modal', function () {
+		$(this).removeData('bs.modal');
 	});
+	$(".datepicker").each(function() {
+		var end = $("#end").attr('value');
+  		if($(this).attr('id') == 'end') {
+  			$(this).datepicker({
+		      numberOfMonths: 3,
+		      showButtonPanel: true,
+		      dateFormat: "yy-mm-dd"
+		    });
+  		} else {
+  			$(this).datepicker({
+  				minDate: "-3M",
+  				maxDate: end,
+  				numberOfMonths: 2,
+  				showButtonPanel: true,
+  				dateFormat: "yy-mm-dd"
+  			});
+  		}
+  	});
+});
 </script>
+
 
