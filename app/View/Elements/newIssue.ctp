@@ -1,3 +1,8 @@
+<?php 
+	$members = $content['members'];
+	$projects = $content['projects'];
+	$stat = $content['stat'];
+?>
 <div class="modal-header">
 	<h4 class="modal-title" id="myModalLabel"><?php echo __('Add Issue'); ?></h4>
 </div>
@@ -7,7 +12,14 @@
 		<fieldset>
 		<?php
 			echo "<div class='form-group'>";
-			echo $this->Form->input('project_id', array('label' => 'Project Name', 'class' => 'form-control'));
+			//echo $this->Form->input('project_id', array('label' => 'Project Name', 'class' => 'form-control'));
+			echo $this->Form->input('project_id', array(
+				'class' => 'form-control',
+				'type'=>'select', 
+				'label' => 'Project Name', 
+				'options' => $projects
+					)
+				);
 			echo "</div>
 				 <div class='form-group'>";
 			echo $this->Form->input('issue_no', array('label' => 'Issue number', 'class' => 'form-control'));
@@ -19,7 +31,14 @@
 			echo $this->Form->input('task_description', array('label' => 'Task Description', 'class' => 'form-control'));
 			echo "</div>
 				 <div class='form-group'>";
-			echo $this->Form->input('member', array('label' => 'Assign To', 'class' => 'form-control'));
+			//echo $this->Form->input('member', array('label' => 'Assign To', 'class' => 'form-control'));
+			echo $this->Form->input('member', array(
+				'class' => 'form-control',
+				'type'=>'select', 
+				'label' => 'Assign To', 
+				'options' => $members
+					)
+				);
 			echo "</div>
 				 <div class='form-group'>";
 			echo $this->Form->input('issue_link', array('label' => 'Issue link', 'class' => 'form-control'));
@@ -28,17 +47,8 @@
 			echo $this->Form->input('status', array(
 				'class' => 'form-control',
 				'type'=>'select', 
-				'label' => 'Status', 
-				'empty' => 'Please Select',
-				'options' => array(
-						'0' => 'Inactive',
-						'1' => 'In Progress',
-						'2' => 'Pending',
-						'3' => 'For Confirmation',
-						'4' => 'For Testing',
-						'5' => 'Released',
-						'6'	=> 'Closed'
-						)
+				'label' => 'Status',
+				'options' => $stat
 					)
 				);
 			echo "</div>";

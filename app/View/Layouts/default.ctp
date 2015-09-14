@@ -259,6 +259,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
+		                  <!-- <li><?php //echo $this->Html->link(__('Issue'), array('controller' => 'pdetails', 'action' => 'getIssue'));?></li> -->
 		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
 		                </ul>
 		            </li>

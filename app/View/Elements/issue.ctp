@@ -3,13 +3,18 @@
 	echo $this->Html->css('bars-pill', null, array('inline' => true));
 	echo $this->Html->script('jquery.barrating', array('inline' => true));
 	echo $this->Html->script('bars', array('inline' => true));
+	
 ?>
-
-<div class="panel panel-default">
+<div class="container-fluid" style="margin:0 0 10px 0; padding-left:0px;">
+	<?php
+	echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success fleft', 'data-toggle' => 'modal', 'data-target' => '#addForm'));
+	?>
+</div>
+<div class="panel panel-default" style="padding-left:0px;">
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Project ID</th>
+				<th>Project ID test</th>
 				<th>Deadline</th>
 				<th>Issue Number</th>
 				<th>Task Description</th>
@@ -76,7 +81,7 @@
 				<td>
 					<div class="pull-right sub-menu">
 						<?php 
-							echo $stat = $Pdetail['Pdetail']['status'];
+							$stat = $Pdetail['Pdetail']['status'];
 							foreach ($legendColorModal as $key => $value) {
 								foreach ($value as $nkey => $nval) {
 									if($stat == $nval['status_id']){
