@@ -103,7 +103,7 @@
                 			<td colspan='2'><input type='radio' id='radio-legend'>Add Legend
                 				<div id='add-legend' style='display:none'>
 
-                					<input type="text" id="legend-add" style='float:left'>
+                					<input type="text" id="legend-add" style='float:left' >
                 					 <div class="colorpicker-component demo demo-auto">
 					                    <input type="hidden" value="#ffffff" id='color-pick'/>		                 
 					                    <input type='text' class='input-group-addon'>
@@ -118,7 +118,7 @@
                 		  	?>
                 		<tr>
                 			<td>
-								<span class="label color-box2" style="background-color:<?php echo $value['Tblcolor']['color'];?>; z-index: 1022;"  id="<?php echo $value['Tblcolor']['color'];?>"><?php echo $value['Tblcolor']['status'];?></span>
+								<div class="label color-box2" style="background-color:<?php echo $value['Tblcolor']['color'];?>; z-index: 1022;"  id="<?php echo $value['Tblcolor']['color'];?>"><?php echo $value['Tblcolor']['status'];?></div>
 							</td>
 							<td> 
 							
