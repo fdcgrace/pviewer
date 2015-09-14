@@ -121,6 +121,7 @@ $(document).ready(function(){
 	$("#datepicker").on("change", function () {
 
         var currDate = $(this).val();
+
         var projID = $(".table-responsive").attr('id');
         loader();
     	$.ajax({
@@ -254,7 +255,7 @@ function deleteBug(bugId){
 	            
 	            success: function(rows){
 	            	alert('Bug Deleted');
-	            	$('#myModal4').close();
+	            		location.reload();
 	            },
 	            error: function(data){
 	        }
@@ -398,7 +399,7 @@ function editDeleteLegend(func,status,status_id)
 	            
 	            success: function(data){
 
-	             window.location.href=baseUrl+'/pdetails/index/1';
+	             location.reload();
 	               
 	            },
 	            error: function(data){
@@ -439,7 +440,7 @@ function editLegend(func)
 	            	if(data == 0)
 	            	alert('Status already exist');
 	            	else
-	             window.location.href=baseUrl+'/pdetails/index/1';
+	            location.reload();
 	               
 	            },
 	            error: function(xhr, textStatus, error){
@@ -493,7 +494,7 @@ function insertLegend(func)
 	             if(data == 1)
 	             {
 	             alert('Status Added');
-	             window.location.href=baseUrl+'/pdetails/index/1';
+	            location.reload();
 	         	 }
 	         	 else
 	         	 	alert('Status Already Exist');
