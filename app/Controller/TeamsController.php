@@ -164,7 +164,7 @@ class TeamsController extends AppController {
 		}
 		
 		file_put_contents($filename, "");
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'view'));
 	}
 
 	public function team() {
@@ -235,7 +235,9 @@ class TeamsController extends AppController {
 					)
 				);
 
-				var_dump($content);
+				$stat = $this->Tblcolors->find('all', array('fields' => array('status_id','status')));
+				$content['stat']=$stat;
+
 				$view = new View($this, false);
 				return $view->element('project', array('content' => $content));
 			}

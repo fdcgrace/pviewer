@@ -1,5 +1,8 @@
-<?php $project = $content['project'];?>
-<?php $unassigned = $content['unassigned'];?>
+<?php 
+	$project = $content['project'];
+	$unassigned = $content['unassigned'];
+	$stat = $content['stat'];
+?>
 <div id="project_content" class="panel panel-success">
 	<div class="panel-heading" role="tab" id="headingTwo">
 		<h4 class="panel-title">
@@ -29,7 +32,19 @@
 						<td><?php echo h($u_assign['Pdetail']['issue_no']); ?></td>
 						<td><?php echo h($u_assign['Pdetail']['task_description']); ?></td>
 						<td style="word-wrap:break-word"><a href="<?php echo h($u_assign['Pdetail']['issue_link']); ?>" target="_blank"><?php echo h($u_assign['Pdetail']['issue_link']); ?></a></td>
-						<td><?php echo h($u_assign['Pdetail']['status']); ?></td>
+						<td>
+							<?php
+								//echo h($u_assign['Pdetail']['status']); 
+							$getstat = $u_assign['Pdetail']['status']; 
+							foreach($stat as $key => $value) {
+								foreach ($value as $key1 => $nval) {
+									if($getstat == $nval['status_id']){
+								        echo $nval['status']; 
+								    }
+								}
+							}
+							?>
+						</td>
 						<td><?php echo h($u_assign['Pdetail']['deadline']); ?></td>
 					</tr>
 					<?php endforeach;?>
