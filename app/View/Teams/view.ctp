@@ -50,7 +50,7 @@
 	});
 </script>
 
-<div class="container-fluid martop">
+<div class="container-fluid martop"> <h3> Assign Issue </h3> <hr>
 	<div class="row">
 		<div class="col-md-3">
 			<select id="team" class="form-control" style="width:100%">
@@ -67,6 +67,13 @@
 				<option class="issue" id="<?php echo h($pdetail['Project']['team_id']);?>" value="<?php echo h($pdetail['Project']['id']);?>"><?php echo h($pdetail['Project']['p_name']);?></option>
 				<?php endforeach;?>
 			</select>
+		</div>
+		<div class="col-md-3">
+			<div class="btn-group">
+				<?php
+					echo $this->Html->link(__('Save'), array('controller' => 'Teams', 'action' => 'save'), array('class' => 'btn btn-default'));
+				?>
+				</div>
 		</div>
 	</div>
 	<br><br>

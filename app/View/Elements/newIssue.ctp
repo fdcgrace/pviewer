@@ -36,6 +36,7 @@
 				'class' => 'form-control',
 				'type'=>'select', 
 				'label' => 'Assign To', 
+				'empty' => array(0 => 'Select Member'),
 				'options' => $members
 					)
 				);
