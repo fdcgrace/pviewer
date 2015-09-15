@@ -1,0 +1,149 @@
+/* CSS Document */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+
+
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  line-height: 1.5;
+  color: #FFF;
+} 
+
+
+p {
+	font-size:22px;
+	line-height:40px;
+	color: #333;
+	}
+ 
+.tabs {
+    width: 650px;
+    float: none;
+    list-style: none;
+    padding: 0;
+}
+ 
+.tabs li {
+	display: block;
+}
+
+.labels:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.labels label {
+	display: inline-block;
+	float: left;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    font-size: 17.6px;
+    font-weight: normal;
+    background: #2c3e50;
+    cursor: pointer;
+}
+ 
+.tabs label:hover {
+    background: #3498db;
+}
+.tabs label:active {
+    background: #3498db;
+}
+ 
+.tab-content {
+    display: none;
+    width: 87%;
+    padding: 15px;
+    float:left;
+    border:1px solid #ccc;
+    background-color:#ffffff;
+}
+
+
+.tabs input[type=radio] {
+    display:none;
+}
+ 
+[id^=tab]:checked ~ div[id^=tab-content] {
+    display: block;
+}
+
+[id^=tab]:checked ~ [id^=label]  {
+    background: #08C;
+    color: white;
+}
+
+
+
+
+#relatedContent {
+	display: block;
+	clear: both;
+  	max-width: 800px;
+  	margin: 100px auto 0;
+}
+
+#relatedContent h3 {
+  font-size: 30px;
+  text-align: center;
+  color: #FFF;
+}
+
+#relatedContent .item {
+  	max-width: 44%;
+  	padding: 3%;
+  	float: left;
+  	text-align: center;
+}
+
+#relatedContent .item a img {
+ 	max-width: 100%;
+}
+#left-column {
+  float: right;/*
+  border-right: solid #2c3e50;*/
+  width: 50%;
+ 
+}
+
+#right-column {
+    float: right;
+  width: 50%;
+    
+}
+div.scroll {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+#tbody-bug th{
+    font-weight: bold;
+    color:white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FFB973;
+    background: #FFB973 -webkit-gradient(linear, left top, left bottom, from(#D96C00), to(#FFB973)) no-repeat;
+    background: #FFB973 -moz-linear-gradient(top, #D96C00, #FFB973) no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#FFB973) no-repeat;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D96C00, endColorstr=#D96C00)" no-repeat;
+
+
+
+}
+
+#tbody-bug tr{
+  border: 1px solid silver;
+}
+#tbody-bug td{
+  border: 1px solid silver;
+   padding-left: 10px;
+    padding-right: 10px;
+}
+#tbody-bug th{
+  border: 1px solid silver;
+}

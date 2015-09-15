@@ -30,4 +30,13 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+	public $validate = array(
+		'team' => array(
+			'nonEmpty' => array(
+                'rule' => array('notEmpty'),
+                'allowEmpty' => false
+            )
+		)
+	);
 }

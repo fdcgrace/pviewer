@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  */
 class Pdetail extends AppModel {
+	public $actsAs = array('Containable');
 	public $belongsTo = array(
 		'Project' => array(
 			'className' => 'Project',

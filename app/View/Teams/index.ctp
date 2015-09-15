@@ -1,63 +1,78 @@
+<?php 
+	echo $this->Html->script(array('definedjs'));
+?>
 <div class="container-fluid">
-<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
-	<hr>
-	<div class="row">
-	<?php $counter = 0; ?>
-	<?php foreach ($team as $key => $teams): ?>
-		<?php $counter++; ?>
-			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			  	<div class="panel panel-default">
-			    	<div class="panel-heading" role="tab" id="headingOne">
-			      		<h4 class="panel-title">
-			        		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $counter;?>" aria-expanded="true" aria-controls="collapseOne">
-				      		<?php echo $teams['Team']['team'];?>
-							</a>
-			      		</h4>
-			    	</div>
-		    		<div id="<?php echo $counter;?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-		      			<div class="panel-body">
-					      	<table class="table table-hover">
-					      	<?php if($teams['Project']['p_name']): ?>
+
+	<!-- <h3>Team Leader List</h3> -->
+	<h3> Team Leader List <?php echo $this->Html->link('', array('controller' => 'teams', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#addForm', 'id' => 'addBtn')); ?> </h3>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div data-example-id="simple-responsive-table" class="bs-example">
+    				<div class="table-responsive">
+						<table class="table table-striped teams">
+
 							<thead>
-								<tr>
-									<th><?php echo $this->Paginator->sort('Project Name'); ?></th>
-									<th><?php echo $this->Paginator->sort('Link'); ?></th>
-									<th><?php echo $this->Paginator->sort('Team Assigned'); ?></th>
-									<th><?php echo $this->Paginator->sort('Number of Task'); ?></th>
-									<th><?php echo $this->Paginator->sort('Created Date'); ?></th>
-									<th><?php echo $this->Paginator->sort('Modifiedd Date'); ?></th>
-									<th class="actions"><?php echo __('Actions'); ?></th>
-								</tr>
+								<th><?php echo $this->Paginator->sort('Team Name'); ?></th>
+								<th><?php echo $this->Paginator->sort('Created'); ?></th>
+								<th><?php echo $this->Paginator->sort('Modified'); ?></th>
+								<th><?php echo $this->Paginator->sort('Status'); ?></th>
+								<th class="actions"><?php echo __('Actions'); ?></th>
 							</thead>
-					      	<?php //foreach ($teams as $key2 => $val): ?>
-					      			<?php //if ($key2 != 0 ):?>
-					      			
-										<tbody>
-											<tr>
-												<td><?php echo h($teams['Project']['p_name']); ?></td>
-												<td><a href="<?php echo h($teams['Project']['link']); ?>" target="_blank"><?php echo h($teams['Project']['link']); ?></a></td>
-												<td><?php echo h($teams['Team']['team']); ?></td>
-												<td><?php echo h($teams[0]['total_num_task']); ?></td>
-												<td><?php echo h($teams['Project']['created']); ?></td>
-												<td><?php echo h($teams['Project']['modified']); ?></td>
-												<td class="actions">
-													<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $teams['Project']['id'])); ?>
-													<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $teams['Project']['id'])); ?>
-													<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $teams['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $teams['Project']['id']))); ?>
-												</td>
-											</tr>
-										</tbody>
-									<?php else:?>
-										<tbody>
-											<td>No Issue</td>
-										</tbody>
-									<?php endif;?>
-							<?php// endforeach; ?>
-							</table>
-				      	</div>
-				    </div>
-			  	</div>
+
+							<tbody>
+								<?php foreach ($teams as $team): ?>
+									<tr>
+										<td><?php echo h($team['Team']['team']); ?></td>
+										<td><?php echo h($team['Team']['created']); ?></td>
+										<td><?php echo h($team['Team']['modified']); ?></td>
+										<td><?php echo $team['Team']['del_flg'] == 0 ? $deactivate : $activate; ?></td>
+										<td class="actions">
+											<?php echo $this->Html->link(__(''), array('#'), array('label' => false, 'class' => 'btn glyphicon glyphicon-eye-open view', 'flag' => $team['Team']['del_flg'])); ?>
+											<?php echo $this->Html->link(__(''), array('action' => 'edit', $team['Team']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); 
+											?>
+											<?php if ($team['Team']['del_flg']) :?>
+											<?php echo $this->Form->postLink(__(''), array('action' => 'deactivate', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to deactivate # %s?', $team['Team']['id']))); ?>
+											<?php else :?>
+											<?php echo $this->Form->postLink(__(''), array('action' => 'activate', $team['Team']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-user', 'confirm' => __('Are you sure you want to activate # %s?', $team['Team']['id']))); ?>
+											<?php endif;?>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 			</div>
-	<?php endforeach; ?>
+		</div>
+		<div class="col-md-6">
+			<div id="pdfRenderer" class="panel panel-default mini-layout">
+			</div> 
+		</div>
+	</div>
+	<div class=" row paging btn-group pagination-margin">
+	<?php
+		echo $this->Paginator->prev('< ' . __(''), array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary prev disabled'));
+		echo $this->Paginator->numbers(array('separator' => '', 'class' => 'forange btn btn-sm btn-default'));
+		echo $this->Paginator->next(__('') . ' >', array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn btn-sm btn-primary next disabled'));
+	?>
 	</div>
 </div>
+
+<!--editForm button -->
+<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
+	</div>
+</div>
+<!--end editForm button -->
+
+<!--addForm button -->
+<div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
+	</div>
+</div>
+<!--end addForm button -->

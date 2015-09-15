@@ -1,0 +1,141 @@
+
+
+.fixWidth{
+  width: 170px;
+}
+.br-theme-bars-1to10 .br-widget{
+  height: 10px !important;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+  padding:4px !important;
+  border-top:none !important;
+}
+
+.br-theme-bars-1to10{
+  width: 121px;
+}
+.submitButton{
+  float: left;
+}
+.pull-right{
+  float: left !important;
+}
+
+.fright{
+  float: right;
+}
+.fleft{
+  float: left;
+}
+#flashMessage{
+  background-color: #ed412b;
+  color: #fff;
+  padding: 5px;
+}
+.wFirty{
+  width: 50%;
+}
+.buttons{
+  padding: 10px;
+}
+.mar10{
+  margin-right: 10px;
+}
+.mini-layout{
+    min-height: 200px;
+    background-color:#E6E6E6;
+    width: 100%;
+}
+
+.teams th{
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+
+.form{
+  padding: 0 10px 10px 10px;
+}
+
+.btn-orange{
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+  border-color: #FF9933 !important;
+}
+
+.btn-teams {
+  background: linear-gradient(#FF944D,#FF6600);
+  color: #FFFFFF;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center; 
+}
+div.btn-group > .btn-teams{
+  background: #E6E6E6;
+  border: 1px #E6E6E6;
+}
+
+.members th {
+  background: linear-gradient(#00CCFF,#008FB2);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center;
+}
+
+.members th a{
+  color:#fff;
+}
+.teams th a{
+  color:#fff;
+}
+
+.btn-members {
+  color: #00CCFF;
+}
+div.btn-group > .btn-teams{
+  background: #E6E6E6;
+  border: 1px #E6E6E6;
+}
+.forange{
+  color: #FF9933 !important;
+}
+.pagination-margin{
+  margin: 10px 0 0 14px;
+}
+.martop{
+  margin: 50px 0 0 0;
+}
+.martop10{
+  margin-top: 10px !important;
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
+    src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.woff') format('woff'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  }
+
+.datepicker{ z-index: 9999999;}
+
+
+.ui-datepicker{
+z-index: 10000 !important;
+}
+.border-none{
+  border: none !important;
+}
+
+.form{
+  padding: 0 10px 10px 10px;
+}
+

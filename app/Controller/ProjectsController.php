@@ -18,6 +18,11 @@ class ProjectsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('controllerID', 1);
+	}
+
 /**
  * index method
  *
@@ -44,7 +49,10 @@ class ProjectsController extends AppController {
 
 					),
 	            'group' => array('Pdetail.project_id'),
-	            'fields' => array('count(Pdetail.project_id) as total_num_task', '*', 'Leader.team')
+
+	            'fields' => array('count(Pdetail.project_id) as total_num_task', '*', 'Leader.team'),
+	            'conditions' => array('Project.del_flg' => 1)
+
         	);
 		
 		$pagination = $this->paginate('Project');
@@ -72,6 +80,7 @@ class ProjectsController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->autoRender = false;
 		if ($this->request->is('post')) {
 			$this->Project->create();
 			if ($this->Project->save($this->request->data)) {
@@ -88,8 +97,8 @@ class ProjectsController extends AppController {
 				)
 			)
 		);
-
-		$this->set(compact('teams'));
+		$view = new View($this, false);
+		return $view->element('newProj', array('teams' => $teams));
 	}
 
 /**
@@ -100,6 +109,7 @@ class ProjectsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->autoRender = false;
 		if (!$this->Project->exists($id)) {
 			throw new NotFoundException(__('Invalid project'));
 		}
@@ -121,8 +131,14 @@ class ProjectsController extends AppController {
 				)
 			)
 		);
-
-		$this->set(compact('teams'));
+		$data = $this->Project->find('first', array(
+			'conditions' => array('Project.id' => $id),
+			'fields' => 'team_id',
+			'recursive' => 0
+			)
+		);
+		$view = new View($this, false);
+		return $view->element('editProj', array('teams' => $teams, 'data' => $data));
 	}
 
 /**
@@ -144,5 +160,34 @@ class ProjectsController extends AppController {
 			$this->Session->setFlash(__('The project could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+	public function deactivate($id = null){
+		$this->Project->id = $id;
+		if (!$this->Project->exists()) {
+			throw new NotFoundException(__('Invalid project'));
+		}
+
+		if ($this->Project->saveField("del_flg", 0)) {
+			$this->Session->setFlash(__('The project has been deactivated.'));
+		} else {
+			$this->Session->setFlash(__('The project could not be deactivated. Please, try again.'));
+		}
+
+		$this->redirect($this->referer());
+	}
+
+	public function activate($id = null){
+		$this->Project->id = $id;
+		if (!$this->Project->exists()) {
+			throw new NotFoundException(__('Invalid project'));
+		}
+		
+		if ($this->Project->saveField("del_flg", 1)) {
+			$this->Session->setFlash(__('The project has been activated.'));
+		} else {
+			$this->Session->setFlash(__('The project could not be activated. Please, try again.'));
+		}
+
+		$this->redirect($this->referer());
 	}
 }

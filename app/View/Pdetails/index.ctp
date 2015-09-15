@@ -1,134 +1,168 @@
-<div class="container-fluid">
-	<h3>Project Detail</h3>
-	<div class="row">
-		<div class="col-md-8">
-			<?php echo $this->Html->link(__('Project List'), array('controller' => 'Projects', 'action' => 'index'), array('class' => 'btn btn-primary')); ?>
-			<?php echo $this->Html->link(__('Create New Issue'), array('action' => 'add', $p_id), array('class' => 'btn btn-success')); ?>
+
+<section class="container-fluid" id="content">
+	<div class="alert alert-success" style="display:none">
+		<strong>Success!</strong> Issues success
+	</div>
+	<h3>Project Detail
+	</h3>
+	<hr>
+
+	<p>To view issues, select date from Calendar. Issue is shown by date and grouped by status.</p>
+	<div id="datepicker"></div>
+	<div class="row mt">
+		<div class="col-md-5">
+			<div style="float:left; padding-right:10px;">
+				<?php echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
+			</div>
+			<div style="float:left;">
+				<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
+			</div>
+			<?php 
+				date_default_timezone_set("Asia/Manila"); 
+				$todayDate = date("Y-m-d"); 
+				$baseUrl= Router::url('/', true);
+			?>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-7" style="text-align:right;">
 			Legend: 
-			<?php foreach ($legendColor as $key => $value): ?>
-				<span class="label color-box" style="background-color:<?php echo $key;?>"  id="<?php echo $key;?>"><?php echo $value;?></span>
-			<?php endforeach;?>
+			<?php
+				$statusArray= array();
+				$colorArray = array();
+				$selectedStatus = array();
+				foreach ($legendStatusId as $statusId => $status) {
+					$statusArray[] = $status;
+				}
+
+				foreach ($legendColor as $key => $value): ?>
+					<span class="label color-box" style="background-color:<?php echo $key;?>"  id="<?php echo $key;?>">
+						<?php 
+							$colorArray[] = $key;
+							$selectedStatus[] = $value;
+							echo $value;
+						?>
+					</span> &nbsp;
+			<?php endforeach; ?>
+			<a href="#" class="btn-setting"><img class='legend-modal' src='<?php echo $baseUrl; ?>img/setting.png' style='width:18px;height=18px'></a>
 		</div>
 	</div>	
 	<hr>
-	<div class="container-fluid">
-		<div class="row">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th><?php echo $this->Paginator->sort('Project ID'); ?></th>
-						<th><?php echo $this->Paginator->sort('Deadline'); ?></th>
-						<th><?php echo $this->Paginator->sort('Issue Number'); ?></th>
-						<!-- <th><?php //echo $this->Paginator->sort('Sub Task Description'); ?></th> -->
-						<th><?php echo $this->Paginator->sort('Task Description'); ?></th>
-						<th><?php echo $this->Paginator->sort('Assignee'); ?></th>
-						<th><?php echo $this->Paginator->sort('Issue Link'); ?></th>
-						<th><?php echo $this->Paginator->sort('Status'); ?></th>
-						<th><?php echo $this->Paginator->sort('Created Date'); ?></th>
-						<th><?php echo $this->Paginator->sort('Modified Date'); ?></th>
-						<th class="actions"><?php echo __('Actions'); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($pdetails as $Pdetail): ?>
-						<?php echo $this->Form->create('Pdetail'); ?>
-						<tr style="background-color:<?php echo h($Pdetail['TblColor']['color']);?>">
-							<td><?php echo h($Pdetail['Pdetail']['project_id']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
-							<!-- <td><?php //echo h($Pdetail['Pdetail']['sub_task']); ?></td> -->
-							<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
-							<td>
-								<?php echo $this->Form->input('member', array(
-									'type'=>'select', 
-									'label' => '', 
-									'empty' => 'Please Select',
-									'selected' => $Pdetail['Pdetail']['member']
-									)
-								); ?>
-							</td>
-							<td>
-								<a href="<?php echo h($Pdetail['Pdetail']['issue_link']);?>" target="_blank"><?php echo h($Pdetail['Pdetail']['issue_link']);?></a>
-							</td>
 
-							<td><?php echo $this->Form->input('status', array(
-								'type'=>'select', 
-								'label' => '', 
-								'empty' => 'Please Select',
-								'default' => $Pdetail['Pdetail']['status'],
-								'selected' => $Pdetail['Pdetail']['status'],
-								'options' => array(
-										'0' => 'Inactive',
-										'1' => 'In Progress',
-										'2' => 'Pending',
-										'3' => 'For Confirmation',
-										'4' => 'For Testing',
-										'5' => 'Released',
-										'6'	=> 'Closed'
-										)
-									)
-								); ?>
-							</td>
-							<td><?php echo h($Pdetail['Pdetail']['created']); ?></td>
-							<td><?php echo h($Pdetail['Pdetail']['modified']); ?></td>
-							<td class="actions">
-								<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
-								<?php echo $this->Form->submit(__('Update Status'), array('class' => 'btn btn-primary btn-xs'),array('action' => 'index')); ?>
-								<?php //echo $this->Html->link(__('View'), array('action' => 'view', $Pdetail['Pdetail']['id'])); ?>
-								<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('class' => 'btn btn-primary btn-xs')); ?>
-								<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $Pdetail['Pdetail']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $Pdetail['Pdetail']['id']), 'class' => 'btn btn-primary btn-xs')); ?>
-							</td>
-							<td>
-
-							</td>
-						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-		<p>
-			<?php
-				echo $this->Paginator->counter(array(
-					'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-				));
-				?>	
+	<div data-example-id="simple-responsive-table" class="bs-example">
+	    <div style="border:none;" class="table-responsive " id="<?php echo $this->Session->read('project_id');?>">
+			
+	    </div><!-- /.table-responsive -->
+	    <p>
 		</p>
 		<div class="paging">
-			<?php
-				echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-				echo $this->Paginator->numbers(array('separator' => ''));
-				echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-			?>
 		</div>
+    </div>
+</section>
+
+<!--addForm button -->
+<div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
 	</div>
 </div>
+<!--end addForm button -->
 
-<script>
-$(document).ready(function(){
 
-	$('.color-box').colpick({
-		colorScheme:'dark',
-		layout:'rgbhex',
-		color:'ff8800',
-		onSubmit:function(hsb,hex,rgb,el) {
-			$(el).css('background-color', '#'+hex);
-			$(el).colpickHide();
+<!--editForm button -->
+<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    </div>
+	</div>
+</div>
+<!--end editForm button -->
 
-			var val = $(el).text();
-			var bcolor = '#'+hex;
-			$.ajax({
-				type: "POST",
-				url: "pdetails/",
-				data: { 'changeColor' : val, 'color': bcolor},
-				success: function (data) {
-					location.reload();
-				}
-			});
-	
-		}
-	});
-	
-});
-</script>
+<div class="bs-example">
+</div>
+
+<!-- Button HTML (to Trigger Modal) -->
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Legend Settings</h4>
+            </div>
+            <div class="modal-body">
+            	<center>
+            	<div id='table-legend'>
+            		<?php
+						$imploded = implode('|', $selectedStatus);
+						$colorArrayImploded = implode('|', $colorArray);
+						
+            		?>
+            		<input type="hidden" value="<?php  echo $imploded; ?>" id="hide-status">
+            		<input type="hidden" value="<?php  echo $colorArrayImploded; ?>" id="hide-color">
+                	<table class='table table-striped'>
+                		<tr>
+                			<td colspan='2'><input type='radio' id='radio-legend'>Add Legend
+                				<div id='add-legend' style='display:none'>
+
+                					<input type="text" id="legend-add" style='float:left' >
+                					 <div class="colorpicker-component demo demo-auto">
+					                    <input type="hidden" value="#ffffff" id='color-pick'/>		                 
+					                    <input type='text' class='input-group-addon'>
+					                 </div>
+                					<input type='button' class='btn btn-primary btn-sm' style='float:left' onclick='insertLegend("insertLegend");' value="ADD" >
+                				</div>
+                			</td>
+                		</tr>
+                		<?php
+                		  foreach ($legendColorModal as $value): 
+                		  //	echo $value['Tblcolor']['color'];
+                		  	?>
+                		<tr>
+                			<td>
+								<div class="label color-box2" style="background-color:<?php echo $value['Tblcolor']['color'];?>; z-index: 1022;"  id="<?php echo $value['Tblcolor']['color'];?>"><?php echo $value['Tblcolor']['status'];?></div>
+							</td>
+							<td> 
+							
+									
+								<button id="btn1" type="button" onclick='showEdit("<?php echo $value['Tblcolor']['status']; ?>")'>
+							    <span class="glyphicon glyphicon-pencil"></span>
+								</button>
+
+								<button onclick='if(confirm("Are you Sure?") == true)editDeleteLegend("deleteLegend","<?php echo $value['Tblcolor']['status']; ?>","<?php echo $value['Tblcolor']['status_id']; ?>")'id='legend-delete'>
+							    <span class="glyphicon glyphicon-trash"></span>
+								</button>
+
+								
+							</td>
+						</tr>
+						<?php endforeach;?>
+                	</table>
+            	</div>	
+            	<div id="divEdit" style="display:none">
+            		<div id="back" style='margin-bottom:30px;'>
+            			<div onclick='backFunction()'> BACK >> </div>
+            		<!-- 	<img class='legend-modal' onclick='backFunction()' src='<?php echo $baseUrl; ?>img/back.png' style='width:18px;height=18px'> -->
+            		</div>
+            		<input type='text' id='edit-status'>
+            		<input type='button' class='btn btn-primary btn-sm' onclick='editLegend("editLegend");' value="SAVE" id='legend-edit'>
+            		<input type='hidden' id='edit-hidden'>
+            	</div>
+
+
+            </center>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->element('pdetailsIssueSpecs'); ?> <!--Issue Specs Page -->
+
+<?php echo $this->element('pdetailsBugInfo'); ?> <!--Bug Info Page -->
+
+<?php echo $this->Html->script(array('pdetails')); ?> <!--js -->
+
