@@ -25,5 +25,8 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+<<<<<<< HEAD
 
 app/webroot/js/jquery.dcjqaccordion.2.7.js
+=======
+>>>>>>> origin/master

@@ -159,7 +159,6 @@ class ProjectsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
-
 	public function deactivate($id = null){
 		$this->Project->id = $id;
 		if (!$this->Project->exists()) {

@@ -29,7 +29,7 @@ class TeamsController extends AppController {
  * @return void
  */
 
-	public function view() {
+	public function index() {
 		$team = $this->Team->find('all', array('conditions' => array('Team.del_flg' => 1)));
 		$project = $this->Project->find('all', array('conditions' => array('Project.del_flg' => 1)));
 		foreach ($team as $key => $leader) {
@@ -234,8 +234,6 @@ class TeamsController extends AppController {
 						)
 					)
 				);
-
-				var_dump($content);
 				$view = new View($this, false);
 				return $view->element('project', array('content' => $content));
 			}

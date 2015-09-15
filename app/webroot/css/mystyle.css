@@ -134,3 +134,8 @@ z-index: 10000 !important;
 .border-none{
   border: none !important;
 }
+
+.form{
+  padding: 0 10px 10px 10px;
+}
+

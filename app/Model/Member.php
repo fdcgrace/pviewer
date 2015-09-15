@@ -40,4 +40,5 @@ class Member extends AppModel {
 			return false;
 		}
 	}
+	
 }

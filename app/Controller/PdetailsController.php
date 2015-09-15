@@ -19,7 +19,6 @@ class PdetailsController extends AppController {
 	public $components = array('Paginator', 'Session');
 	public $helper = array('Form', 'Html', 'Js');
 
-
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->set('controllerID', 1);
@@ -73,13 +72,15 @@ class PdetailsController extends AppController {
 				$this->Tblcolor->set($arrData);
 		        if($this->Tblcolor->save()){
 		           $this->Session->setFlash(__('The details has been saved.'));
-		        } else{
+		        }else{
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
 			}else{
 				if ($this->Pdetail->save($this->request->data)) {
 					$this->Session->setFlash(__('The details has been updated.'));
 					return $this->redirect(array('action' => 'index', $id));
+				} else {
+					
 				}
 			}
 		} else {
@@ -92,7 +93,7 @@ class PdetailsController extends AppController {
 			)
 		);
 
-		$this->set(compact('members'));
+		//$this->set(compact('members'));
 
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -124,7 +125,6 @@ class PdetailsController extends AppController {
 		$this->set('legendColorStatus', $legendColorStatus);
 		$this->set('legendColor', $legendColor);
 		$this->set('legendStatusId', $legendStatusId);
-
 		if($this->request->is('ajax')){
 			$this->layout = 'default';
 			$this->render('index','ajax');
@@ -174,7 +174,6 @@ class PdetailsController extends AppController {
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
 
 		$content['projectID'] = $projectID;
-
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Pdetail->save($this->request->data)) {
 				$this->Session->setFlash(__('The details has been updated.'));
@@ -193,7 +192,6 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
-
 		$legendColorModal = $this->Tblcolor->find('all', array(
 			'fields' => array(
 				'color', 'status','status_id'				
@@ -213,9 +211,6 @@ class PdetailsController extends AppController {
 		$content['stat'] = $stat;
 
 		$content['members'] = $members;
-
-		//$this->set(compact('members'));
-
 		$legendColor = $this->Tblcolor->find('list', array(
 			'fields' => array(
 				'color', 'status'				
@@ -226,9 +221,7 @@ class PdetailsController extends AppController {
 		$view = new View($this, false);
     	return $view->element('pdetailsEdit', array('content' => $content));
 	}
-
-/** 
- * add method
+ /* add method
  *
  * @throws NotFoundException
  * @param string $id
@@ -239,7 +232,6 @@ class PdetailsController extends AppController {
 		$this->autoRender = false;
 		$projectID = $id;
 		$content = array();
-
 		if ($this->request->is('post')) {
 			$this->Pdetail->create();
 			if ($this->Pdetail->save($this->request->data)) {
@@ -289,11 +281,9 @@ class PdetailsController extends AppController {
 
 	public function delete($id = null, $project_id = null) {
 		$this->Pdetail->id = $id;
-		
 		if (!$this->Pdetail->exists()) {
 			throw new NotFoundException(__('Invalid project'));
 		}
-
 		if ($this->Pdetail->saveField('del_flg', 0)) {	
 			$this->Session->setFlash(__('The project has been deleted.'));
 		} else {
@@ -301,7 +291,6 @@ class PdetailsController extends AppController {
 		}
 		$this->redirect(array('action' => 'index', $project_id));
 	}
-
 	public function deleteBugInfo()	{
 		 $this->autoRender = false;
 		 $bugId = $_POST['bugId'];
@@ -671,8 +660,11 @@ class PdetailsController extends AppController {
 		if(isset($_POST['selected'])){
 			$selected = $_POST['selected'];	
 		} else {
-			$selected = $_POST['getDate'];
-
+			if (isset($_POST['getDate'])) {
+				$selected = $_POST['getDate'];
+			} else {
+				$selected = "";
+			}
 		}
 
 		$view = new View($this, false);
@@ -732,9 +724,7 @@ class PdetailsController extends AppController {
 			unset($Pdetail['Pdetail']['modified']);
 			//unset($Pdetail['Pdetail']['priority']);
 			unset($Pdetail['Pdetail']['progress']);
-			// var_dump($Pdetail);
-			// var_dump($current);
-			// var_dump(!in_array($Pdetail, $current));
+
 			if(!in_array($Pdetail, $current)) {
 				$this->Pdetail->create();
 				$this->Pdetail->set($Pdetail);

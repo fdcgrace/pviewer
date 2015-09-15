@@ -61,7 +61,7 @@ $(function() {
 	function getTeam(callback) {
 		var content;
 		$.ajax({
-			url: "/pviewer-layout/Teams/team/",
+			url: baseUrl+"/Teams/team/",
 			type: "POST",
 			data:{
 				"team_id": $("#team").val(),
@@ -84,7 +84,7 @@ $(function() {
 	function getProject(callback) {
 		var content;
 		$.ajax({
-			url: "/pviewer-layout/Teams/project/",
+			url: baseUrl+"/Teams/project/",
 			type: "POST",
 			data:{
 				"project_id": $("#team_project").val()
@@ -133,7 +133,7 @@ $(function() {
 				},
 				receive: function(e, ui) {
 					$.ajax({
-						url:"/pviewer-layout/Teams/update/",
+						url:baseUrl+"/Teams/update/",
 						type:"POST",
 						data:{
 							"team_id":$(this).attr('team'), 
@@ -160,7 +160,7 @@ $(function() {
 				},
 				receive: function(e, ui) {
 					$.ajax({
-						url:"/pviewer-layout/Teams/update/",
+						url:baseUrl+"/Teams/update/",
 						type:"POST",
 						data:{
 							"team_id":$(this).attr('team'),

@@ -5,9 +5,7 @@ App::uses('AppModel', 'Model');
  *
  */
 class Project extends AppModel {
-
 	public $actsAs = array('Containable');
-	
 	public $belongsTo = array(
 		'Team' => array(
 			'className' => 'Team',
@@ -32,8 +30,4 @@ class Project extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
-	public function beforeSave($options = array()) {
-
-	}
 }
