@@ -58,6 +58,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->script(
 			array(
 				// 'assets/js/jquery-1.8.3.min',
+				'archive',
 				'assets/js/jquery',
 				'jquery-ui',
 				'bars',
@@ -137,6 +138,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                  <li><?php echo $this->Html->link(__('View Members'), array('controller' => 'members', 'action' => 'index'));?></li>
 		                </ul>
 		            </li>
+		          <li class="sub-menu">
+		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-archive')).$this->Html->tag('span','Archive'), 
+		                     array('controller' => 'archives', 'action' => 'viewArchive'), array('escape' => false));?>
+		             
+		            </li>
 		        </ul>
 		        <!-- sidebar menu end-->
 		    </div>
@@ -184,7 +190,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</section>
 	<br><br>
 	<!--footer start-->
-	<footer class="site-footer footer">
+	<!-- <footer class="site-footer footer">
 	  <div class="text-center" style="text-align:center;">
 	      FDC - Project Viewer
 	     <!-- <a href="index.html#" class="go-top">
@@ -192,7 +198,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	      </a>
 	  	  -->
 	  </div>
-	</footer>
+	</footer> -->
 	<!--footer end-->
 	<?php // echo $this->element('sql_dump'); ?>
 

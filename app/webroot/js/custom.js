@@ -79,7 +79,7 @@ $(function() {
 	$('#search-archive').on('click',function(){
 			var vals = $('#search-val').val();
 			var input = $('#search-field').val();
-			if(input == 0)
+			if(vals == 0)
 			{
 				alert('Please select Category');
 			}

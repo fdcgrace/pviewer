@@ -57,7 +57,7 @@ class ArchivesController extends AppController {
 		}
 		else
 		{
-			$content = '<br><center><i><h4>No deleted project.</h4></i></center>';
+			$content = '<br><center><i><h4>No data available.</h4></i></center>';
 		}
 
 	//	$content =  $view->element('getProjects', array('deletedProject' => $project));
@@ -88,7 +88,7 @@ class ArchivesController extends AppController {
 		}
 		else
 		{
-			$content = '<br><center><i><h4>No deleted issue.</h4></i></center>';
+			$content = '<br><center><i><h4>No data available.</h4></i></center>';
 		}
 
 		return $content;
@@ -119,7 +119,7 @@ class ArchivesController extends AppController {
 		}
 		else
 		{
-			$content = '<br><center><i><h4>No deleted member.</h4></i></center>';
+			$content = '<br><center><i><h4>No data available.</h4></i></center>';
 		}
 
 		return $content;
@@ -168,7 +168,7 @@ class ArchivesController extends AppController {
 		}
 		else
 		{
-			$leaders = '<br><center><i><h4>No deleted leader.</h4></i></center>';
+			$leaders = '<br><center><i><h4>No data available.</h4></i></center>';
 		}
 
 
