@@ -75,7 +75,7 @@ class ArchivesController extends AppController {
 		if(isset($_POST['search']))
 			{
 				$search = $_POST['search'];
-				$condition[] = array('OR' => array('Pdetail.task_description LIKE' => '%'.$search.'%', 'Pdetail.issue_link LIKE' => '%'.$search.'%', 'Pdetail.deadline LIKE' => '%'.$search.'%', 'Member.member LIKE' => '%'.$search.'%') );
+				$condition[] = array('OR' => array('Pdetail.task_description LIKE' => '%'.$search.'%', 'Pdetail.issue_link LIKE' => '%'.$search.'%', 'Pdetail.deadline LIKE' => '%'.$search.'%', 'Pdetail.issue_no LIKE' => '%'.$search.'%', 'Member.member LIKE' => '%'.$search.'%') );
 			}
 
 
