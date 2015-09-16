@@ -60,9 +60,11 @@ $(function() {
 
 
 	$('#archive').on('change',function(){
+			var vals = $(this).val();
+			$('#search-val').val(vals);
 			$.ajax({
 				type: 'POST',
-				'url' : $(this).val(),
+				'url' : vals,
 				data:{
 
 				},
@@ -71,6 +73,30 @@ $(function() {
 				}
 
 			});
+				
+		})
+
+	$('#search-archive').on('click',function(){
+			var vals = $('#search-val').val();
+			var input = $('#search-field').val();
+			if(input == 0)
+			{
+				alert('Please select Category');
+			}
+			else
+			{
+				$.ajax({
+					type: 'POST',
+					'url' : vals,
+					data:{
+						search : input
+					},
+					success : function (data){
+						$('#div-history').html(data);
+					}
+
+				});
+			}
 				
 		})
 

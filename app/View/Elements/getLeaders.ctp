@@ -1,7 +1,3 @@
-<?php 
-//debug($issueArray); 
-
-?>
 
 <table class='table table-hovered table-bordered table-striped content-panel'>
 

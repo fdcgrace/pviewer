@@ -10,6 +10,11 @@
 		$('#leader-history').html($('#'+id).html());
 		$('#leader-history').show();
 	}
+	function toggleRowsMember(id,radio)
+	{
+		$('#member-history').html($('#'+id).html());
+		$('#member-history').show();
+	}
 
 	function getProject(id)
 	{
