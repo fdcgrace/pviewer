@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class ProjectsController extends AppController {
 
-	public $uses = array('Project', 'Pdetail', 'Team');
+	public $uses = array('Project', 'Pdetail', 'Team','Member');
 
 /**
  * Components
@@ -49,10 +49,8 @@ class ProjectsController extends AppController {
 
 					),
 	            'group' => array('Pdetail.project_id'),
-
 	            'fields' => array('count(Pdetail.project_id) as total_num_task', '*', 'Leader.team'),
 	            'conditions' => array('Project.del_flg' => 1)
-
         	);
 		
 		$pagination = $this->paginate('Project');
@@ -161,6 +159,7 @@ class ProjectsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
 	public function deactivate($id = null){
 		$this->Project->id = $id;
 		if (!$this->Project->exists()) {
@@ -189,5 +188,104 @@ class ProjectsController extends AppController {
 		}
 
 		$this->redirect($this->referer());
+	}
+
+	public function viewArchive()
+	{
+			$project = $this->Project->find('all',array('conditions' =>
+				array('Project.del_flg' => 0)
+				));
+
+			$view = new View($this, false);
+		    $blah =  $view->element('testing');
+
+			$this->set('deletedProject', $project);
+			$this->set('blah', $blah);
+	}
+	public function chuchu()
+	{
+		$this->autoRender = false;
+ 
+		/* Set up new view that won't enter the ClassRegistry */
+		$view = new View($this, false);
+		$view->set('text', 'Hello World');
+		$view->viewPath = 'elements';
+		 
+		$view_output = $view->render('view_archive');
+		$this->set('churva', $view_output);
+		$this->render('view_archive');
+
+
+	}
+	public function getProjects(){
+		$this->autoRender = false;
+		$view = new View($this, false);
+
+		$project = $this->Project->find('all',array('conditions' =>
+				array('Project.del_flg' => 0)
+				));
+		//$this->set('issueArray',$issues);
+		$content =  $view->element('getProjects', array('deletedProject' => $project));
+
+		return $content;
+	}
+	public function getIssues(){
+		$this->autoRender = false;
+		$view = new View($this, false);
+
+		$issues = $this->Pdetail->find('all',
+										array('conditions' => array('Pdetail.del_flg' => 0)));
+		//$this->set('issueArray',$issues);
+		$content =  $view->element('getIssues', array('issueArray' => $issues));
+
+		return $content;
+	}
+	public function getMembers()
+	{
+		$this->autoRender = false;
+		$view = new View($this, false);
+
+		$issues = $this->Member->find('all',
+										array('conditions' => array('Member.del_flg' => 0)));
+		$content =  $view->element('getMembers', array('issueArray' => $issues));
+		return $content;
+	}
+	public function getLeaders()
+	{
+			$this->autoRender = false;
+		$view = new View($this, false);
+
+		$issues = $this->Team->find('all',array('conditions' => array('Team.del_flg' => 0)));
+
+
+
+
+		$storeDivisions = $this->Team->find('all',
+                array('joins' => array(
+                                       array('table' => 'projects',
+                                             'alias' => 'Project',
+                                             'type' => 'left',
+                                             'conditions'=> array('Team.id = Project.team_id')
+                                        )
+                                 ),
+                	   'fields' => array('Project.*','Team.team','Team.created','Team.modified'),
+                       'conditions'=>array('Team.del_flg'=> 0),
+                       'group' => 'Project.team_id'
+                ));
+
+		$arr = array();
+		foreach ($issues as $value) {
+
+			$arr[] = $value['Team']['id'];
+
+			
+		}
+
+
+
+		
+		$leaders =  $view->element('getLeaders', array('issueArray' => $storeDivisions));
+
+		return $leaders;
 	}
 }

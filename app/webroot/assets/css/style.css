@@ -2241,3 +2241,29 @@ label {
 }
 
 
+.rcorners2 {
+    border-radius: 15px;
+    border: 2px solid #BDBDBD;
+    padding: 20px; 
+    margin-top: 40px;
+
+}
+.darkrow
+{ 
+    background-color:#330099;
+}
+.th-style{
+    background-color:#428bca;
+    color:white;
+}
+#archives{
+    margin-bottom: 15px;
+}
+#div-history{
+    margin-top: 20px;
+}
+hr.style-four {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}

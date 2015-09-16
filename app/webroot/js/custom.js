@@ -58,6 +58,23 @@ $(function() {
 		project = $(this).val();
 	});
 
+
+	$('#archive').on('change',function(){
+			$.ajax({
+				type: 'POST',
+				'url' : $(this).val(),
+				data:{
+
+				},
+				success : function (data){
+					$('#div-history').html(data);
+				}
+
+			});
+				
+		})
+
+
 	function getTeam(callback) {
 		var content;
 		$.ajax({
