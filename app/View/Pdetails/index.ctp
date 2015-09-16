@@ -1,4 +1,16 @@
+<?php
+	date_default_timezone_set("Asia/Manila"); 
+	$todayDate = date("Y-m-d"); 
+	$baseUrl= Router::url('/', true);
+	$mod = 2;
 
+	$statusArray= array();
+	$colorArray = array();
+	$selectedStatus = array();
+	foreach ($legendStatusId as $statusId => $status) {
+		$statusArray[] = $status;
+	}
+?>
 <section class="container-fluid" id="content">
 	<div class="alert alert-success" style="display:none">
 		<strong>Success!</strong> Issues success
@@ -8,43 +20,39 @@
 	<hr>
 
 	<p>To view issues, select date from Calendar. Issue is shown by date and grouped by status.</p>
-	<div id="datepicker"></div>
-	<div class="row mt">
-		<div class="col-md-5">
-			<div style="float:left; padding-right:10px;">
-				<?php echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
-			</div>
-			<div style="float:left;">
-				<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
-			</div>
-			<?php 
-				date_default_timezone_set("Asia/Manila"); 
-				$todayDate = date("Y-m-d"); 
-				$baseUrl= Router::url('/', true);
-			?>
+	<div class="row">
+	  <div class="col-md-8">
+	  	<div id="datepicker"></div>
+	  	<div style="float:left; padding-right:10px; margin: 10px 0 0 0 ">
+			<?php echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
 		</div>
-		<div class="col-md-7" style="text-align:right;">
-			Legend: 
-			<?php
-				$statusArray= array();
-				$colorArray = array();
-				$selectedStatus = array();
-				foreach ($legendStatusId as $statusId => $status) {
-					$statusArray[] = $status;
-				}
-
-				foreach ($legendColor as $key => $value): ?>
-					<span class="label color-box" style="background-color:<?php echo $key;?>"  id="<?php echo $key;?>">
-						<?php 
-							$colorArray[] = $key;
-							$selectedStatus[] = $value;
-							echo $value;
-						?>
-					</span> &nbsp;
-			<?php endforeach; ?>
-			<a href="#" class="btn-setting"><img class='legend-modal' src='<?php echo $baseUrl; ?>img/setting.png' style='width:18px;height=18px'></a>
+		<div style="float:left; padding-right:10px; margin: 10px 0 0 0 ">
+			<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
 		</div>
+	  </div>
+	  <div class="col-md-4">
+	  	<table class="table table-condensed">
+			<tbody>
+			<tr><td colspan="<?php echo $mod; ?>" class="fleft">Legend: <a href="#" class="btn-setting"><img class='legend-modal' src='<?php echo $baseUrl; ?>img/setting.png' style='width:18px;height=18px'></a></td></tr>
+			<tr>
+			   <?php 
+			   $i = 0;
+			   foreach ($legendColor as $key => $value) {
+			      if ($i % $mod === 0) {
+			            echo '</tr><tr>';
+			        }
+			      $background = "<div class='legend' style='background-color: $key;'></div>";
+			      $value = "<span class='fleft'>$value</span>";
+			      echo "<td class='padd' > $background" . $value . "</td>";
+			      $i++;
+			   }
+			   ?>
+			</tr>
+			</tbody>
+		</table>
+	  </div>
 	</div>	
+	
 	<hr>
 	<div data-example-id="simple-responsive-table" class="bs-example">
 	    <div style="border:none;" class="table-responsive " id="<?php echo $this->Session->read('project_id');?>">

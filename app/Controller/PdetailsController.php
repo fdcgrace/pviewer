@@ -645,10 +645,16 @@ class PdetailsController extends AppController {
 
 		$legendColorStatus = $this->Tblcolor->find('list', array(
 			'fields' => array(
-				'status_id', 'color'				
+				'status_id', 'color'			
+				),
+			'order' =>  array(
+				'status_id' => 'asc'
 				)
 			)
 		);
+
+		//var_dump($legendColorStatus);
+
 
 		$legendStatusId = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -666,6 +672,7 @@ class PdetailsController extends AppController {
 				$selected = "";
 			}
 		}
+		//var_dump($pdetails);
 
 		$view = new View($this, false);
 		return $view->element('issue', array(

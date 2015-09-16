@@ -33,32 +33,27 @@
 				$tempar = array();
 				$temp2 = array();
 				$countArr = count($pdetails);
-				$statusPdetail = $break_row = "";
-
+				$cnt = 0;
+				$tempCar = "";
 				foreach ($pdetails as $key=>$Pdetail):
-					if($key === 0) {
-						$tempar[] = $Pdetail['Pdetail']['status'];
-						$temp2[] = prev($tempar);
-					} 
-
-					if($key+1 != $countArr) {
-						$break_row =  $pdetails[$key+1]['Pdetail']['status'];				
-					} 
-
-					if ($Pdetail['Pdetail']['status'] != prev($tempar)) {
-						$statusPdetail = $Pdetail['Pdetail']['status'];
-						//var_dump($Pdetail['Pdetail']);
-						$selectedStatus[] = $statusPdetail;
-						echo $this->Form->create('Pdetail');
-						$detId = $Pdetail['Pdetail']['id'];
+					$getstatus = $Pdetail['Pdetail']['status'];
+					$detId = $Pdetail['Pdetail']['id'];
+					echo $this->Form->create('Pdetail');
+					if ($cnt > 0) {
+						if($tempCar <> $getstatus){
+							echo '<tr><th colspan=11></th></tr>';
+						}else{							
+						}
+					}else{			
 					}
-					//var_dump($legendColorStatus);
+				$tempCar = $getstatus;
+				$cnt++;
 			?>
 			<tr style="background-color:<?php
-				if (array_key_exists($statusPdetail, $legendColorStatus)) {
-						    echo $legendColorStatus[$statusPdetail];
-						}
-				?>" id='<?php echo $detId; ?>'>
+				if (array_key_exists($getstatus, $legendColorStatus)) {
+					   echo $legendColorStatus[$getstatus];
+					}
+				?>">
 				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); ?></th>
 				<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 				<td id='tab-click'><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
@@ -160,15 +155,6 @@
 				</td>
 			</tr>
 		<?php
-			if($Pdetail['Pdetail']['status'] != $break_row){
-				if(!isset($legendStatusId[$break_row]))
-					$r = '';
-				else
-					$r = $legendStatusId[$break_row];
-
-				echo '<tr><th colspan=11></th></tr>';
-			}
-				$i= $Pdetail['Pdetail']['status'];
 				endforeach;
 		} /*-----end of first if-------*/ 
 		 else { ?>

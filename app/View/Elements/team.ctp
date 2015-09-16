@@ -39,7 +39,7 @@
 												<td><?php echo h($pdetail['task_description']); ?></td>
 												<td style="word-wrap:break-word"><a href="<?php echo h($pdetail['issue_link']); ?>" target="_blank"><?php echo h($pdetail['issue_link']); ?></a></td>
 												<td><?php
-												 $getstat = $pdetail['status']; 
+												$getstat = $pdetail['status']; 
 												foreach($stat as $key => $value) {
 													foreach ($value as $key1 => $nval) {
 														if($getstat == $nval['status_id']){
