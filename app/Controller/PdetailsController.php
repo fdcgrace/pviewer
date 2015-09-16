@@ -281,6 +281,7 @@ class PdetailsController extends AppController {
 	}
 
 	public function delete($id = null, $project_id = null) {
+		var_dump($_POST); DIE();
 		$this->Pdetail->id = $id;
 		if (!$this->Pdetail->exists()) {
 			throw new NotFoundException(__('Invalid project'));

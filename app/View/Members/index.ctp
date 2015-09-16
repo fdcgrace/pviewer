@@ -1,4 +1,6 @@
-<?php  echo $this->Html->script(array('definedjs')); ?>
+<?php  
+	echo $this->Html->script(array('definedjs')); 
+?>
 <div class="container-fluid">
 	<!-- <h3>Member List</h3> -->
 	<h3> Member List</h3><hr>

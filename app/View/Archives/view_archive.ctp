@@ -1,8 +1,5 @@
-
 <h3 id='archives'>Archives</h3> 
-
-<hr class="style-four">
-
+<hr>
 <div class="container-fluid martop">
 	<div class="row">
 		<div class="col-md-3">
@@ -27,5 +24,4 @@
 	</div>
 	<div id='div-history'>
 	</div>
-
 </div>

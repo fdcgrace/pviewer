@@ -10,7 +10,7 @@
 		echo $this->Form->input('p_name', array('label' => 'Project Name', 'class' => 'form-control'));
 		echo "</div>
 			 <div class='form-group'>";
-		echo $this->Form->input('link', array('label' => 'Link', 'class' => 'form-control'));
+		echo $this->Form->input('link', array('label' => 'Link', 'class' => 'form-control', 'type' => 'url'));
 		echo "</div>
 			 <div class='form-group'>";
 		echo $this->Form->input('team_id', array('class' => 'form-control', 'type' => 'select', 'options' => $teams, 'empty' => 'Please Select Team'));

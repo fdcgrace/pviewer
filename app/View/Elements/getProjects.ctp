@@ -1,6 +1,4 @@
-
 <table class='table table-hovered table-bordered table-striped content-panel'>
-
 	<thead>
 								<tr>
 								<td></td>	
@@ -9,7 +7,6 @@
 								<th><?php echo $this->Paginator->sort('Team Assigned'); ?></th>
 								<th><?php echo $this->Paginator->sort('Number of Task'); ?></th>
 								<th><?php echo $this->Paginator->sort('Created Date'); ?></th>
-								<th><?php echo $this->Paginator->sort('Modified Date'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -17,7 +14,7 @@
 								 $r = 0;
 								 foreach ($deletedProject as $project): ?>
 								 <?php $r++; ?>
-								<tr onclick="toggleRows('issue<?php echo $r; ?>','<?php echo $r ?>');">
+								<tr onclick="toggleRows('issue<?php echo $r; ?>','<?php echo $r;  ?>');">
 							
 
 
@@ -28,12 +25,6 @@
 									<td><?php echo h($project['Team']['team']); ?></td>
 									<td><?php echo h(count($project['Pdetail'])); ?></td>
 									<td><?php echo h($project['Project']['created']); ?></td>
-									<td><?php echo h($project['Project']['modified']); ?></td>
-
-
-
-
-
 									
 								<?php  ?>	
 								</tr>
@@ -53,7 +44,9 @@
 									  foreach ($deletedProject as $project): ?>
 									   <div  id='issue<?php echo $count++; ?>'  style='display:none;' >
 									   		<h3>Issues Covered</h3>
-										<table  class='table table-hovered table-striped'>
+									   		<div data-example-id="simple-responsive-table" class="bs-example">
+					<div class="table-responsive ">
+										 <table  class='table table-hovered table-striped'> 
 											<center>		<tr>
 
 													<th style='background-color:#428bca;color:white'>Issue No.</th>
@@ -67,10 +60,15 @@
 													<th style='background-color:#428bca;color:white'>Progress</th>
 													</tr>
 											<?php
-											
+												$hide = '';
+												$tot = count($project['Pdetail']);
+												if($tot === 0 ){
+													echo "<tr><td colspan='9' class='center  blue'>No Issues found under this project.</td></tr>";
+													$hide = "style='display:none'";
+												}
 												for($i=0;$i<count($project['Pdetail']);$i++)
 												{
-													echo '<tr>';
+													echo "<tr $hide>";
 													echo '<td>'.$project['Pdetail'][$i]['issue_no'].'</td>';
 													echo '<td>'.$project['Pdetail'][$i]['task_description'].'</td>';
 													echo '<td>'.$project['Pdetail'][$i]['issue_link'].'</td>';
@@ -84,8 +82,11 @@
 												}
 												
 											?>
-
+											</center>
 										</table>
+										</div>
+										</div>
 									</div></br>
 										<?php  endforeach;  ?> 
+										
 	

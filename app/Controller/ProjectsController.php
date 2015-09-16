@@ -146,18 +146,19 @@ class ProjectsController extends AppController {
  * @param string $id
  * @return void
  */
+
 	public function delete($id = null) {
 		$this->Project->id = $id;
 		if (!$this->Project->exists()) {
 			throw new NotFoundException(__('Invalid project'));
 		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Project->delete()) {
+		if ($this->Project->saveField('del_flg', 0)) {	
 			$this->Session->setFlash(__('The project has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The project could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+
+		$this->redirect(array('action' => 'index'));
 	}
 
 	public function deactivate($id = null){

@@ -54,7 +54,7 @@
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-weight: normal;
   text-align: center; 
-
+}
 .form{
   padding: 0 10px 10px 10px;
 }
@@ -140,11 +140,11 @@ z-index: 10000 !important;
 }
 
 
-#addBtn {
+/*#addBtn {
   border-radius:50%;
   width:25px;
   height:25px;
-}
+}*/
 
 .marLeft{
   margin-left: 25px;
@@ -165,6 +165,8 @@ z-index: 10000 !important;
 }
 
 .buttMargin{
-  margin:0 0 10px 15px; 
-  padding-left:0px;
+  margin:0 0 10px 15px; padding-left:0px;
+}
+.blue{
+  color: #0040ff;
 }
