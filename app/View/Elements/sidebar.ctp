@@ -10,7 +10,7 @@ MAIN SIDEBAR MENU
         	<h5 class="centered">Admin</h5>
         	  	
             <li class="mt">
-                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-dashboard')).$this->Html->tag('span','Dashboard'), 
+                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-dashboard')).$this->Html->tag('span','Dashbodsdfdfdfard'), 
                       array('controller' => 'pages', 'action' => 'display'), array('escape' => false));?>
             </li>
 

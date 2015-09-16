@@ -25,6 +25,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -32,7 +33,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		
 		echo $this->Html->css(
 			array(
-
 				'assets/css/bootstrap',
 				'assets/font-awesome/css/font-awesome',
 				'assets/css/zabuto_calendar',
@@ -53,7 +53,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			)
 		);
 		echo $this->fetch('css');
-
 
 		echo $this->Html->script(
 			array(
@@ -78,7 +77,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
 <body>
-
 	<section id="container">
 		<!-- *****************(*****************************************************************************************************************************************
 		TOP BAR CONTENT & NOTIFICATIONS
@@ -247,7 +245,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		    <div id="sidebar"  class="nav-collapse " style="z-index:98">
 		        <!-- sidebar menu start-->
 		        <ul class="sidebar-menu" id="nav-accordion">
-
 		        
 		        	  <p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
 		        	  <h5 class="centered">Admin</h5>
@@ -262,7 +259,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
-		                  <!-- <li><?php //echo $this->Html->link(__('Issue'), array('controller' => 'pdetails', 'action' => 'getIssue'));?></li> -->
 		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
 		                </ul>
 		            </li>
@@ -280,6 +276,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                <ul class="sub">
 		                  <li><?php echo $this->Html->link(__('View Members'), array('controller' => 'members', 'action' => 'index'));?></li>
 		                </ul>
+		            </li>
+		            <li class="sub-menu">
+		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-archive')).$this->Html->tag('span','Archive'), 
+		                     array('controller' => 'projects', 'action' => 'viewArchive'), array('escape' => false));?>
+		             
 		            </li>
 		        </ul>
 		        <!-- sidebar menu end-->
@@ -328,17 +329,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</section>
 	<br><br>
 	<!--footer start-->
-	<footer class="site-footer">
-	  <div class="text-center" style="text-align:center;">
-	      FDC - Project Viewer
-	     <!-- <a href="index.html#" class="go-top">
-	          <i class="fa fa-angle-up"></i>
-	      </a>
-	  	  -->
-	  </div>
-	</footer>
+	
 	<!--footer end-->
 	<?php // echo $this->element('sql_dump'); ?>
-
 </body>
 </html>
