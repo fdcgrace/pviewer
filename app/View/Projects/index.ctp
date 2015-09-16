@@ -1,19 +1,11 @@
-<style>
-	#addBtn {
-		border-radius:50%;
-		width:25px;
-		height:25px;
-	}
-</style>
-
 <section class="container-fluid flip-scroll" id="content">
 	<div class="row mt">
-		<h3> Project List 
-			<?php echo $this->Html->link('', array('controller' => 'projects', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn')); 
-			
-			?>
-			</h3>
+		<h3>Project List</h3>
 		<hr>
+		<div class="marginButton nfont alignMargin"><?php echo $this->Html->link('Create New Project', array('controller' => 'projects', 'action' => 'add'), array('data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn', 'class' => 'glyphicon-plus glyphicon btn btn-success nfont')); 
+			?>
+		</div>
+
 		<div class="col-md-12">
 			<div class="content-panel">
 				<div data-example-id="simple-responsive-table" class="bs-example">
@@ -24,9 +16,8 @@
 								<th><?php echo $this->Paginator->sort('Project Name'); ?></th>
 								<th><?php echo $this->Paginator->sort('Link'); ?></th>
 								<th><?php echo $this->Paginator->sort('Team Assigned'); ?></th>
-								<th><?php echo $this->Paginator->sort('Number of Task'); ?></th>
+								<!-- <th><?php //echo $this->Paginator->sort('Number of Task'); ?></th> -->
 								<th><?php echo $this->Paginator->sort('Created Date'); ?></th>
-								<th><?php echo $this->Paginator->sort('Modified Date'); ?></th>
 								<th class="actions"><?php echo __('Actions'); ?></th>
 								</tr>
 							</thead>
@@ -36,14 +27,14 @@
 									<td><?php echo h($project['Project']['p_name']); ?></td>
 									<td><a href="<?php echo h($project['Project']['link']); ?>" target="_blank"><?php echo h($project['Project']['link']); ?></a></td>
 									<td><?php echo h($project['Leader']['team']); ?></td>
-									<td><?php echo h($project[0]['total_num_task']); ?></td>
+									<!-- <td><?php //echo h($project[0]['total_num_task']); ?></td> -->
 									<td><?php echo h($project['Project']['created']); ?></td>
-									<td><?php echo h($project['Project']['modified']); ?></td>
 									<td class="actions">
 
-										<?php echo $this->Html->link(__('View Issue'), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id'])); ?>
-										<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id']), array('data-toggle' => 'modal', 'data-target' => '#editProj')); ?>
-										<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
+										<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id']), array('class' => 'btn glyphicon glyphicon-eye-open view')); ?>
+										<?php echo $this->Html->link(__(''), array('action' => 'edit', $project['Project']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
+
+										<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $project['Project']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
 
 									</td>
 								</tr>

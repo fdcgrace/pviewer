@@ -400,7 +400,12 @@ ul.sidebar-menu li a.active i {
     margin-left: 210px;
 }
 
-.header, .footer {
+/*.header, .footer {
+    min-height: 60px;
+    padding: 0 15px;
+}*/
+
+.header{
     min-height: 60px;
     padding: 0 15px;
 }

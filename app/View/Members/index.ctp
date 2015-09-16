@@ -1,7 +1,10 @@
 <?php  echo $this->Html->script(array('definedjs')); ?>
 <div class="container-fluid">
 	<!-- <h3>Member List</h3> -->
-	<h3> Member List <?php echo $this->Html->link('', array('controller' => 'members', 'action' => 'add'), array('class' => 'glyphicon glyphicon-plus', 'data-toggle' => 'modal', 'data-target' => '#addForm', 'id' => 'addBtn')); ?> </h3>
+	<h3> Member List</h3><hr>
+	<div class="container-fluid alignMargin">
+	<?php echo $this->Html->link('Add New Member', array('controller' => 'members', 'action' => 'add'), array('class' => 'glyphicon-plus glyphicon btn btn-success nfont', 'data-toggle' => 'modal', 'data-target' => '#addForm', 'id' => 'addBtn')); ?>
+	</div> 
 	<div class="col-md-12">
 	<div class="col-md-6">
 		<div class="row">
@@ -46,7 +49,7 @@
 		</div>
 	</div>
 	</div>
-	<div class=" row paging btn-group pagination-margin">
+	<div class=" row paging btn-group pagination-margin alignMargin">
 	<?php
 		echo $this->Paginator->prev('< ' . __(''), array('tag' => false, 'class' => 'btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn btn-sm btn-primary prev disabled'));
 		echo $this->Paginator->numbers(array('separator' => '', 'class' => 'btn btn-sm btn-default'));
