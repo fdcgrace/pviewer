@@ -32,7 +32,8 @@
 									<td class="actions">
 
 										<?php echo $this->Html->link(__(''), array('controller' => 'pdetails', 'action' => 'index', $project['Project']['id']), array('class' => 'btn glyphicon glyphicon-eye-open view')); ?>
-										<?php echo $this->Html->link(__(''), array('action' => 'edit', $project['Project']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
+
+										<?php echo $this->Html->link(__(''), array('action' => 'edit', $project['Project']['id']), array('data-toggle' => 'modal', 'data-target' => '#editProj', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
 
 										<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $project['Project']['id']), array('label' => false, 'class' => 'btn glyphicon glyphicon-trash', 'confirm' => __('Are you sure you want to delete # %s?', $project['Project']['id']))); ?>
 

@@ -67,7 +67,7 @@ class TeamsController extends AppController {
 			if ($this->Team->save($this->request->data)) {
 				$this->Session->setFlash(__('The Team has been saved.'));
 			} else {
-				$this->Session->setFlash(__('The Team could not be saved. Name already exist.'));
+				$this->Session->setFlash(__('The Team could not be saved. Name is required.'));
 			}
 			return $this->redirect(array('action' => 'index'));
 		}
@@ -233,13 +233,16 @@ class TeamsController extends AppController {
 						'conditions' => array(
 							'Pdetail.project_id' => $data['project_id'],
 							'Pdetail.member' => 0, 
-							'Pdetail.status' => 0
+							'Pdetail.status' => 0,
+							'Pdetail.del_flg' => 1
 						)
 					)
 				);
 
 				$stat = $this->Tblcolors->find('all', array('fields' => array('status_id','status')));
 				$content['stat']=$stat;
+
+				//var_dump($content);
 
 				$view = new View($this, false);
 				return $view->element('project', array('content' => $content));

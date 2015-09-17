@@ -4,10 +4,13 @@ $(function() {
             theme: 'bars-1to10',
             onSelect:function(value) {
                     var id = $(this).attr('gval');
+                    var ino = $('#ino').val();
+                    var desc = $('#desc').val();
+                    var ilink = $('#ilink').val();
                     $.ajax({
                         type: "POST",
                         url: "pdetails/",
-                        data: { 'progress' : value, 'id' : id},
+                        data: {'task_description': desc, 'issue_link': ilink, 'issue_no' : ino, 'progress' : value, 'id' : id},
                         success: function (data) {
                             location.reload();
                         }
@@ -23,10 +26,13 @@ $(function() {
             showSelectedRating: false,
             onSelect:function(value) {
                     var id = $(this).attr('gval');
+                    var ino = $('#ino').val();
+                    var desc = $('#desc').val();
+                    var ilink = $('#ilink').val();
                     $.ajax({
                         type: "POST",
                         url: "pdetails/",
-                        data: { 'priority' : value, 'id' : id},
+                        data: {'task_description': desc, 'issue_link': ilink, 'issue_no' : ino, 'priority' : value, 'id' : id},
                         success: function (data) {
                             location.reload();
                         }

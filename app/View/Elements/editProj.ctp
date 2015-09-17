@@ -19,7 +19,7 @@
 	</fieldset>
 	<div class="modal-footer submit">
 		<input type="submit" value="Save" class="btn btn-primary" />
-	    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'deactivate', $this->Form->value('Project.id')), array('class' => 'btn btn-warning'), __('Are you sure you want to delete # %s?', $this->Form->value('Project.id'))); ?>
+	    <?php //echo $this->Form->postLink(__('Delete'), array('action' => 'deactivate', $this->Form->value('Project.id')), array('class' => 'btn btn-warning'), __('Are you sure you want to delete # %s?', $this->Form->value('Project.id'))); ?>
 	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	</div>
 </div>
