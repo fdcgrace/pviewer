@@ -1,7 +1,4 @@
-
-<script>
-	
-</script>
+*Click on issue to show more details
 <table class='table table-bordered table-hovered table-striped content-panel'>
 											<center>		<tr>
 												<td></td>
@@ -51,7 +48,7 @@
 		 							foreach ($issueArray as $project)
 										{?>
 									 <div  id='issue<?php echo $count++; ?>' style='display:none;'>
-										<table  class='table table-bordered table-hovered table-striped'>
+										<table  class='table table-bordered table-hovered table-striped archive-table'>
 											<tr >
 											<th  style='background-color:#428bca;color:white'>Project Name'</th>
 											<th  style='background-color:#428bca;color:white'>Link</th>
