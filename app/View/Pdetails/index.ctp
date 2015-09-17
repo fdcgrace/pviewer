@@ -43,7 +43,7 @@
 			        }
 			      //$background = "<div class='label color-box' style='background-color:$key' id='$key'>$value</div>";
 			      //$background = "<div class='legend color-box' style='background-color: $key;' id='$key'></div>";
-			      $background = "<div class='label color-box' style='background-color:$key;'  id='$key'>$value</div>";
+			        $background = "<div class='label color-box' style='background-color:$key;' id='$key'>$value</div>";
 			      $value = "<span class='fleft'>$value</span>";
 			      echo "<td class='padd' > $background" . "</td>";
 			      $i++;

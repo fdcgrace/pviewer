@@ -28,7 +28,6 @@ class Member extends AppModel {
 
 
 	function beforeSave($options = array()) {
-		var_dump($_POST);
 		if(!empty($_POST['member_id'])){
 			$conditions = array('conditions' => array('member' => $this->data[$this->alias]['member'], 'Member.id != ' => $_POST['member_id']));
 		} else {	
