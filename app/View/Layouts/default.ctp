@@ -140,9 +140,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		            </li>
 		          <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-archive')).$this->Html->tag('span','Archive'), 
-		                     array('controller' => 'archives', 'action' => 'viewArchive'), array('escape' => false));?>
+		                     array('controller' => 'archives', 'action' => 'viewArchive'), array('escape' => false, 'cid' => 4, 'class' => 'parent'));?>
 		             
 		            </li>
+
+
+
+
+		     
+
 		        </ul>
 		        <!-- sidebar menu end-->
 		    </div>
