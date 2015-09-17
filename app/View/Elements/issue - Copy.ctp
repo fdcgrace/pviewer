@@ -2,7 +2,8 @@
 	echo $this->Html->css('bars-1to10', null, array('inline' => true));
 	echo $this->Html->css('bars-pill', null, array('inline' => true));
 	echo $this->Html->script('jquery.barrating', array('inline' => true));
-	echo $this->Html->script('bars', array('inline' => true));	
+	echo $this->Html->script('bars', array('inline' => true));
+	
 ?>
 <div class="container-fluid" style="margin:0 0 10px 0; padding-left:0px;">
 	<?php
@@ -13,7 +14,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Project ID</th>
+				<th>Project ID test</th>
 				<th>Deadline</th>
 				<th>Issue Number</th>
 				<th>Task Description</th>
@@ -32,40 +33,53 @@
 				$tempar = array();
 				$temp2 = array();
 				$countArr = count($pdetails);
-				$cnt = 0;
-				$tempCar = "";
+				$statusPdetail = $break_row = "";
+
 				foreach ($pdetails as $key=>$Pdetail):
-					$getstatus = $Pdetail['Pdetail']['status'];
-					$detId = $Pdetail['Pdetail']['id'];
-					echo $this->Form->create('Pdetail');
-					if ($cnt > 0) {
-						if($tempCar <> $getstatus){
-							echo '<tr><th colspan=11></th></tr>';
-						}else{							
-						}
-					}else{			
+					//var_dump($Pdetail);
+					//echo $gstat[] = $Pdetail['Pdetail']['status'];
+					//echo $pdetails['status'].'<br><hr>';
+					/*var_dump($pdetails).'<br><hr>';*/
+					//if($key === 0) {
+						$tempar[] = $Pdetail['Pdetail']['status'];
+						$temp2[] = prev($tempar);
+					//} 
+
+
+					if($key+1 != $countArr) {
+						$break_row =  $pdetails[$key+1]['Pdetail']['status'];				
+					} 
+
+					if ($Pdetail['Pdetail']['status'] != prev($tempar)) {
+						$statusPdetail = $Pdetail['Pdetail']['status'];
+						//var_dump($Pdetail['Pdetail']);
+						$selectedStatus[] = $statusPdetail;
+						echo $this->Form->create('Pdetail');
+						$detId = $Pdetail['Pdetail']['id'];
 					}
-				$tempCar = $getstatus;
-				$cnt++;
+					//echo $statusPdetail.'<br>';
+					//var_dump($legendColorStatus);
 			?>
 			<tr style="background-color:<?php
-				if (array_key_exists($getstatus, $legendColorStatus)) {
-					   echo $legendColorStatus[$getstatus];
-					}
-				?>" id="<?php echo $Pdetail['Pdetail']['id']; ?>">
-				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); ?></th>
+				if (array_key_exists($statusPdetail, $legendColorStatus)) {
+						    echo $legendColorStatus[$statusPdetail];
+						}
+				?>" id='<?php echo $detId; ?>'>
+				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); echo 'test'.$statusPdetail; ?></th>
 				<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 				<td id='tab-click'><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
 				<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
 				<td>
-					<?php
-						echo  empty($Pdetail['Pdetail']['member']) ? 'No person assigned' : $members[$Pdetail['Pdetail']['member']] ;
-					?>
+					<div class="pull-right sub-menu">
+						<?php
+							echo  $Pdetail['Pdetail']['member'] <> '' ? $members[$Pdetail['Pdetail']['member']]  : '';
+						?>
+					</div>
 				</td>
 				<td>
 					<a href="<?php echo h($Pdetail['Pdetail']['issue_link']);?>" target="_blank">
 					<?php
-						$link = $Pdetail['Pdetail']['issue_link'] <> '' ? substr($Pdetail['Pdetail']['issue_link'],0,15).'...' : '';
+						$link = $Pdetail['Pdetail']['issue_link'] <> '' ? substr($Pdetail['Pdetail']['issue_link'],0,15).'...' : 'No person assigned';
 					?>
 					<?php echo h($link);?>
 					</a>
@@ -83,9 +97,6 @@
 							}
 							echo $this->Form->hidden('projID', array('value' => $Pdetail['Pdetail']['project_id'], 'id' => 'projID'));
 							echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id'], 'id' => 'pID'));
-							echo $this->Form->hidden('ino', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['issue_no'], 'id' => 'ino'));
-							echo $this->Form->hidden('task_description', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['task_description'], 'id' => 'desc'));
-							echo $this->Form->hidden('issue_link', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['issue_link'], 'id' => 'ilink'));
 						?>
 					</div>
 				</td>
@@ -151,11 +162,19 @@
 				<td>
 				<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
 				<?php echo $this->Html->link(__(''), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
-				<?php echo $this->Html->link(__(''), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id']), array('confirm' => __('Are you sure you want to delete this Project?'), 'class' => 'glyphicon glyphicon-trash')); ?>
-
+				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id'], 'class' => 'glyphicon glyphicon-trash'), array('confirm' => __('Are you sure you want to delete this Project?'), 'class' => 'glyphicon glyphicon-trash')); ?>
 				</td>
 			</tr>
 		<?php
+			/*if($Pdetail['Pdetail']['status'] != $break_row){
+				if(!isset($legendStatusId[$break_row]))
+					$r = '';
+				else
+					$r = $legendStatusId[$break_row];
+
+				echo '<tr><th colspan=11></th></tr>';
+			}
+				$i= $Pdetail['Pdetail']['status'];*/
 				endforeach;
 		} /*-----end of first if-------*/ 
 		 else { ?>

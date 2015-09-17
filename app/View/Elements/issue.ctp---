@@ -52,7 +52,7 @@
 				if (array_key_exists($getstatus, $legendColorStatus)) {
 					   echo $legendColorStatus[$getstatus];
 					}
-				?>" id="<?php echo $Pdetail['Pdetail']['id']; ?>">
+				?>">
 				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); ?></th>
 				<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
 				<td id='tab-click'><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
@@ -83,9 +83,6 @@
 							}
 							echo $this->Form->hidden('projID', array('value' => $Pdetail['Pdetail']['project_id'], 'id' => 'projID'));
 							echo $this->Form->hidden('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id'], 'id' => 'pID'));
-							echo $this->Form->hidden('ino', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['issue_no'], 'id' => 'ino'));
-							echo $this->Form->hidden('task_description', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['task_description'], 'id' => 'desc'));
-							echo $this->Form->hidden('issue_link', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['issue_link'], 'id' => 'ilink'));
 						?>
 					</div>
 				</td>
@@ -122,6 +119,7 @@
 				<!-- end progress -->
 				<script type="text/javascript">
 					$(document).ready(function(){
+						alert(<?php echo $Pdetail['Pdetail']['id']; ?>);
 						var id = "<?php echo $Pdetail['Pdetail']['id']; ?>";
 						var projID = <?php echo $Pdetail['Pdetail']['id']; ?>;
 						var selected =  <?php echo ($Pdetail['Pdetail']['priority']) ? $Pdetail['Pdetail']['priority'] : '1'; ?>;
@@ -151,8 +149,7 @@
 				<td>
 				<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $Pdetail['Pdetail']['id']));?>
 				<?php echo $this->Html->link(__(''), array('action' => 'edit', $Pdetail['Pdetail']['id']), array('data-toggle' => 'modal', 'data-target' => '#editForm', 'class' => 'glyphicon glyphicon-pencil', 'id' =>'formEdit')); ?>
-				<?php echo $this->Html->link(__(''), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id']), array('confirm' => __('Are you sure you want to delete this Project?'), 'class' => 'glyphicon glyphicon-trash')); ?>
-
+				<?php echo $this->Form->postLink(__(''), array('action' => 'delete', $Pdetail['Pdetail']['id'], $Pdetail['Pdetail']['project_id'], 'class' => 'glyphicon glyphicon-trash'), array('confirm' => __('Are you sure you want to delete this Project?'), 'class' => 'glyphicon glyphicon-trash')); ?>
 				</td>
 			</tr>
 		<?php

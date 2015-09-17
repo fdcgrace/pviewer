@@ -41,7 +41,12 @@ class PdetailsController extends AppController {
 		
 		if ($this->request->is(array('post', 'put'))) {
 			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
-				$arrData = array('progress' => $_POST['progress']);
+				$arrData = array(
+						'issue_no' => $_POST['issue_no'],
+						'progress' => $_POST['progress'],
+						'task_description' => $_POST['task_description'],
+						'issue_link' => $_POST['issue_link']
+					);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
 		        if($this->Pdetail->save()){
@@ -50,7 +55,12 @@ class PdetailsController extends AppController {
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
 		    } else if((isset($_POST['priority']) &&!empty($_POST['priority'])) && (isset($_POST['id']) && !empty($_POST['id']))){
-				$arrData = array('priority' => $_POST['priority']);
+				$arrData = array(
+						'priority' => $_POST['priority'],
+						'issue_no' => $_POST['issue_no'],
+						'task_description' => $_POST['task_description'],
+						'issue_link' => $_POST['issue_link']
+					);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
 		        if($this->Pdetail->save()){
@@ -281,7 +291,6 @@ class PdetailsController extends AppController {
 	}
 
 	public function delete($id = null, $project_id = null) {
-		var_dump($_POST); DIE();
 		$this->Pdetail->id = $id;
 		if (!$this->Pdetail->exists()) {
 			throw new NotFoundException(__('Invalid project'));

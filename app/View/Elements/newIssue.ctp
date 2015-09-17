@@ -42,7 +42,7 @@
 				);
 			echo "</div>
 				 <div class='form-group'>";
-			echo $this->Form->input('issue_link', array('label' => 'Issue link', 'class' => 'form-control'));
+			echo $this->Form->input('issue_link', array('label' => 'Issue link', 'class' => 'form-control', 'type' => 'url'));
 			echo "</div>
 				 <div class='form-group'>";
 			echo $this->Form->input('status', array(

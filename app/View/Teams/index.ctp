@@ -57,7 +57,7 @@
 	<?php
 		echo $this->Paginator->prev('< ' . __(''), array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary prev disabled'));
 		echo $this->Paginator->numbers(array('separator' => '', 'class' => 'forange btn btn-sm btn-default'));
-		echo $this->Paginator->next(__('') . ' >', array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn btn-sm btn-primary next disabled'));
+		echo $this->Paginator->next(__('') . ' >', array('tag' => false, 'class' => 'btn-orange btn btn-sm btn-primary'), null, array('tag' => false, 'class' => 'btn-orange  btn btn-sm btn-primary next disabled'));
 	?>
 	</div>
 </div>

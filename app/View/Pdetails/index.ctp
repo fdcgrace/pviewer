@@ -104,7 +104,6 @@
             		<?php
 						$imploded = implode('|', $selectedStatus);
 						$colorArrayImploded = implode('|', $colorArray);
-						
             		?>
             		<input type="hidden" value="<?php  echo $imploded; ?>" id="hide-status">
             		<input type="hidden" value="<?php  echo $colorArrayImploded; ?>" id="hide-color">
@@ -115,8 +114,8 @@
 
                 					<input type="text" id="legend-add" style='float:left' >
                 					 <div class="colorpicker-component demo demo-auto">
-					                    <input type="hidden" value="#ffffff" id='color-pick'/>		                 
-					                    <input type='text' class='input-group-addon'>
+					                    <input type="hidden" value="#ffffff" id='color-pick'/>
+					                    <input type='text' class='input-group-addon' style="height:24px;">
 					                 </div>
                 					<input type='button' class='btn btn-primary btn-sm' style='float:left' onclick='insertLegend("insertLegend");' value="ADD" >
                 				</div>
@@ -124,7 +123,6 @@
                 		</tr>
                 		<?php
                 		  foreach ($legendColorModal as $value): 
-                		  //	echo $value['Tblcolor']['color'];
                 		  	?>
                 		<tr>
                 			<td>
