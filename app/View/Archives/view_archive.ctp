@@ -3,7 +3,7 @@
 <div class="container-fluid martop">
 	<div class="row">
 		<div class="col-md-3">
-			<select id='archive' class='form-control' style='width:110%;'>
+			<select id='archive' class='form-control' style='width:100%;'>
 				<option value='0'>Select Category</option>
 				<option value='getProjects'>Projects</option>
 				<option value='getIssues'>Issues</option>
@@ -17,11 +17,12 @@
 		</div>
 		<div class="col-md-1">
 			<div class="btn-group">
-			<input type='button' value='SEARCH' id='search-archive' class='btn btn-default'>
+			<input type='button' value='SEARCH' id='search-archive' class='btn btn-default' style='width:110%;'>
 			<input type='hidden' id='search-val' value='0'>
 				</div>
 		</div>
 	</div>
 	<div id='div-history'>
+	
 	</div>
 </div>

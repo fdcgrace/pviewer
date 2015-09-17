@@ -1161,7 +1161,9 @@ PANELS CONFIGURATIONS
 .content-panel h4 {
 	margin-left: 10px;
 }
-
+.content-panel tr {
+    cursor: pointer;
+}
 /*WEATHER PANELS*/
 
 /* Weather 1 */
