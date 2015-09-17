@@ -20,7 +20,7 @@ class ArchivesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->set('controllerID', 1);
+		$this->set('controllerID', 4);
 	}
 
 	public function viewArchive()

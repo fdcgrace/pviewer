@@ -1,3 +1,4 @@
+	*Click on project to show more details
 <table class='table table-hovered table-bordered table-striped content-panel'>
 	<thead>
 								<tr>
@@ -46,7 +47,7 @@
 									   		<h3>Issues Covered</h3>
 									   		<div data-example-id="simple-responsive-table" class="bs-example">
 					<div class="table-responsive ">
-										 <table  class='table table-hovered table-striped'> 
+										 <table   class='table table-hovered table-striped'> 
 											<center>		<tr>
 
 													<th style='background-color:#428bca;color:white'>Issue No.</th>
