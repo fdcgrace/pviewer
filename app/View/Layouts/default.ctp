@@ -146,18 +146,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 
 
-		             <li class="sub-menu">
-		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-th-list')).$this->Html->tag('span','Extras'), 
-		                    "javascript:;", array('escape' => false, 'cid' => 5, 'class' => 'parent'));?>
-		                <ul class="sub">
-		                  <li><?php echo $this->Html->link(__('Shift for the month'), array('controller' => 'extras', 'action' => 'shift'));?></li>
-		                  <!-- <li><?php //echo $this->Html->link(__('Issue'), array('controller' => 'pdetails', 'action' => 'getIssue'));?></li> -->
-		                  <li><?php echo $this->Html->link(__('Lets Go Drink!'), array('controller' => 'extras', 'action' => 'drink'));?></li>
-		                </ul>
-		            </li>
-
-
-
 
 		     
 

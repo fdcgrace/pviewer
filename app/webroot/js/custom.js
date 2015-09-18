@@ -100,57 +100,6 @@ $(function() {
 				
 		})
 
-	 $("td").dblclick(function () {
-        var OriginalContent = $(this).text();
-        $('#hidden-cell').val(OriginalContent);
-
-        $(this).addClass("cellEditing");
-        $(this).html("<input type='text' value='" + OriginalContent + "' />");
-         $(this).children().first().focus();
-        $(this).children().first().keyup(function (e) {        	
-            var newContent = $(this).val();
-            
-            if(newContent.toLowerCase() == 'leave')
-            {
-            	$(this).parent().css('background-color',"red");
-            	$(this).parent().css('color',"white");
-            	console.log(newContent);
-            }else
-            {
-            	$(this).parent().css('background-color',"");
-            	$(this).parent().css('color',"");
-            }
-            $('#hidden-cell').val(newContent);
-            if (e.which == 13) {
-                
-                $(this).parent().text(newContent);
-                $(this).parent().removeClass("cellEditing");
-            }
-        });
-    $(this).children().first().blur(function(){
-      
-        var cont = $('#hidden-cell').val();
-        $(this).parent().text(cont);
-        $(this).parent().removeClass("cellEditing");
-    });
-        $(this).find('input').dblclick(function(e){
-            e.stopPropagation(); 
-        });
-    });
-
-
-    $('#update-shift').on('click',function(){
-        var tabContent = $('#tabid').html();
-
-        $.ajax({
-            type: "POST",
-            url: baseUrl+"/extras/updateShift/",
-            data: { 'content' : tabContent},
-            success: function (data) {
-               location.reload();
-            }
-        });
-    })
 
 	function getTeam(callback) {
 		var content;
