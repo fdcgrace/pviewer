@@ -164,3 +164,5 @@
 		</tbody>
 	</table>
 </div>
+
+<input type="hidden"  name="selected" id="selected" value="<?php echo $selected; ?>">

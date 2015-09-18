@@ -29,6 +29,13 @@ class PdetailsController extends AppController {
  * @return void
  */
 	public function index($id = null) {
+		session_start();
+		if(isset($_POST['getDate'])){
+			$_SESSION['getDate'] = $_POST['getDate'];
+			$selectedDate = $_SESSION['getDate'];
+		}else{
+		}
+		
 		$this->Pdetail->recursive = 0;
 
 		$this->Session->write('project_id',$id);
@@ -43,9 +50,9 @@ class PdetailsController extends AppController {
 			if((isset($_POST['progress']) && $_POST['progress']!='') && (isset($_POST['id']) && (!empty($_POST['id'])))){
 				$arrData = array(
 						'issue_no' => $_POST['issue_no'],
-						'progress' => $_POST['progress'],
+						'progress' => $_POST['progress']/*,
 						'task_description' => $_POST['task_description'],
-						'issue_link' => $_POST['issue_link']
+						'issue_link' => $_POST['issue_link']*/
 					);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
@@ -57,9 +64,9 @@ class PdetailsController extends AppController {
 		    } else if((isset($_POST['priority']) &&!empty($_POST['priority'])) && (isset($_POST['id']) && !empty($_POST['id']))){
 				$arrData = array(
 						'priority' => $_POST['priority'],
-						'issue_no' => $_POST['issue_no'],
+						'issue_no' => $_POST['issue_no']/*,
 						'task_description' => $_POST['task_description'],
-						'issue_link' => $_POST['issue_link']
+						'issue_link' => $_POST['issue_link']*/
 					);
 				$this->Pdetail->id = $_POST['id'];
 				$this->Pdetail->set($arrData);
@@ -136,11 +143,11 @@ class PdetailsController extends AppController {
 		$this->set('legendColorStatus', $legendColorStatus);
 		$this->set('legendColor', $legendColor);
 		$this->set('legendStatusId', $legendStatusId);
+		$this->set('selectedDate', $_SESSION['getDate']);
 		if($this->request->is('ajax')){
 			$this->layout = 'default';
 			$this->render('index','ajax');
         }
-
 	}
 
 /**
@@ -609,6 +616,7 @@ class PdetailsController extends AppController {
 	}
 
 	public function issue() {
+
 		$this->autoRender =  false;
 
 		$conditions = array(
@@ -621,10 +629,12 @@ class PdetailsController extends AppController {
 
 		if (isset($_POST['getDate'])){
 			$conditions['Pdetail.created'] = $_POST['getDate'];
+			$selected = $_POST['getDate'];
+
 		} else {
 			$conditions['Pdetail.del_flg'] = 1;
+			$selected = '';
 		}
-		
 		$this->Paginator->settings = array(
 			'conditions' => $conditions,
 			'order' => array(
@@ -665,8 +675,6 @@ class PdetailsController extends AppController {
 			)
 		);
 
-		//var_dump($legendColorStatus);
-
 
 		$legendStatusId = $this->Tblcolor->find('list', array(
 			'fields' => array(
@@ -674,18 +682,7 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
-
-		if(isset($_POST['selected'])){
-			$selected = $_POST['selected'];	
-		} else {
-			if (isset($_POST['getDate'])) {
-				$selected = $_POST['getDate'];
-			} else {
-				$selected = "";
-			}
-		}
-		//var_dump($pdetails);
-
+		
 		$view = new View($this, false);
 		return $view->element('issue', array(
 				'pdetails' => $pdetails, 

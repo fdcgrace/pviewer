@@ -14,7 +14,7 @@ class Pdetail extends AppModel {
 						'message' => 'Issue number is required.',
 						'allowEmpty' => false
 					)
-				),
+				)/*,
 				'task_description' => array(
 					'nonEmpty' => array(
 						'rule' => array('notEmpty'),
@@ -27,7 +27,7 @@ class Pdetail extends AppModel {
 					'required' => true, 
 				    'allowEmpty' => false, 
 				    'message' => '* Please enter a valid URL.'
-				)
+				)*/
 			);
 
 	public $belongsTo = array(

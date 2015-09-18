@@ -68,21 +68,29 @@ $(document).ready(function(){
 		    $('.table-responsive').style.display = "none";
 		}
   	}
-
-	$( "#datepicker" ).datepicker();
-	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	var currDate = $("#datepicker").val();
-  	var projID = $(".table-responsive").attr('id');
-  	loader();
-    	$.ajax({
-			type: "POST",
-			url: baseUrl+"/pdetails/issue/",
-			data: { 'getDate' : currDate, 'projID' : projID},
-			success: function (data) {
-			
-				$(".table-responsive").html(data);
-			}
+  	$(function(){ 
+		var currDate = $("#selectedDate").val();
+		if (currDate == '') {
+			currDate = $("#datepicker").val();
+		} else {
+			currDate = currDate;
+		}
+		$("#datepicker").datepicker({
+			dateFormat : 'yy-mm-dd',
+		    defaultDate: currDate
 		});
+	  	var projID = $(".table-responsive").attr('id');
+	  	loader();
+	    	$.ajax({
+				type: "POST",
+				url: baseUrl+"/pdetails/issue/",
+				data: { 'getDate' : currDate, 'projID' : projID},
+				success: function (data) {
+					$(".table-responsive").html(data);
+					//$("#selected").val(currDate);
+				}
+			});
+    });
 
   	$("#view-all").on("click", function() {
 	  	var projID = $(".table-responsive").attr('id');
@@ -119,17 +127,27 @@ $(document).ready(function(){
   	});
   	
 	$("#datepicker").on("change", function () {
-
         var currDate = $(this).val();
-
         var projID = $(".table-responsive").attr('id');
         loader();
+
+        $.ajax({
+			type: "POST",
+			url: baseUrl+"/pdetails/",
+			data: { 'getDate' : currDate, 'projID' : projID},
+			success: function (data) {
+				//$(".table-responsive").html(data);
+				//$("#selected").val(currDate);
+			}
+		});
+
     	$.ajax({
 			type: "POST",
 			url: baseUrl+"/pdetails/issue/",
 			data: { 'getDate' : currDate, 'projID' : projID},
 			success: function (data) {
 				$(".table-responsive").html(data);
+				$("#selected").val(currDate);
 			}
 		});
 		display();

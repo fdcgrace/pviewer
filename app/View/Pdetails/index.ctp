@@ -24,8 +24,12 @@
 	  <div class="col-md-8">
 	  	<div id="datepicker"></div>
 	  	<div style="float:left; padding-right:10px; margin: 10px 0 0 0 ">
-			<?php echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
+			<div class="legend" style="background-color: #8bd999"> </div><strong>Selected Date</strong><br>
+			<div class="legend" style="background-color: #fed22f"> </div><strong>Current Date</strong>
 		</div>
+	  	<!-- <div style="float:left; padding-right:10px; margin: 10px 0 0 0 ">
+			<?php //echo $this->Html->tag('span',__('View All Issues'), array('class' => 'btn btn-info', 'id' => 'view-all'));?>
+		</div> -->
 		<div style="float:left; padding-right:10px; margin: 10px 0 0 0 ">
 			<?php echo $this->Html->tag('span',__('Copy to Current Date'),array('class' => 'btn btn-primary', 'id' => 'copy-all', 'style' => 'display:none'));?>
 		</div>
@@ -167,6 +171,7 @@
         </div>
     </div>
 </div>
+<input type="hidden"  name="selectedDate" id="selectedDate" value="<?php echo $selectedDate; ?>">
 
 <?php echo $this->element('pdetailsIssueSpecs'); ?> <!--Issue Specs Page -->
 

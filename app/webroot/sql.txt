@@ -1,1 +1,0 @@
-UPDATE Pdetails SET team_id=3, member=0, status=0 WHERE id=7;
