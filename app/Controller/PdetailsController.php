@@ -30,10 +30,12 @@ class PdetailsController extends AppController {
  */
 	public function index($id = null) {
 		session_start();
+		//$_SESSION['getDate'] = date('Y-m-d');
 		if(isset($_POST['getDate'])){
 			$_SESSION['getDate'] = $_POST['getDate'];
 			$selectedDate = $_SESSION['getDate'];
 		}else{
+
 		}
 		
 		$this->Pdetail->recursive = 0;
@@ -143,7 +145,10 @@ class PdetailsController extends AppController {
 		$this->set('legendColorStatus', $legendColorStatus);
 		$this->set('legendColor', $legendColor);
 		$this->set('legendStatusId', $legendStatusId);
-		$this->set('selectedDate', $_SESSION['getDate']);
+		if(isset($_SESSION['getDate'])){
+			$this->set('selectedDate', $_SESSION['getDate']);	
+		}
+		
 		if($this->request->is('ajax')){
 			$this->layout = 'default';
 			$this->render('index','ajax');

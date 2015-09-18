@@ -165,4 +165,4 @@
 	</table>
 </div>
 
-<input type="hidden"  name="selected" id="selected" value="<?php echo $selected; ?>">
+<input type="hidden" name="selected" id="selected" value="<?php if(isset($selectedDate)) { echo $selectedDate; } else { }  ?>">

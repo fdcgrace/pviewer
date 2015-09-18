@@ -171,7 +171,7 @@
         </div>
     </div>
 </div>
-<input type="hidden"  name="selectedDate" id="selectedDate" value="<?php echo $selectedDate; ?>">
+<input type="hidden" name="selectedDate" id="selectedDate" value="<?php if(isset($selectedDate)) { echo $selectedDate; } else { }  ?>">
 
 <?php echo $this->element('pdetailsIssueSpecs'); ?> <!--Issue Specs Page -->
 
