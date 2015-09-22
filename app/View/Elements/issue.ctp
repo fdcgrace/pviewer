@@ -13,7 +13,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Project ID</th>
+				<th>Project Name</th>
 				<th>Deadline</th>
 				<th>Issue Number</th>
 				<th>Task Description</th>
@@ -53,8 +53,15 @@
 					   echo $legendColorStatus[$getstatus];
 					}
 				?>" id="<?php echo $Pdetail['Pdetail']['id']; ?>">
-				<th scope="row"><?php echo h($Pdetail['Pdetail']['project_id']); ?></th>
-				<td><?php echo h($Pdetail['Pdetail']['deadline']); ?></td>
+				<th scope="row"><?php echo h($Pdetail['Project']['p_name']); ?></th>
+				<?php 
+					if ($Pdetail['Pdetail']['deadline'] <= date("Y-m-d")){
+						$dcolor = "#FF6A6A";
+					} else {
+						$dcolor = "#70766F";
+					} 
+				?>
+				<td><span style="color:<?php echo $dcolor; ?>"><?php echo h($Pdetail['Pdetail']['deadline']); ?></span></td>
 				<td id='tab-click'><?php echo h($Pdetail['Pdetail']['issue_no']); ?></td>
 				<td><?php echo h($Pdetail['Pdetail']['task_description']); ?></td>
 				<td>

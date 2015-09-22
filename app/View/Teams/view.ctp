@@ -1,4 +1,3 @@
-
 <?php 	
 	$res = $this->Session->read('result');
 	if (isset($res)) {
@@ -50,7 +49,9 @@
 	});
 </script>
 
-<div class="container-fluid martop"> <h3> Assign Issue </h3> <hr>
+<div class="container-fluid"> 
+	<h3> Assign Issue </h3> 
+	<hr>
 	<div class="row">
 		<div class="col-md-3">
 			<select id="team" class="form-control" style="width:100%">

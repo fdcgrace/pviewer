@@ -1,6 +1,7 @@
 <?php 
 	$members = $content['members'];
 	$projects = $content['projects'];
+	$pid = $content['pid'];
 	$stat = $content['stat'];
 ?>
 <div class="modal-header">
@@ -13,13 +14,15 @@
 		<?php
 			echo "<div class='form-group'>";
 			//echo $this->Form->input('project_id', array('label' => 'Project Name', 'class' => 'form-control'));
-			echo $this->Form->input('project_id', array(
+			/*echo $this->Form->input('project_id', array(
 				'class' => 'form-control',
 				'type'=>'select', 
 				'label' => 'Project Name', 
 				'options' => $projects
 					)
-				);
+				);*/
+			echo $this->Form->input('project', array('type' => 'text', 'disabled' => true, 'label' => 'Project Name', 'class' => 'form-control', 'value' => $projects));
+			echo $this->Form->input('project_id', array('type' => 'hidden', 'value' => $pid));
 			echo "</div>
 				 <div class='form-group'>";
 			echo $this->Form->input('issue_no', array('label' => 'Issue number', 'class' => 'form-control'));

@@ -69,7 +69,7 @@ $(document).ready(function(){
 		}
   	}
   	$(function(){ 
-		//$( "#datepicker" ).datepicker();
+		
 		var today = new Date();
 	    var dd = today.getDate();
 	    var mm = today.getMonth()+1; //January is 0!
@@ -79,12 +79,11 @@ $(document).ready(function(){
 	    var today = yyyy+'-'+mm+'-'+dd;
 		var currDate = $("#selectedDate").val();
 		if (currDate == '') {
-			//currDate = $("#datepicker").val();
 			currDate = today;
 		} else {
 			currDate = currDate;
 		}
-		alert('currDate'+currDate);
+		
 		$("#datepicker").datepicker({
 			dateFormat : "yy-mm-dd",
 		    defaultDate: currDate
