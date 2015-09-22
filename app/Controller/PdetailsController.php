@@ -39,7 +39,6 @@ class PdetailsController extends AppController {
 		}
 		
 		$this->Pdetail->recursive = 0;
-
 		$this->Session->write('project_id',$id);
 
 		$projectID = (isset($pdetails[0]['Pdetail']['project_id']))? $pdetails[0]['Pdetail']['project_id']: 0;
@@ -95,13 +94,11 @@ class PdetailsController extends AppController {
 		        }else{
 		            $this->Session->setFlash(__('The details could not be updated. Please, try again.'));
 		        } 
-			}else{
-				if ($this->Pdetail->save($this->request->data)) {
+			} else {
+			/*	if ($this->Pdetail->save($this->request->data)) {
 					$this->Session->setFlash(__('The details has been updated.'));
 					return $this->redirect(array('action' => 'index', $id));
-				} else {
-					
-				}
+				}*/
 			}
 		} else {
 			$options = array('conditions' => array('Pdetail.' . $this->Pdetail->primaryKey => $id, 'Pdetail.del_flg' => 1));
@@ -193,7 +190,6 @@ class PdetailsController extends AppController {
 		$pdetails = $this->paginate('Pdetail');
 		$content['pdetails'] = $pdetails;
 		//$this->set('pdetails', $pdetails);
-	
 		$projectID = $pdetails[0]['Pdetail']['project_id'];
 
 		$content['projectID'] = $projectID;
@@ -271,8 +267,12 @@ class PdetailsController extends AppController {
 				)
 			)
 		);
-		$content['projects'] = $projects;
 
+		if (false !== $key = array_key_exists($id, $projects)) {
+		    $content['projects'] = $projects[$id];
+		}
+		$content['pid'] = $id;
+		//$content['projects'] = $projects;
 		$members = $this->Pdetail->Member->find('list', array(
 			'fields' => array(
 				'member'
@@ -642,10 +642,11 @@ class PdetailsController extends AppController {
 		}
 		$this->Paginator->settings = array(
 			'conditions' => $conditions,
+			'limit' => 400,
 			'order' => array(
 						'Pdetail.priority' => 'desc',
 						'TblColor.status_id' =>'desc'
-						
+			
 			)
 		);
 

@@ -32,7 +32,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		
 		echo $this->Html->css(
 			array(
-
 				'assets/css/bootstrap',
 				'assets/font-awesome/css/font-awesome',
 				'assets/css/zabuto_calendar',
@@ -54,7 +53,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		);
 		echo $this->fetch('css');
 
-
 		echo $this->Html->script(
 			array(
 				// 'assets/js/jquery-1.8.3.min',
@@ -74,15 +72,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			)
 		);
 		echo $this->fetch('script');
-
 	?>
 	<script type="text/javascript">var baseUrl = '<?php echo $this->base; ?>';</script>
 </head>
 <body>
 
 	<section id="container">
-		<!-- *****************(*****************************************************************************************************************************************
-		TOP BAR CONTENT & NOTIFICATIONS
+		<!-- **********************************************************************************************************************************************************
+				TOP BAR CONTENT & NOTIFICATIONS
 		*********************************************************************************************************************************************************** -->
       	<!--header start-->
       	<header class="header black-bg" style="z-index:99">
@@ -96,31 +93,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	            
 	            <div class="top-menu">
 	            	<ul class="nav pull-right top-menu">
-	                    <li><a class="logout" href="login.html">Logout</a></li>
+	                    <!-- <li><a class="logout" href="login.html">Logout</a></li> -->
 	            	</ul>
 	            </div>
         </header>
       	<!--header end-->
 		<!-- **********************************************************************************************************************************************************
-		MAIN SIDEBAR MENU
+				MAIN SIDEBAR MENU
 		*********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
 		<aside>
 		    <div id="sidebar"  class="nav-collapse " style="z-index:98">
 		        <!-- sidebar menu start-->
 		        <ul class="sidebar-menu" id="nav-accordion">
-
-		        
-		        	  <p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-		        	  <h5 class="centered">Admin</h5>
-		        	  	
+		        	<p class="centered"><a href="profile.html"><img src="<?php echo $this->base; ?>/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+		        	<h5 class="centered">Admin</h5>
 		            <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-desktop')).$this->Html->tag('span','Projects'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 1, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
-		                  <!-- <li><?php //echo $this->Html->link(__('Issue'), array('controller' => 'pdetails', 'action' => 'getIssue'));?></li> -->
-		                  <li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
+		                  	<li><?php echo $this->Html->link(__('View Projects'), array('controller' => 'projects', 'action' => 'index'));?></li>
 		                </ul>
 		            </li>
 
@@ -128,39 +120,29 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-cogs')).$this->Html->tag('span','Teams'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 2, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li><?php echo $this->Html->link(__('View Teams'), array('controller' => 'teams', 'action' => 'index'));?></li>
+		                  	<li><?php echo $this->Html->link(__('View Teams'), array('controller' => 'teams', 'action' => 'index'));?></li>
+		                  	<li><?php echo $this->Html->link(__('Issue Assignment'), array('controller' => 'teams', 'action' => 'view'));?></li>
 		                </ul>
 		            </li>
 		            <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-book')).$this->Html->tag('span','Members'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 3, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li><?php echo $this->Html->link(__('View Members'), array('controller' => 'members', 'action' => 'index'));?></li>
+		                	<li><?php echo $this->Html->link(__('View Members'), array('controller' => 'members', 'action' => 'index'));?></li>
 		                </ul>
 		            </li>
-		          <li class="sub-menu">
+		          	<li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-archive')).$this->Html->tag('span','Archive'), 
 		                     array('controller' => 'archives', 'action' => 'viewArchive'), array('escape' => false, 'cid' => 4, 'class' => 'parent'));?>
-		             
 		            </li>
-
-
-
 		             <li class="sub-menu">
 		                <?php echo $this->Html->link($this->Html->tag('i','', array('class' => 'fa fa-th-list')).$this->Html->tag('span','Extras'), 
 		                    "javascript:;", array('escape' => false, 'cid' => 5, 'class' => 'parent'));?>
 		                <ul class="sub">
-		                  <li><?php echo $this->Html->link(__('Shift for the month'), array('controller' => 'extras', 'action' => 'shift'));?></li>
-		                  <!-- <li><?php //echo $this->Html->link(__('Issue'), array('controller' => 'pdetails', 'action' => 'getIssue'));?></li> -->
-		                  <li><?php echo $this->Html->link(__('Lets Go Drink!'), array('controller' => 'extras', 'action' => 'drink'));?></li>
+		                	<li><?php echo $this->Html->link(__('Shift for the month'), array('controller' => 'extras', 'action' => 'shift'));?></li>
+		                	<li><?php echo $this->Html->link(__('Lets Go Drink!'), array('controller' => 'extras', 'action' => 'drink'));?></li>
 		                </ul>
 		            </li>
-
-
-
-
-		     
-
 		        </ul>
 		        <!-- sidebar menu end-->
 		    </div>
@@ -219,6 +201,5 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</footer> -->
 	<!--footer end-->
 	<?php // echo $this->element('sql_dump'); ?>
-
 </body>
 </html>

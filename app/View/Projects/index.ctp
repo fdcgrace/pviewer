@@ -1,5 +1,4 @@
 <section class="container-fluid flip-scroll" id="content">
-	<div class="row mt">
 		<h3>Project List</h3>
 		<hr>
 		<div class="marginButton nfont alignMargin"><?php echo $this->Html->link('Create New Project', array('controller' => 'projects', 'action' => 'add'), array('data-toggle' => 'modal', 'data-target' => '#newProj', 'id' => 'addBtn', 'class' => 'glyphicon-plus glyphicon btn btn-success nfont')); 
@@ -53,7 +52,6 @@
 
 			</div>
 		</div>
-	</div>
 	<p>
 		<?php
 			echo $this->Paginator->counter(array(

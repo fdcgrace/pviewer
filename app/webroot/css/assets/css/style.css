@@ -324,6 +324,11 @@ ul.sidebar-menu li ul.sub li a:hover {
 	background: transparent;
 }
 
+ul.sidebar-menu li ul.sub li a.active {
+    color: #68dff0;
+    background: none!important;
+}
+
 ul.sidebar-menu li ul.sub li.active a {
     color: #68dff0;
     -webkit-transition: all 0.3s ease;
